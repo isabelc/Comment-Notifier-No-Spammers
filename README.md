@@ -7,6 +7,7 @@ Comment Notifier No Spammers
 * Let visitors subscribe to comments.
 * Do NOT subscribe spammers.* Removes spammers from your "Comment Notifier" list.
 * Seamlessly and easily switch from "Comment Notifier".
+
 This is an alternative to [Comment Notifier](http://wordpress.org/plugins/comment-notifier/) by Stefano Lissa. His is a great plugin, and this maintains all the same features and options. Them main difference is that this new plugin will not subscribe spammers while their comment is pending moderation. Only approved comments will be subscribed. Comments authors in moderation will only be subscribed if, and when, you approve their comment. 
 
 In particular, this new plugin fixes [this problem](http://wordpress.org/support/topic/remove-subscribed-emails-whose-comments-are-trashedmarked-as-spam).
@@ -21,13 +22,18 @@ Bonus Clean Up
 
 Upon activation, this plugin will clean up your "comment_notifier" list (database table) by removing all spammer emails. (This only applies to you if you were using the original Comment Notifier plugin.) It will also empty your Comments "Trash" and "Spam". This clean up is only done once, upon plugin activation.
 
+
+Languages
+---------
+This plugin is translation-ready and includes a `.pot` file to make it easy to translate.
+
+
 Why Did I Modify The Original Plugin?
 --------------------------------------
 
 The problem is that the original Comment Notifier plugin subscribes the email address as soon as the submitted comment goes into moderation. This means that spammers get added to the list of subscribers, immediately. Later, when you delete the spam comments, the spammer's email remains in the list of subscribers. 
 
-You could have hundreds, even thousands, of spammer email addresses in that list. Then, when you approve a legit comment, your server sends out emails to all of the post subscribers (including spammers), which can cause server overload, among other problems.
-This plugin, **Comment Notifier No Spammers**, fixes that by ignoring comments in moderation until they are approved by you. This means less load on your server.
+You could have hundreds, even thousands, of spammer email addresses in that list. Then, when you approve a legit comment, your server sends out emails to all of the post subscribers (including spammers), which can cause server overload, among other problems.This plugin, **Comment Notifier No Spammers**, fixes that by ignoring comments in moderation until they are approved by you. This means less load on your server.
 
 Installation
 ============
