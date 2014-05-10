@@ -8,7 +8,7 @@ Comment Notifier No Spammers
 * Do NOT subscribe spammers.* Removes spammers from your "Comment Notifier" list.
 * Seamlessly and easily switch from "Comment Notifier".
 
-This is an alternative to [Comment Notifier](http://wordpress.org/plugins/comment-notifier/) by Stefano Lissa. His is a great plugin, and this maintains all the same features and options. Them main difference is that this new plugin will not subscribe spammers while their comment is pending moderation. Only approved comments will be subscribed. Comments authors in moderation will only be subscribed if, and when, you approve their comment. 
+This is an alternative to [Comment Notifier](http://wordpress.org/plugins/comment-notifier/) by Stefano Lissa. His is a great plugin, and this maintains all the same features and options. The main difference is that this new plugin will not subscribe spammers while their comment is pending moderation. Only approved comments will be subscribed. Comments authors in moderation will only be subscribed if, and when, you approve their comment. 
 
 In particular, this new plugin fixes [this problem](http://wordpress.org/support/topic/remove-subscribed-emails-whose-comments-are-trashedmarked-as-spam).
 
@@ -39,5 +39,6 @@ Installation
 ============
 
 1. Put the plugin folder into `/wp-content/plugins/`
-2. In your WordPress admin, go to "Plugins" and activate the plugin.3. Optional: go to "Settings -> Comment Notifier No Spammers" and configure the settings.
+2. In your WordPress admin, go to "Plugins" and activate the plugin.
+3. Optional: go to "Settings -> Comment Notifier No Spammers" and configure the settings.
 4. If you were using Comment Notifier plugin, then deactivate it right away to avoid having it add new spammers to your comment_notifier list.
