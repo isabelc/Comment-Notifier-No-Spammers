@@ -15,7 +15,7 @@ if(!empty($_POST['_wpnonce'])){
 			$cmnt_nospammers_data->link = get_option('home');
 			$cmnt_nospammers_data->comment_link = get_option('home');
 			$cmnt_nospammers_data->title = __('A wonderful post title', 'comment-notifier-no-spammers');
-			$cmnt_nospammers_data->content = __('This is a long comment. I like to write useless words with my poor English, but I hope you all can understand me. If you cannot, I also speak French', 'comment-notifier-no-spammers');
+			$cmnt_nospammers_data->content = __('This is a long comment. They say that love is more important than money, but have you ever tried to pay your bills with a hug?', 'comment-notifier-no-spammers');
 			$message = cmnt_nospammers_replace($options['message'], $cmnt_nospammers_data);
 
 			$message = str_replace('{name}', 'Subscriber name', $message);
@@ -37,7 +37,7 @@ if(!empty($_POST['_wpnonce'])){
 			$cmnt_nospammers_data->link = get_option('home');
 			$cmnt_nospammers_data->comment_link = get_option('home');
 			$cmnt_nospammers_data->title = __('The post title', 'comment-notifier-no-spammers');
-			$cmnt_nospammers_data->content = __('This is a long comment. I like to write useless words with my poor English, but I hope you all can understand me. If you cannot, I also speak French.', 'comment-notifier-no-spammers');
+			$cmnt_nospammers_data->content = __('This is a long comment. Be a yardstick of quality. Some people are not used to an environment where excellence is expected.', 'comment-notifier-no-spammers');
 			$message = cmnt_nospammers_replace($options['ty_message'], $cmnt_nospammers_data);
 
 			$subject = $options['ty_subject'];
@@ -259,10 +259,10 @@ if (isset($_POST['remove'])) {
         <table class="form-table">
             <tr>
                 <td>
-                    <label><?php _e('Email address where to send a copy of EACH notification', 'comment-notifier-no-spammers'); ?></label><br />
+                    <label><?php _e('Extra email address where to send a copy of EACH notification', 'comment-notifier-no-spammers'); ?></label><br />
                     <input name="options[copy]" type="text" size="50" value="<?php echo htmlspecialchars($options['copy']) ?>"/>
                     <br />
-                    <?php _e('Leave empty to disable. Do not use the sender address, some mail servers do not accept "from" and "to" set to the same value', 'comment-notifier-no-spammers'); ?>
+                    <?php _e('Leave empty to disable. You still get notifications at the site\'s admin email (which is set in General Settings).', 'comment-notifier-no-spammers'); ?>
                 </td>
             </tr>
             <tr>
