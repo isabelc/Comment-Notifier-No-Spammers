@@ -281,7 +281,6 @@ if (isset($_POST['remove'])) {
     <form action="" method="post">
         <?php wp_nonce_field('remove') ?>
         <h3><?php _e('Long List of Subscribers', 'comment-notifier-no-spammers'); ?></h3>
-        <p><?php _e('This section is under development.', 'comment-notifier-no-spammers'); ?></p>
         <ul>
             <?php
             $list = $wpdb->get_results("select distinct post_id, count(post_id) as total from " . $wpdb->prefix . "comment_notifier group by post_id order by total desc");
