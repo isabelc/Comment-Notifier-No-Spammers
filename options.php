@@ -109,10 +109,10 @@ if (isset($_POST['remove'])) {
         <h3><?php _e('Subscription Checkbox Configuration', 'comment-notifier-no-spammers'); ?></h3>
         <table class="form-table">
             <tr>
-                <th><?php _e('Auto add the checkbox', 'comment-notifier-no-spammers'); ?></th>
+                <th><?php _e('Add The Checkbox', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input type="checkbox" name="options[checkbox]" value="1" <?php echo isset($options['checkbox']) ? 'checked' : ''; ?> />
-                    <?php _e('If checked, the "notify me" checkbox will be inserted in the comment form (not all themes support this function. Read below.)', 'comment-notifier-no-spammers'); ?>
+                    <?php _e('Check this to add the "Notify me" checkbox to the comment form. (Not all themes support this function. Read below.)', 'comment-notifier-no-spammers'); ?>
 
                     <br /><br />
                     <?php
@@ -122,7 +122,7 @@ if (isset($_POST['remove'])) {
                     }
                     
 
-                    _e('Your theme need to call the WordPress "comment_form" (usually in comments.php theme file). Not all themes have it. If you want to add manually the subscription checkbox, use this code for an unchecked checkbox:', 'comment-notifier-no-spammers'); ?><br /><br />
+                    _e('Your theme need to call the WordPress "comment_form" (usually in comments.php theme file). Not all themes have it. If you want to manually add the subscription checkbox, use this code for an unchecked checkbox:', 'comment-notifier-no-spammers'); ?><br /><br />
                     &nbsp;&nbsp;&nbsp;<code>&lt;input type="checkbox" value="1" name="subscribe" id="subscribe"/&gt;</code><br /><br />
                     <?php _e('or the one below for a checked checkbox:', 'comment-notifier-no-spammers'); ?><br /><br />
                     &nbsp;&nbsp;&nbsp;<code>&lt;input type="checkbox" value="1" name="subscribe" id="subscribe" checked="checked"/&gt;</code>
@@ -130,14 +130,14 @@ if (isset($_POST['remove'])) {
             </tr>
 
             <tr>
-                <th><?php _e('Subscription checkbox label', 'comment-notifier-no-spammers'); ?></th>
+                <th><?php _e('Subscription Checkbox Label', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input name="options[label]" type="text" size="50" value="<?php echo htmlspecialchars($options['label']) ?>"/>
                     <br /><?php _e('Label to be displayed near the subscription checkbox', 'comment-notifier-no-spammers'); ?>
                 </td>
             </tr>
             <tr>
-                <th><?php _e('Checkbox default status', 'comment-notifier-no-spammers'); ?></th>
+                <th><?php _e('Checkbox Default Status', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input type="checkbox" name="options[checked]" value="1" <?php echo isset($options['checked']) ? 'checked' : ''; ?> />
                     <?php _e('if checked, the "notify me" checkbox will be checked by default', 'comment-notifier-no-spammers'); ?>
@@ -148,20 +148,20 @@ if (isset($_POST['remove'])) {
         <h3><?php _e('Notification Email Settings', 'comment-notifier-no-spammers'); ?></h3>
         <table class="form-table">
             <tr>
-                <th><?php _e('Notification sender name', 'comment-notifier-no-spammers'); ?></th>
+                <th><?php _e('Notification Sender Name', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input name="options[name]" id="from_name" type="text" size="50" value="<?php echo htmlspecialchars($options['name']) ?>"/>
                 </td>
             </tr>
 
             <tr>
-                <th><?php _e('Notification sender email', 'comment-notifier-no-spammers'); ?></th>
+                <th><?php _e('Notification Sender Email', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input name="options[from]" id="from_email" type="text" size="50" value="<?php echo htmlspecialchars($options['from']) ?>"/>
                 </td>
             </tr>
             <tr>
-                <th><?php _e('Notification subject', 'comment-notifier-no-spammers'); ?></th>
+                <th><?php _e('Notification Subject', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input name="options[subject]" id="subject" type="text" size="70" value="<?php echo htmlspecialchars($options['subject']) ?>"/>
                     <br />
@@ -170,7 +170,7 @@ if (isset($_POST['remove'])) {
             </tr>
 
             <tr>
-                <th><?php _e('Notification message body', 'comment-notifier-no-spammers'); ?></th>
+                <th><?php _e('Notification Message Body', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input type="checkbox" name="options[html]" value="1" <?php echo $options['html'] != null ? 'checked' : ''; ?> /> <?php _e(' send emails as html', 'comment-notifier-no-spammers'); ?> 
                     ( <a href="javascript:void(cmnt_nospammers_preview());"><?php _e('preview', 'comment-notifier-no-spammers'); ?></a>)
@@ -181,7 +181,7 @@ if (isset($_POST['remove'])) {
                 </td>
             </tr>
             <tr>
-                <th><?php _e('Comment excerpt length', 'comment-notifier-no-spammers'); ?></th>
+                <th><?php _e('Comment Excerpt Length', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input name="options[length]" type="text" size="5" value="<?php echo htmlspecialchars($options['length']) ?>"/> <?php _e(' characters', 'comment-notifier-no-spammers'); ?>
                     <br />
@@ -198,7 +198,7 @@ if (isset($_POST['remove'])) {
         <table class="form-table">
             <tr>
                 <td>
-                    <label><?php _e('Unsubscribe page URL', 'comment-notifier-no-spammers'); ?></label><br />
+                    <label><?php _e('Unsubscribe Page URL', 'comment-notifier-no-spammers'); ?></label><br />
                     <input name="options[unsubscribe_url]" type="text" size="50" value="<?php echo htmlspecialchars($options['unsubscribe_url']) ?>"/>
                     <br />
                     <?php _e('If you want to create a page with your content to say "ok, you are unsubscribed", enter the URL here. Otherwise, leave this field blank and the subsequent configurations will be used.', 'comment-notifier-no-spammers'); ?>
@@ -206,7 +206,7 @@ if (isset($_POST['remove'])) {
             </tr>
             <tr>
                 <td>
-                    <label><?php _e('Unsubscribe message', 'comment-notifier-no-spammers'); ?></label><br />
+                    <label><?php _e('Unsubscribe Message', 'comment-notifier-no-spammers'); ?></label><br />
                     <textarea name="options[thankyou]" wrap="off" rows="7" style="width: 500px"><?php echo htmlspecialchars($options['thankyou']) ?></textarea>
                     <br />
                     <?php _e('Example: You have unsubscribed successfully. Thank you. I will send you to the home page in 3 seconds.', 'comment-notifier-no-spammers'); ?><br />
@@ -259,7 +259,7 @@ if (isset($_POST['remove'])) {
         <table class="form-table">
             <tr>
                 <td>
-                    <label><?php _e('Extra email address where to send a copy of EACH notification', 'comment-notifier-no-spammers'); ?></label><br />
+                    <label><?php _e('Extra email address where to send a copy of EACH notification:', 'comment-notifier-no-spammers'); ?></label><br /><br />
                     <input name="options[copy]" type="text" size="50" value="<?php echo htmlspecialchars($options['copy']) ?>"/>
                     <br />
                     <?php _e('Leave empty to disable. You still get notifications at the site\'s admin email (which is set in General Settings).', 'comment-notifier-no-spammers'); ?>
@@ -267,7 +267,7 @@ if (isset($_POST['remove'])) {
             </tr>
             <tr>
                 <td>
-                    <label><?php _e('Email address where to send test emails', 'comment-notifier-no-spammers'); ?></label><br />
+                    <label><?php _e('Email address where to send test emails:', 'comment-notifier-no-spammers'); ?></label><br /><br />
                     <input name="options[test]" type="text" size="50" value="<?php echo htmlspecialchars($options['test']) ?>"/>
                 </td>
             </tr>
