@@ -333,7 +333,6 @@ function cmnt_nospammers_mail(&$to, &$subject, &$message, $html=null)
 }
 /** 
 * Load plugin textdomain
-* @return void
 */
  function cmnt_nospammers_load_textdomain() {
 	load_plugin_textdomain( 'cmnt_nospammers_options_page', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Comment Notifier No Spammers\n"
-"POT-Creation-Date: 2014-05-07 10:04-0500\n"
-"PO-Revision-Date: 2014-05-07 10:04-0500\n"
+"POT-Creation-Date: 2014-06-03 11:02-0500\n"
+"PO-Revision-Date: 2014-06-03 11:03-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -14,212 +14,210 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_x;_n;esc_attr_e\n"
-"X-Poedit-SearchPath-0: C:\\Users\\Isabel\\sites\\isamaiden@isabelcastillo.com"
-"\\home\\content\\78\\5708478\\html\\wp-content\\plugins\\comment-notifier-no-"
-"spammers\n"
+"X-Poedit-SearchPath-0: C:\\Users\\Isabel\\Documents\\aA_test\\comment-"
+"notifier-no-spammers\n"
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:391
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:388
 #, php-format
 msgid "Hi %s"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:392
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:389
 #, php-format
 msgid "%s has just written a new comment on \"%s\". Here is an excerpt:"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:394
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:391
 #, php-format
 msgid "To read more, <a href=\"%s\">click here</a>"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:396
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:393
 msgid "Bye"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:398
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:395
 #, php-format
 msgid "To unsubscribe this notification service, <a href=\"%s\">click here</a>"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:399
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:396
 msgid "Notify me when new comments are added."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:400
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:397
 #, php-format
 msgid "A new comment from %s on \"%s\""
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:401
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:398
 msgid ""
 "Your subscription has been removed. You'll be redirect to the home page "
 "within few seconds"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:408
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:405
 msgid "Thank you for your first comment"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:410
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:407
 #, php-format
 msgid "Hi %s,"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:412
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:409
 msgid "I received and published your first comment on my blog on the article:"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:414
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:411
 msgid "Have a nice day!"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:434
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:88
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:431
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:88
 msgid "Comment Notifier No Spammers"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/comment-notifier-no-spammers.php:438
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/comment-notifier-no-spammers.php:435
 msgid "Settings"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:14
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:14
 msgid "Author name"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:17
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:17
 msgid "A wonderful post title"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:18
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:18
 msgid ""
-"This is a long comment. I like to write useless words with my poor English, "
-"but I hope you all can understand me. If you cannot, I also speak French"
+"This is a long comment. They say that love is more important than money, but "
+"have you ever tried to pay your bills with a hug?"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:36
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:36
 msgid "Author"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:39
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:39
 msgid "The post title"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:40
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:40
 msgid ""
-"This is a long comment. I like to write useless words with my poor English, "
-"but I hope you all can understand me. If you cannot, I also speak French."
+"This is a long comment. Be a yardstick of quality. Some people are not used "
+"to an environment where excellence is expected."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:54
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:61
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:54
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:61
 msgid "Security violated"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:92
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:92
 #, php-format
 msgid ""
 "On activation, this plugin removed <strong>%s</strong> spammer email address "
 "from your database."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:96
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:96
 msgid "Email Management"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:100
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:100
 msgid "Remove this email: "
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:101
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:299
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:101
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:297
 msgid "Remove"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:109
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:109
 msgid "Subscription Checkbox Configuration"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:112
-msgid "Auto add the checkbox"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:112
+msgid "Add The Checkbox"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:115
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:115
 msgid ""
-"If checked, the \"notify me\" checkbox will be inserted in the comment form "
-"(not all themes support this function. Read below.)"
+"Check this to add the \"Notify me\" checkbox to the comment form. (Not all "
+"themes support this function. Read below.)"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:121
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:121
 msgid ""
 "Your theme seems to NOT have the \"comment_form\" action call. Read below."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:125
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:125
 msgid ""
 "Your theme need to call the WordPress \"comment_form\" (usually in comments."
-"php theme file). Not all themes have it. If you want to add manually the "
+"php theme file). Not all themes have it. If you want to manually add the "
 "subscription checkbox, use this code for an unchecked checkbox:"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:127
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:127
 msgid "or the one below for a checked checkbox:"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:133
-msgid "Subscription checkbox label"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:133
+msgid "Subscription Checkbox Label"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:136
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:136
 msgid "Label to be displayed near the subscription checkbox"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:140
-msgid "Checkbox default status"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:140
+msgid "Checkbox Default Status"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:143
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:143
 msgid "if checked, the \"notify me\" checkbox will be checked by default"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:148
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:148
 msgid "Notification Email Settings"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:151
-msgid "Notification sender name"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:151
+msgid "Notification Sender Name"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:158
-msgid "Notification sender email"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:158
+msgid "Notification Sender Email"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:164
-msgid "Notification subject"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:164
+msgid "Notification Subject"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:168
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:168
 #, php-format
 msgid ""
 "Tags: %1$s - the post title, %2$s - the subscriber name, %3$s - the "
 "commenter name"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:173
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:243
-msgid "Notification message body"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:173
+msgid "Notification Message Body"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:175
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:245
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:175
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:245
 msgid " send emails as html"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:176
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:176
 msgid "preview"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:180
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:180
 #, php-format
 msgid ""
 "Tags: %1$s - the subscriber name, %2$s - the unsubscribe link, %3$s - the "
@@ -227,125 +225,125 @@ msgid ""
 "comment text (eventually truncated)."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:184
-msgid "Comment excerpt length"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:184
+msgid "Comment Excerpt Length"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:186
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:186
 msgid " characters"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:188
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:188
 msgid ""
 "Sets the length of the comment excerpt to be inserted in the notification."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:193
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:193
 msgid "Unsubscribe Settings"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:195
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:195
 msgid ""
 "Here you can configure what to show to unsubscribing users. Set an "
 "\"Unsubscribe page URL\" to send the user to a specific page or configure a "
 "specific message."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:201
-msgid "Unsubscribe page URL"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:201
+msgid "Unsubscribe Page URL"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:204
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:204
 msgid ""
 "If you want to create a page with your content to say \"ok, you are "
 "unsubscribed\", enter the URL here. Otherwise, leave this field blank and "
 "the subsequent configurations will be used."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:209
-msgid "Unsubscribe message"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:209
+msgid "Unsubscribe Message"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:212
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:212
 msgid ""
 "Example: You have unsubscribed successfully. Thank you. I will send you to "
 "the home page in 3 seconds."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:218
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:255
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:277
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:218
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:255
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:277
 msgid "Save"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:219
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:219
 msgid "Save and send a test email"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:223
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:223
 msgid "Thank You Message Settings"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:224
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:224
 msgid ""
 "Configure a thank you message for <strong>first time commentators</strong>. "
 "Messages are sent when comments are approved."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:228
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:228
 msgid "Enable Thank You Message"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:231
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:231
 msgid "send a \"Thank You\" message sent to visitor on their first comment"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:235
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:235
 msgid "Subject"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:239
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:239
 #, php-format
 msgid "Tags: %1$s - the post title, %2$s - the commenter name"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:249
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:243
+msgid "Notification message body"
+msgstr ""
+
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:249
 #, php-format
 msgid ""
 "Tags: %1$s - the post title, %2$s - the commenter name, %3$s - the post "
 "link, %4$s - the comment text."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:256
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:256
 msgid "Save and send a thank you test email"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:258
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:258
 msgid "Advanced Settings"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:262
-msgid "Email address where to send a copy of EACH notification"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:262
+msgid "Extra email address where to send a copy of EACH notification:"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:265
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:265
 msgid ""
-"Leave empty to disable. Do not use the sender address, some mail servers do "
-"not accept \"from\" and \"to\" set to the same value"
+"Leave empty to disable. You still get notifications at the site's admin "
+"email (which is set in General Settings)."
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:270
-msgid "Email address where to send test emails"
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:270
+msgid "Email address where to send test emails:"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:283
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:283
 msgid "Long List of Subscribers"
 msgstr ""
 
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:284
-msgid "This section is under development."
-msgstr ""
-
-#: C:\Users\Isabel\sites\isamaiden@isabelcastillo.com\home\content\78\5708478\html\wp-content\plugins\comment-notifier-no-spammers/options.php:292
+#: C:\Users\Isabel\Documents\aA_test\comment-notifier-no-spammers/options.php:290
 msgid ", subscribers: "
 msgstr ""
