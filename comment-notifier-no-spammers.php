@@ -3,7 +3,7 @@
  * Plugin Name: Comment Notifier No Spammers
  * Plugin URI: https://github.com/isabelc/Comment-Notifier-No-Spammers
  * Description: Subscribe to comments and notify only approved comment authors, not spammers.
- * Version: 0.2
+ * Version: 1.0
  * Author: Isabel Castillo
  * Author URI: http://isabelcastillo.com
  * License: GPL2
@@ -146,7 +146,8 @@ function cmnt_nospammers_replace($message, $data)
     $message = str_replace('{author}', $data->author, $message);
 
     $temp = strip_tags($data->content);
-    if ($options['length'] && strlen($temp) > $options['length'])
+	$length = empty($options['length']) ? '' : htmlspecialchars($options['length']);
+    if ( $length && ( strlen($temp) > $length ) )
     {
         $x = strpos($temp, ' ', $options['length']);
         if ($x !== false) $temp = substr($temp, 0, $x) . '...';
@@ -216,13 +217,11 @@ function cmnt_nospammers_notify($comment_id)
 
     $url = get_option('home') . '/?';
 
-    if (!empty($options['copy']))
-    {
+    if (!empty($options['copy'])) {
         $fake->token = 'fake';
         $fake->id = 0;
         $fake->email = $options['copy'];
         $fake->name = 'Test subscriber';
-
         $subscriptions[] = $fake;
     }
 
@@ -288,10 +287,12 @@ function cmnt_nospammers_init()
 
 
     cmnt_nospammers_unsubscribe($id, $token);
+	
+	$unsubscribe_url = empty($options['unsubscribe_url']) ? '' : $options['unsubscribe_url'];
 
-    if ($options['unsubscribe_url']) header('Location: ' . $options['unsubscribe_url']);
-    else
-    {
+    if ( $unsubscribe_url ) {
+		header('Location: ' . $unsubscribe_url);
+	} else {
         echo '<html><head>';
         echo '<meta http-equiv="refresh" content="3;url=' . get_option('home') . '"/>';
         echo '</head><body>';

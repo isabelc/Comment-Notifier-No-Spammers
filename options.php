@@ -1,68 +1,72 @@
 <?php
 function cmnt_nospammers_options_page() {
-$options = get_option('cmnt_nospammers');
-global $wpdb;
-if(!empty($_POST['_wpnonce'])){
+	$options = get_option('cmnt_nospammers');
+	global $wpdb;
+	// prevent warnings
+	$unsubscribe_url = empty($options['unsubscribe_url']) ? '' : htmlspecialchars($options['unsubscribe_url']);
+	$length = empty($options['length']) ? '' : htmlspecialchars($options['length']);
+	$test = empty($options['test']) ? '' : htmlspecialchars($options['test']);
+	$copy = empty($options['copy']) ? '' : htmlspecialchars($options['copy']);
+	if(!empty($_POST['_wpnonce'])){
 
-	if (wp_verify_nonce($_POST['_wpnonce'], 'update-comment-notifier-options')) {
+		if (wp_verify_nonce($_POST['_wpnonce'], 'update-comment-notifier-options')) {
+			$options = stripslashes_deep($_POST['options']);
+			update_option('cmnt_nospammers', $options);
+			
+			if (isset($_POST['savetest'])) {
+				$cmnt_nospammers_data = new stdClass();
+				$cmnt_nospammers_data->author = __('Author name', 'comment-notifier-no-spammers');
+				$cmnt_nospammers_data->link = get_option('home');
+				$cmnt_nospammers_data->comment_link = get_option('home');
+				$cmnt_nospammers_data->title = __('A wonderful post title', 'comment-notifier-no-spammers');
+				$cmnt_nospammers_data->content = __('This is a long comment. They say that love is more important than money, but have you ever tried to pay your bills with a hug?', 'comment-notifier-no-spammers');
+				$message = cmnt_nospammers_replace($options['message'], $cmnt_nospammers_data);
 
-		$options = stripslashes_deep($_POST['options']);
-		update_option('cmnt_nospammers', $options);
+				$message = str_replace('{name}', 'Subscriber name', $message);
 
-		if (isset($_POST['savetest'])) {
-			$cmnt_nospammers_data = new stdClass();
-			$cmnt_nospammers_data->author = __('Author name', 'comment-notifier-no-spammers');
-			$cmnt_nospammers_data->link = get_option('home');
-			$cmnt_nospammers_data->comment_link = get_option('home');
-			$cmnt_nospammers_data->title = __('A wonderful post title', 'comment-notifier-no-spammers');
-			$cmnt_nospammers_data->content = __('This is a long comment. They say that love is more important than money, but have you ever tried to pay your bills with a hug?', 'comment-notifier-no-spammers');
-			$message = cmnt_nospammers_replace($options['message'], $cmnt_nospammers_data);
-
-			$message = str_replace('{name}', 'Subscriber name', $message);
-
-			$message = str_replace('{unsubscribe}', get_option('home') . '/?cmnt_nospammers_id=0&cmnt_nospammers_t=fake', $message);
+				$message = str_replace('{unsubscribe}', get_option('home') . '/?cmnt_nospammers_id=0&cmnt_nospammers_t=fake', $message);
 
 
-			$subject = $options['subject'];
-			$subject = str_replace('{title}', $cmnt_nospammers_data->title, $subject);
-			$subject = str_replace('{author}', $cmnt_nospammers_data->author, $subject);
-			$subject = str_replace('{name}', 'Subscriber name', $subject);
+				$subject = $options['subject'];
+				$subject = str_replace('{title}', $cmnt_nospammers_data->title, $subject);
+				$subject = str_replace('{author}', $cmnt_nospammers_data->author, $subject);
+				$subject = str_replace('{name}', 'Subscriber name', $subject);
 
-			cmnt_nospammers_mail($options['test'], $subject, $message);
-		}
+				cmnt_nospammers_mail($test, $subject, $message);
+			}
 
-		if (isset($_POST['savethankyou'])) {
-			$cmnt_nospammers_data = new stdClass();
-			$cmnt_nospammers_data->author = __('Author', 'comment-notifier-no-spammers');
-			$cmnt_nospammers_data->link = get_option('home');
-			$cmnt_nospammers_data->comment_link = get_option('home');
-			$cmnt_nospammers_data->title = __('The post title', 'comment-notifier-no-spammers');
-			$cmnt_nospammers_data->content = __('This is a long comment. Be a yardstick of quality. Some people are not used to an environment where excellence is expected.', 'comment-notifier-no-spammers');
-			$message = cmnt_nospammers_replace($options['ty_message'], $cmnt_nospammers_data);
+			if (isset($_POST['savethankyou'])) {
+				$cmnt_nospammers_data = new stdClass();
+				$cmnt_nospammers_data->author = __('Author', 'comment-notifier-no-spammers');
+				$cmnt_nospammers_data->link = get_option('home');
+				$cmnt_nospammers_data->comment_link = get_option('home');
+				$cmnt_nospammers_data->title = __('The post title', 'comment-notifier-no-spammers');
+				$cmnt_nospammers_data->content = __('This is a long comment. Be a yardstick of quality. Some people are not used to an environment where excellence is expected.', 'comment-notifier-no-spammers');
+				$message = cmnt_nospammers_replace($options['ty_message'], $cmnt_nospammers_data);
 
-			$subject = $options['ty_subject'];
-			$subject = str_replace('{title}', $cmnt_nospammers_data->title, $subject);
-			$subject = str_replace('{author}', $cmnt_nospammers_data->author, $subject);
-			cmnt_nospammers_mail($options['test'], $subject, $message, isset($options['ty_html']));
+				$subject = $options['ty_subject'];
+				$subject = str_replace('{title}', $cmnt_nospammers_data->title, $subject);
+				$subject = str_replace('{author}', $cmnt_nospammers_data->author, $subject);
+				cmnt_nospammers_mail($test, $subject, $message, isset($options['ty_html']));
+			}
 		}
 	}
-}
 
-// Removes a single email for all subscriptions
-if (isset($_POST['remove_email'])) {
-    if (!wp_verify_nonce($_POST['_wpnonce'], 'remove_email'))
-		die(__('Security violated', 'comment-notifier-no-spammers'));
-    $email = strtolower(trim($_POST['email']));
-    $wpdb->query($wpdb->prepare("delete from " . $wpdb->prefix . "comment_notifier where email=%s", $email));
-}
+	// Removes a single email for all subscriptions
+	if (isset($_POST['remove_email'])) {
+		if (!wp_verify_nonce($_POST['_wpnonce'], 'remove_email'))
+			die(__('Security violated', 'comment-notifier-no-spammers'));
+		$email = strtolower(trim($_POST['email']));
+		$wpdb->query($wpdb->prepare("delete from " . $wpdb->prefix . "comment_notifier where email=%s", $email));
+	}
 
-if (isset($_POST['remove'])) {
-    if (!wp_verify_nonce($_POST['_wpnonce'], 'remove'))
-		die(__('Security violated', 'comment-notifier-no-spammers'));
-    $query = "delete from " . $wpdb->prefix . "comment_notifier where id in (" . implode(',', $_POST['s']) . ")";
-    $wpdb->query($query);
-}
-?>
+	if (isset($_POST['remove'])) {
+		if (!wp_verify_nonce($_POST['_wpnonce'], 'remove'))
+			die(__('Security violated', 'comment-notifier-no-spammers'));
+		$query = "delete from " . $wpdb->prefix . "comment_notifier where id in (" . implode(',', $_POST['s']) . ")";
+		$wpdb->query($query);
+	}
+	?>
 
 <script type="text/javascript">
     function cmnt_nospammers_preview()
@@ -183,7 +187,8 @@ if (isset($_POST['remove'])) {
             <tr>
                 <th><?php _e('Comment Excerpt Length', 'comment-notifier-no-spammers'); ?></th>
                 <td>
-                    <input name="options[length]" type="text" size="5" value="<?php echo htmlspecialchars($options['length']) ?>"/> <?php _e(' characters', 'comment-notifier-no-spammers'); ?>
+                    <input name="options[length]" 
+					type="text" size="5" value="<?php echo $length; ?>"/> <?php _e(' characters', 'comment-notifier-no-spammers'); ?>
                     <br />
                     <?php _e('Sets the length of the comment excerpt to be inserted in the notification.', 'comment-notifier-no-spammers'); ?>
                 </td>
@@ -199,7 +204,8 @@ if (isset($_POST['remove'])) {
             <tr>
                 <td>
                     <label><?php _e('Unsubscribe Page URL', 'comment-notifier-no-spammers'); ?></label><br />
-                    <input name="options[unsubscribe_url]" type="text" size="50" value="<?php echo htmlspecialchars($options['unsubscribe_url']) ?>"/>
+                    <input name="options[unsubscribe_url]" 
+					type="text" size="50" value="<?php echo $unsubscribe_url; ?>"/>
                     <br />
                     <?php _e('If you want to create a page with your content to say "ok, you are unsubscribed", enter the URL here. Otherwise, leave this field blank and the subsequent configurations will be used.', 'comment-notifier-no-spammers'); ?>
                 </td>
@@ -260,7 +266,7 @@ if (isset($_POST['remove'])) {
             <tr>
                 <td>
                     <label><?php _e('Extra email address where to send a copy of EACH notification:', 'comment-notifier-no-spammers'); ?></label><br /><br />
-                    <input name="options[copy]" type="text" size="50" value="<?php echo htmlspecialchars($options['copy']) ?>"/>
+                    <input name="options[copy]" type="text" size="50" value="<?php echo $copy; ?>"/>
                     <br />
                     <?php _e('Leave empty to disable. You still get notifications at the site\'s admin email (which is set in General Settings).', 'comment-notifier-no-spammers'); ?>
                 </td>
@@ -268,7 +274,7 @@ if (isset($_POST['remove'])) {
             <tr>
                 <td>
                     <label><?php _e('Email address where to send test emails:', 'comment-notifier-no-spammers'); ?></label><br /><br />
-                    <input name="options[test]" type="text" size="50" value="<?php echo htmlspecialchars($options['test']) ?>"/>
+                    <input name="options[test]" type="text" size="50" value="<?php echo $test; ?>"/>
                 </td>
             </tr>
         </table>
