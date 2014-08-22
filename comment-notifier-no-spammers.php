@@ -33,8 +33,7 @@
  * '1' - approved, 'spam' if it is spam. The comment_id is the database id of the
  * comment which is already saved a this point.
  */
-function cmnt_nospammers_comment_post($comment_id, $status)
-{
+function cmnt_nospammers_comment_post($comment_id, $status) {
 	// Only subscribe if comment is approved; skip those in moderation.
     if (($status === 1) && isset($_POST['subscribe']))
     {

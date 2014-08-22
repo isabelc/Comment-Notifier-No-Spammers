@@ -277,7 +277,6 @@ function cmnt_nospammers_options_page() {
                 </td>
             </tr>
         </table>
-
         <p class="submit">
             <input class="button button-primary" type="submit" name="save" value="<?php _e('Save', 'comment-notifier-no-spammers'); ?>"/>
         </p>
