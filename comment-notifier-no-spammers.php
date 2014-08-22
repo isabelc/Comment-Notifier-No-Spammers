@@ -131,29 +131,32 @@ function cmnt_nospammers_comment_form()
 
 /** Replace placeholders in body message with subscriber data and post/comment
  * data.
- *
  * @param <type> $message
  * @param <type> $data
  * @return <type>
  */
-function cmnt_nospammers_replace($message, $data)
-{
+function cmnt_nospammers_replace($message, $data) {
     $options = get_option('cmnt_nospammers');
-
-    $message = str_replace('{title}', $data->title, $message);
-    $message = str_replace('{link}', $data->link, $message);
-    $message = str_replace('{comment_link}', $data->comment_link, $message);
-    $message = str_replace('{author}', $data->author, $message);
-
-    $temp = strip_tags($data->content);
-	$length = empty($options['length']) ? '' : htmlspecialchars($options['length']);
-    if ( $length && ( strlen($temp) > $length ) )
-    {
-        $x = strpos($temp, ' ', $options['length']);
-        if ($x !== false) $temp = substr($temp, 0, $x) . '...';
-    }
+	$message = str_replace('{title}', $data->title, $message);
+	$message = str_replace('{link}', $data->link, $message);
+	$message = str_replace('{comment_link}', $data->comment_link, $message);
+	$message = str_replace('{author}', $data->author, $message);
+	$temp = strip_tags($data->content);
+	$length = empty($options['length']) ? 155 : htmlspecialchars($options['length']);
+	
+	if ( ! is_numeric($length) ) {
+		$length = 155;
+	}
+	
+	if ( $length ) {
+		if ( strlen($temp) > $length ) {
+			$x = strpos($temp, ' ', $length);
+			if ($x !== false) {
+				$temp = substr($temp, 0, $x) . '...';
+			}
+		}
+	}
     $message = str_replace('{content}', $temp, $message);
-
     return $message;
 }
 

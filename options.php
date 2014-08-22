@@ -190,7 +190,7 @@ function cmnt_nospammers_options_page() {
                     <input name="options[length]" 
 					type="text" size="5" value="<?php echo $length; ?>"/> <?php _e(' characters', 'comment-notifier-no-spammers'); ?>
                     <br />
-                    <?php _e('Sets the length of the comment excerpt to be inserted in the notification.', 'comment-notifier-no-spammers'); ?>
+                    <?php _e('The length of the comment excerpt to be inserted in the email notification. If blank, the default is 155 characters.', 'comment-notifier-no-spammers'); ?>
                 </td>
             </tr>
         </table>
@@ -204,8 +204,7 @@ function cmnt_nospammers_options_page() {
             <tr>
                 <td>
                     <label><?php _e('Unsubscribe Page URL', 'comment-notifier-no-spammers'); ?></label><br />
-                    <input name="options[unsubscribe_url]" 
-					type="text" size="50" value="<?php echo $unsubscribe_url; ?>"/>
+                    <input name="options[unsubscribe_url]" type="text" size="50" value="<?php echo $unsubscribe_url; ?>"/>
                     <br />
                     <?php _e('If you want to create a page with your content to say "ok, you are unsubscribed", enter the URL here. Otherwise, leave this field blank and the subsequent configurations will be used.', 'comment-notifier-no-spammers'); ?>
                 </td>
