@@ -52,7 +52,7 @@ In your WordPress dashboard -> Plugins -> Add New, search for "Comment Notifier 
 
 Go to "Settings --> Comment Notifier No Spammers". You must enter a "**Notification Sender Email**".
 
-Some web hosts require that this be an email at your actual website. For example, if your webiste is **www.mysite.com**, then your sender email must be **something@mysite.com**, in which the first part "something" can be anything as long as it ends with **"@mysite.com"**. Bluehost is one host that requires this.
+Some web hosts require that this be an email at your actual website. For example, if your website is **www.mysite.com**, then your sender email must be **something@mysite.com**, in which the first part "something" can be anything as long as it ends with **"@mysite.com"**. Bluehost is one host that requires this.
 
 However, Godaddy hosting does not require this. GoDaddy will allow you to use any email address as the sender email (for example, a Gmail or Yahoo email). If you are unsure whether your web host allows this, then stick with an email at your own site to ensure that your notification emails will be sent.
 
