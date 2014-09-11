@@ -52,11 +52,11 @@ In your WordPress dashboard -> Plugins -> Add New, search for "Comment Notifier 
 
 Go to "Settings --> Comment Notifier No Spammers". You must enter a "**Notification Sender Email**".
 
-Some web hosts require that this be an email at your actual website. For example, if your website is **www.mysite.com**, then your sender email must be **something@mysite.com**, in which the first part "something" can be anything as long as it ends with **"@mysite.com"**. Bluehost is one host that requires this.
+Some web hosts require that this be an email at your actual website. For example, if your website is `www.mysite.com`, then your sender email must be `something@mysite.com`, in which the first part "something" can be anything as long as it ends with **"@mysite.com"**. Bluehost is one host that requires this.
 
-However, Godaddy hosting does not require this. GoDaddy will allow you to use any email address as the sender email (for example, a Gmail or Yahoo email). If you are unsure whether your web host allows this, then stick with an email at your own site to ensure that your notification emails will be sent.
+However, GoDaddy hosting does not require this. GoDaddy will allow you to use any email address as the sender email (for example, a Gmail or Yahoo email). If you are unsure whether your web host allows this, then stick with an email at your own site to ensure that your notification emails will be sent.
 
-In addition to the requirement described above, some web hosts require that the email address be an actual existing address. For example, if your site is www.mysite.com, and you want to use "**wordpress@mysite.com**" as your "Notification Sender Email", but that email does not actually exist, then your notification emails will not send. In this case, you would have to create the email address "**wordpress@mysite.com**" on your hosting server. Please note that "Forwarding Email Addresses" will not work for this since they are not actual email boxes, but rather they are just aliases.
+In addition to the requirement described above, some web hosts require that the email address be an actual existing address. For example, if your site is `www.mysite.com`, and you want to use "`wordpress@mysite.com`" as your "Notification Sender Email", but that email does not actually exist, then your notification emails will not send. In this case, you would have to create the email address "`wordpress@mysite.com`" on your hosting server. Please note that "Forwarding Email Addresses" will not work for this since they are not actual email boxes, but rather they are just aliases.
 
 **Step 3 (Optional) Customize the Settings**
 
