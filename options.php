@@ -124,7 +124,6 @@ function cmnt_nospammers_options_page() {
                     if (strpos($commentsphp, 'comment_form') === false) {
                         echo '<strong>' .__('Your theme seems to NOT have the "comment_form" action call. Read below.', 'comment-notifier-no-spammers') . '</strong><br /><br />';
                     }
-                    
 
                     _e('Your theme needs to call the WordPress "comment_form" (usually in comments.php theme file). Not all themes have it. If you want to manually add the subscription checkbox, use this code for an unchecked checkbox:', 'comment-notifier-no-spammers'); ?><br /><br />
                     &nbsp;&nbsp;&nbsp;<code>&lt;input type="checkbox" value="1" name="cnns_subscribe" id="cnns_subscribe"/&gt;</code><br /><br />

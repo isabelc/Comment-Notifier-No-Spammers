@@ -3,8 +3,8 @@ Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
 Tags: comments, comments reply, comments subscribe, notifications, notify, notifier, subscribe, subscriptions
 Requires at least: 3.7
-Tested up to: 4.0
-Stable Tag: 1.0
+Tested up to: 4.1
+Stable tag: 1.1
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,12 @@ For test emails to work, you must enter an email address in the "Email address w
 
 == Changelog ==
 
+= 1.1 =
+* New - If you were manually adding the subscription checkbox to your template files, you must update it since the input checkbox code has changed. Specifically, the name and id of the checkbox input has changed from 'subscribe' to 'cnns_subscribe'. See the settings page for the whole snippet.
+* Fix - Every approved comment author was being subscribed, whether they checked the box to subscribe, or not.
+* Tweak - Improved some option descriptions.
+* Maintenance - Removed a PHP notice.
+
 = 1.0 =
 * Fix - Removed several PHP errors from the options page.
 
@@ -90,6 +96,9 @@ For test emails to work, you must enter an email address in the "Email address w
 * First release.
 
 == Upgrade Notice ==
+
+= 1.1 =
+Fix - Every approved comment author was being subscribed even if they did not subcribe.
 
 = 1.0 =
 Removed several PHP errors from the options page.
