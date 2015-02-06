@@ -1,32 +1,32 @@
 <?php
-/**
- * Plugin Name: Comment Notifier No Spammers
- * Plugin URI: https://github.com/isabelc/Comment-Notifier-No-Spammers
- * Description: Subscribe to comments and notify only approved comment authors, not spammers.
- * Version: 1.1
- * Author: Isabel Castillo
- * Author URI: http://isabelcastillo.com
- * License: GPL2
- * Text Domain: comment-notifier-no-spammers
- * Domain Path: languages
- * 
- * Copyright 2014 - 2015 Isabel Castillo
- * 
- * This file is part of Comment Notifier No Spammers.
- * 
- * Comment Notifier No Spammers is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * any later version.
- *
- * Comment Notifier No Spammers is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Comment Notifier No Spammers. If not, see <http://www.gnu.org/licenses/>.
- */
+/*
+Plugin Name: Comment Notifier No Spammers
+Plugin URI: https://github.com/isabelc/Comment-Notifier-No-Spammers
+Description: Subscribe to comments and notify only approved comment authors, not spammers.
+Version: 1.1
+Author: Isabel Castillo
+Author URI: http://isabelcastillo.com
+License: GPL2
+Text Domain: comment-notifier-no-spammers
+Domain Path: languages
+
+Copyright 2014 - 2015 Isabel Castillo
+
+This file is part of Comment Notifier No Spammers.
+
+Comment Notifier No Spammers is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+any later version.
+ 
+Comment Notifier No Spammers is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with Comment Notifier No Spammers. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /**
  * Subscribe comment author and notify subscribers
