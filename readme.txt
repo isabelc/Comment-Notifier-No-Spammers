@@ -66,6 +66,10 @@ Optionally, you can customize the rest of the settings on this page.
 
 If you were using Comment Notifier plugin, then deactivate it right away to avoid having it add new spammers to your comment_notifier list.
 
+Only once, upon activation, this plugin will clean up your "comment_notifier" list (database table) by removing all spammer emails that were subscribed by the Comment Notifier Plugin. It will also empty your Comments "Trash" and "Spam". This is done automatically upon activation.
+
+Your existing approved comments, and legit subscribers, will not be lost.
+
 == Frequently Asked Questions ==
 
 = Why are Test Emails not sending? =
