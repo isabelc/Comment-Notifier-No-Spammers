@@ -80,6 +80,7 @@ For test emails to work, you must enter an email address in the "Email address w
 * Fix - Every approved comment author was being subscribed, whether they checked the box to subscribe, or not.
 * Tweak - Improved some option descriptions.
 * Maintenance - Removed a PHP notice.
+* Maintenance - Updated .pot translation file.
 
 = 1.0 =
 * Fix - Removed several PHP errors from the options page.
