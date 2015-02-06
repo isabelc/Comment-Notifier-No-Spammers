@@ -3,7 +3,7 @@
  * Plugin Name: Comment Notifier No Spammers
  * Plugin URI: https://github.com/isabelc/Comment-Notifier-No-Spammers
  * Description: Subscribe to comments and notify only approved comment authors, not spammers.
- * Version: 1.0
+ * Version: 1.1-beta-2
  * Author: Isabel Castillo
  * Author URI: http://isabelcastillo.com
  * License: GPL2
@@ -29,50 +29,69 @@
  */
 
 /**
- * Called when a comment is added to a post with its status: '0' - in moderation,
- * '1' - approved, 'spam' if it is spam. The comment_id is the database id of the
- * comment which is already saved a this point.
+ * Subscribe comment author and notify subscribers
+ * when comment posts with approved status.
+ *
+ * Called when a comment is added to a post with its status:
+ * '0' - in moderation,
+ * '1' - approved,
+ * 'spam' if it is spam.
+ * @param int $comment_id the database id of the comment
+ * @param mixed $status, 0, 1 or spam
  */
-function cmnt_nospammers_comment_post($comment_id, $status) {
-	// Only subscribe if comment is approved; skip those in moderation.
-    if (($status === 1) && isset($_POST['subscribe']))
-    {
+function cmnt_nospammers_comment_post( $comment_id, $status ) {
+
         $comment = get_comment($comment_id);
-        $email = strtolower(trim($comment->comment_author_email));
-        $post_id = $comment->comment_post_ID;
         $name = $comment->comment_author;
-        cmnt_nospammers_subscribe($post_id, $email, $name);
+        $email = strtolower( trim( $comment->comment_author_email ) );
+        $post_id = $comment->comment_post_ID;
+	
+    // Only subscribe if comment is approved; skip those in moderation.
+
+    // if comment author subscribed, and if comment is automatically approved, subscribe author
+    if ( ( $status === 1 ) && isset( $_POST['cnns_subscribe'] ) ) {
+        cmnt_nospammers_subscribe( $post_id, $email, $name );
     }
 
-    // Notify if the comment is already approved
-    if ($status == 1)
-    {
-        cmnt_nospammers_thankyou($comment_id);
-        cmnt_nospammers_notify($comment_id);
+    // If comment is approved automatically, notify subscribers
+    if ( $status == 1 ) {
+        cmnt_nospammers_thankyou( $comment_id );// @todo test thanks message for after moderation.
+        cmnt_nospammers_notify( $comment_id );
     }
+
+    // If comment goes to moderation, and if comment author subscribed,
+    // add comment meta key for pending subscription.
+    if ( ( $status === 0 ) && isset( $_POST['cnns_subscribe'] ) ) {
+        add_comment_meta( $comment_id, 'cnns_subscribe', true, true );
+    }
+    
 }
 
 /**
- * Subscribe user when their comment is finally approved after being held in moderation. Also notify other subscribers of this comment.
- * Called when a comment is changed of status, as when approving a comment that has been held in moderation.
- * The status is a string of 'hold', 'approve', 'spam', or 'delete'.
+ * Subscribe and notify after moderation.
+ *
+ * Subscribe user when their comment is finally approved
+ * after being held in moderation. Notify other subscribers
+ * of this comment.
+ * Called when a comment is changed of status, as when approving
+ * a comment that has been held in moderation.
+ * 
+ * @param int $comment_id the comment id
+ * @param string $status either 'hold', 'approve', 'spam', or 'delete'.
  */
-function cmnt_nospammers_wp_set_comment_status($comment_id, $status)
-{
+function cmnt_nospammers_wp_set_comment_status( $comment_id, $status ) {
 
 	// get original comment info
-
-	$comment = get_comment($comment_id);
+	$comment = get_comment( $comment_id );
 	$post_id = $comment->comment_post_ID;
-	$email = strtolower(trim($comment->comment_author_email));
+	$email = strtolower( trim( $comment->comment_author_email ) );
 	$name = $comment->comment_author;
-	
-    // When a comment is approved, notify the subscribers, and subscribe this comment author
-    if ($status === 'approve')
-    {
-        cmnt_nospammers_thankyou($comment_id);
-        cmnt_nospammers_notify($comment_id);
-		cmnt_nospammers_subscribe($post_id, $email, $name);
+
+    // When a comment is approved later, notify the subscribers, and subscribe this comment author
+    if ( $status === 'approve' ) {
+        cmnt_nospammers_thankyou( $comment_id );
+        cmnt_nospammers_notify( $comment_id );
+		cmnt_nospammers_subscribe_later( $post_id, $email, $name, $comment_id );
     }
 }
 
@@ -114,17 +133,15 @@ function cmnt_nospammers_thankyou($comment_id)
  * and the user want the checkbox automatically added. The options panel checks the theme
  * compatibility.
  */
-function cmnt_nospammers_comment_form()
-{
+function cmnt_nospammers_comment_form() {
+
     $options = get_option('cmnt_nospammers');
-    if (isset($options['checkbox']))
-    {
-        echo '<p style="clear:both"><input style="width: 20px" type="checkbox" value="1" name="subscribe" id="subscribe"';
-        if (isset($options['checked']))
-        {
+    if (isset($options['checkbox'])) {
+        echo '<p style="clear:both"><input style="width: 20px" type="checkbox" value="1" name="cnns_subscribe" id="cnns_subscribe"';
+        if (isset($options['checked'])) {
             echo ' checked="checked"';
         }
-        echo '/>&nbsp;<label style="margin:0; padding:0; position:relative; left:0; top:0;" for="subscribe">' . $options['label'] . '</label></p>';
+        echo '/>&nbsp;<label style="margin:0; padding:0; position:relative; left:0; top:0;" for="cnns_subscribe">' . $options['label'] . '</label></p>';
     }
 }
 
@@ -162,7 +179,7 @@ function cmnt_nospammers_replace($message, $data) {
 /**
  * Sends out the notification of a new comment for subscribers. This is the core function
  * of this plugin. The notification is not sent to the email address of the author
- * if the comment.
+ * of the comment.
  */
 function cmnt_nospammers_notify($comment_id)
 {
@@ -244,22 +261,24 @@ function cmnt_nospammers_notify($comment_id)
 }
 
 /**
- * Subscribe for a post the user with th email and name passed as parameters.
+ * Subscribe a user to a post.
+ * 
+ * @param int $post_id on which to subscribe
+ * @param string $email user's email
+ * @param string $name user's name
  */
-function cmnt_nospammers_subscribe($post_id, $email, $name)
-{
+function cmnt_nospammers_subscribe( $post_id, $email, $name ) {
     global $wpdb;
 
-    // Checks if the user is already subscribed to this post
+    // Check if user is already subscribed to this post
     $subscribed = $wpdb->get_var(
         $wpdb->prepare("select count(*) from " . $wpdb->prefix . "comment_notifier where post_id=%d and email=%s",
         $post_id, $email));
 
-    // Already subscribed, go out of there...
-    if ($subscribed > 0)
-    {
+    if ($subscribed > 0) {
          return;
     }
+
     // The random token for unsubscription
     $token = md5(rand());
     $res = $wpdb->insert($wpdb->prefix ."comment_notifier", array(
@@ -269,8 +288,75 @@ function cmnt_nospammers_subscribe($post_id, $email, $name)
         'token' => $token ));
 }
 
-function cmnt_nospammers_init()
-{
+/**
+ * Subscribe a comment author to a post after his comment has
+ * been held in moderation and is finally approved.
+ * 
+ * @param int $post_id on which comment was made
+ * @param string $email comment author's email
+ * @param string $name comment author's name
+ * @param int $comment_id comment id
+ */
+function cmnt_nospammers_subscribe_later( $post_id, $email, $name, $comment_id ) {
+    global $wpdb;
+
+    // Check if user is already subscribed to this post
+    $subscribed = $wpdb->get_var(
+        $wpdb->prepare("select count(*) from " . $wpdb->prefix . "comment_notifier where post_id=%d and email=%s",
+        $post_id, $email));
+
+    if ($subscribed > 0) {
+         return;
+    }
+
+
+       /**
+     * debug @test begin
+     */
+
+    /**
+ * Log my own debug messages
+ */
+    function isa_log( $message ) {
+        if (WP_DEBUG === true) {
+            if ( is_array( $message) || is_object( $message ) ) {
+                error_log( print_r( $message, true ) );
+            } else {
+                error_log( $message );
+            }
+        }
+    }
+    // $checked = get_comment_meta( $comment_id, 'cnns_subscribe', true );
+
+    // isa_log('Comment id is:');
+    // isa_log($comment_id);
+    // isa_log('comment meta data output is:');
+    // isa_log($checked);
+
+    /**
+     * debug @test end
+     */
+
+
+    // Did the comment author check the box to subscribe?
+    if ( $comment_id ) {
+        if ( get_comment_meta( $comment_id, 'cnns_subscribe', true ) ) {
+
+            // The random token for unsubscription
+            $token = md5(rand());
+            $res = $wpdb->insert($wpdb->prefix ."comment_notifier", array(
+                'post_id' => $post_id,
+                'email' => $email,
+                'name' => $name,
+                'token' => $token ));
+
+            delete_comment_meta( $comment_id, 'cnns_subscribe' );
+        }
+    }
+
+}
+
+function cmnt_nospammers_init() {
     $options = get_option('cmnt_nospammers');
 
     if (is_admin())
@@ -311,16 +397,14 @@ add_action('init', 'cmnt_nospammers_init');
 /**
  * Removes a subscription.
  */
-function cmnt_nospammers_unsubscribe($id, $token)
-{
+function cmnt_nospammers_unsubscribe($id, $token) {
     global $wpdb;
 
     $wpdb->query($wpdb->prepare("delete from " . $wpdb->prefix . "comment_notifier where id=%d and token=%s", $id, $token));
 
 }
 
-function cmnt_nospammers_mail(&$to, &$subject, &$message, $html=null)
-{
+function cmnt_nospammers_mail(&$to, &$subject, &$message, $html=null) {
     $options = get_option('cmnt_nospammers');
 
     if ($html == null) $html = isset($options['html']);
@@ -401,6 +485,7 @@ $default_options['thankyou'] = __( 'Your subscription has been removed. You\'ll 
 $default_options['name'] = get_option('blogname');
 $default_options['from'] = get_option('admin_email');
 $default_options['checkbox'] = '1';
+$default_options['checked'] = '1';
 $default_options['ty_html'] = '1';
 $default_options['html'] = '1';
 
