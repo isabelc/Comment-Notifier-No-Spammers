@@ -126,10 +126,10 @@ function cmnt_nospammers_options_page() {
                     }
                     
 
-                    _e('Your theme need to call the WordPress "comment_form" (usually in comments.php theme file). Not all themes have it. If you want to manually add the subscription checkbox, use this code for an unchecked checkbox:', 'comment-notifier-no-spammers'); ?><br /><br />
-                    &nbsp;&nbsp;&nbsp;<code>&lt;input type="checkbox" value="1" name="subscribe" id="subscribe"/&gt;</code><br /><br />
+                    _e('Your theme needs to call the WordPress "comment_form" (usually in comments.php theme file). Not all themes have it. If you want to manually add the subscription checkbox, use this code for an unchecked checkbox:', 'comment-notifier-no-spammers'); ?><br /><br />
+                    &nbsp;&nbsp;&nbsp;<code>&lt;input type="checkbox" value="1" name="cnns_subscribe" id="cnns_subscribe"/&gt;</code><br /><br />
                     <?php _e('or the one below for a checked checkbox:', 'comment-notifier-no-spammers'); ?><br /><br />
-                    &nbsp;&nbsp;&nbsp;<code>&lt;input type="checkbox" value="1" name="subscribe" id="subscribe" checked="checked"/&gt;</code>
+                    &nbsp;&nbsp;&nbsp;<code>&lt;input type="checkbox" value="1" name="cnns_subscribe" id="cnns_subscribe" checked="checked"/&gt;</code>
                 </td>
             </tr>
 
@@ -144,7 +144,7 @@ function cmnt_nospammers_options_page() {
                 <th><?php _e('Checkbox Default Status', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input type="checkbox" name="options[checked]" value="1" <?php echo isset($options['checked']) ? 'checked' : ''; ?> />
-                    <?php _e('if checked, the "notify me" checkbox will be checked by default', 'comment-notifier-no-spammers'); ?>
+                    <?php _e('Check here if you want the "Notify me" checkbox to be checked by default', 'comment-notifier-no-spammers'); ?>
                 </td>
             </tr>
         </table>
@@ -206,7 +206,7 @@ function cmnt_nospammers_options_page() {
                     <label><?php _e('Unsubscribe Page URL', 'comment-notifier-no-spammers'); ?></label><br />
                     <input name="options[unsubscribe_url]" type="text" size="50" value="<?php echo $unsubscribe_url; ?>"/>
                     <br />
-                    <?php _e('If you want to create a page with your content to say "ok, you are unsubscribed", enter the URL here. Otherwise, leave this field blank and the subsequent configurations will be used.', 'comment-notifier-no-spammers'); ?>
+                    <?php _e('If you want to create a page with your content to say "ok, you are unsubscribed", enter the URL here. Otherwise, leave this field blank and the following message will be used.', 'comment-notifier-no-spammers'); ?>
                 </td>
             </tr>
             <tr>
