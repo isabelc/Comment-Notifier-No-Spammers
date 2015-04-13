@@ -140,7 +140,6 @@ function cmnt_nospammers_thankyou( $comment_id ) {
  * Add a subscribe checkbox after the form content.
  */
 function cmnt_nospammers_comment_form() {
-
 	$options = get_option('cmnt_nospammers');
 	if (isset($options['checkbox'])) {
 		echo '<p class="cnns-comment-subscription"><input type="checkbox" value="1" name="cnns_subscribe" id="cnns_subscribe"';
