@@ -3,8 +3,8 @@ Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
 Tags: comments, comments reply, comments subscribe, notifications, notify, notifier, subscribe, subscriptions
 Requires at least: 3.7
-Tested up to: 4.1.1
-Stable tag: 1.2
+Tested up to: 4.4.2
+Stable tag: 1.3
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,9 @@ For test emails to work, you must enter an email address in the "Email address w
 **Tip:** Do not use the sender address for this; some mail servers do not accept "from" and "to" set to the same value.
 
 == Changelog ==
+= 1.3 =
+* Fix - If using paged comments, the comments link may have been wrong if it was a comment that appeared on a page other than the first comments page.
+
 = 1.2 =
 * New - Removed inline CSS for subscription checkbox. Added new CSS selectors for easier styling: p.cnns-comment-subscription and label#cnns-label.
 
