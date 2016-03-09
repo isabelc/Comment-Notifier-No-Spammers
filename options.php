@@ -89,7 +89,7 @@ function cmnt_nospammers_options_page() {
     }
 </script>
 <div class="wrap">
-    <h2><?php _e('Comment Notifier No Spammers', 'comment-notifier-no-spammers'); ?></h2>
+    <h1><?php _e('Comment Notifier No Spammers', 'comment-notifier-no-spammers'); ?></h1>
 	<?php 
 	$cleaned = get_option('cmnt_nospammers_cleanup');
 	if ( $cleaned > 0 ) { ?>

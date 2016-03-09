@@ -80,6 +80,7 @@ For test emails to work, you must enter an email address in the "Email address w
 == Changelog ==
 = 1.3 =
 * Fix - If using paged comments, the comments link may have been wrong if it was a comment that appeared on a page other than the first comments page.
+* Tweak - Change h2 heading tag on Settings page to h1.
 
 = 1.2 =
 * New - Removed inline CSS for subscription checkbox. Added new CSS selectors for easier styling: p.cnns-comment-subscription and label#cnns-label.
