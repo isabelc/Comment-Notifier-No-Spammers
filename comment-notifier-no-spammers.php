@@ -3,18 +3,14 @@
 Plugin Name: Comment Notifier No Spammers
 Plugin URI: https://github.com/isabelc/Comment-Notifier-No-Spammers
 Description: Subscribe to comments and notify only approved comment authors, not spammers.
-<<<<<<< HEAD
-Version: 1.3-beta1
-=======
-Version: 1.2
->>>>>>> cdfcfe72edcaeb2d8964184b90f305b85fd0f556
+Version: 1.3
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
 License: GPL2
 Text Domain: comment-notifier-no-spammers
 Domain Path: languages
 
-Copyright 2014 - 2015 Isabel Castillo
+Copyright 2014 - 2016 Isabel Castillo
 
 This file is part of Comment Notifier No Spammers.
 
@@ -126,11 +122,7 @@ function cmnt_nospammers_thankyou( $comment_id ) {
 	$data->post_id = $comment->comment_post_ID;
 	$data->title = $post->post_title;
 	$data->link = get_permalink( $comment->comment_post_ID );
-<<<<<<< HEAD
 	$data->comment_link = get_comment_link( $comment_id );
-=======
-	$data->comment_link = $data->link . '#comment-' . $comment_id;
->>>>>>> cdfcfe72edcaeb2d8964184b90f305b85fd0f556
 	$data->author = $comment->comment_author;
 	$data->content = $comment->comment_content;
 
@@ -233,12 +225,7 @@ function cmnt_nospammers_notify($comment_id)
 	$data->post_id = $post_id;
 	$data->title = $post->post_title;
 	$data->link = get_permalink($post_id);
-<<<<<<< HEAD
 	$data->comment_link = get_comment_link( $comment_id );
-=======
-	$data->comment_link = $data->link . '#comment-' . $comment_id;
-
->>>>>>> cdfcfe72edcaeb2d8964184b90f305b85fd0f556
 	$comment = get_comment($comment_id);
 	$data->author = $comment->comment_author;
 	$data->content = $comment->comment_content;
@@ -346,12 +333,7 @@ function cmnt_nospammers_subscribe_later( $post_id, $email, $name, $comment_id )
 function cmnt_nospammers_init() {
 	$options = get_option('cmnt_nospammers');
 
-<<<<<<< HEAD
 	if (is_admin()) {
-=======
-	if (is_admin())
-	{
->>>>>>> cdfcfe72edcaeb2d8964184b90f305b85fd0f556
 		add_action('admin_menu', 'cmnt_nospammers_admin_menu');
 	}
 
@@ -383,10 +365,6 @@ function cmnt_nospammers_init() {
 
 	die();
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> cdfcfe72edcaeb2d8964184b90f305b85fd0f556
 add_action('init', 'cmnt_nospammers_init');
 
 /**
