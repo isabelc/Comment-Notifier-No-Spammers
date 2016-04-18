@@ -67,7 +67,11 @@ In addition to the requirement described above, some web hosts require that the 
 
 Optionally, you can customize the rest of the settings on this page.
 
-**Step 4 - For those that were using Comment Notifier Plugin**
+**Step 4 (Optional) Depending on how your theme styles checkboxes, you may want to add this CSS to align the subscription checkbox under the comment form: 
+
+`#cnns-label {display: inline-block;}`
+
+**Step 5 - For those that were using Comment Notifier Plugin**
 
 If you were using Comment Notifier plugin, then deactivate it right away to avoid having it add new spammers to your comment_notifier list.
 
@@ -82,9 +86,16 @@ Your existing approved comments, and legit subscribers, will not be lost.
 For test emails to work, you must enter an email address in the "Email address where to send test emails:" option, under "Advanced Settings". 
 **Tip:** Do not use the sender address for this; some mail servers do not accept "from" and "to" set to the same value.
 
+= How can I style the subscription checkbox =
+
+Depending on how your theme styles checkboxes, you may want to add this CSS to align the subscription checkbox under the comment form: 
+
+`#cnns-label {display: inline-block;}`
+
 == Changelog ==
 = 1.4 =
 * Fix - Removed annoying admin notice. It will only show up once upon plugin activation, only if spam/pending commenter emails were removed from the database.
+* Fix - Fixed incorrect textdomain. The correct textdomain is comment-notifier-no-spammers.
 
 = 1.3 =
 * Fix - If using paged comments, the comments link may have been wrong if it was a comment that appeared on a page other than the first comments page.
