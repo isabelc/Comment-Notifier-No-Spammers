@@ -395,8 +395,7 @@ function cmnt_nospammers_mail(&$to, &$subject, &$message, $html=null) {
 * Load plugin textdomain
 */
  function cmnt_nospammers_load_textdomain() {
- 	// @todo fix textdomain!
-	load_plugin_textdomain( 'cmnt_nospammers_options_page', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'comment-notifier-no-spammers', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'plugins_loaded', 'cmnt_nospammers_load_textdomain' );
 
