@@ -1,0 +1,351 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Comment Notifier No Spammers\n"
+"POT-Creation-Date: 2015-02-06 14:18-0500\n"
+"PO-Revision-Date: 2015-02-06 14:19-0500\n"
+"Last-Translator: Isabel Castillo <me@isabelcastillo.com>\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n;esc_attr_e\n"
+"X-Poedit-SearchPath-0: /var/www/html/wp-content/plugins/Comment-Notifier-No-"
+"Spammers\n"
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:453
+#, php-format
+msgid "Hi %s"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:454
+#, php-format
+msgid "%s has just written a new comment on \"%s\". Here is an excerpt:"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:456
+#, php-format
+msgid "To read more, <a href=\"%s\">click here</a>"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:458
+msgid "Bye"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:460
+#, php-format
+msgid "To unsubscribe this notification service, <a href=\"%s\">click here</a>"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:461
+msgid "Notify me when new comments are added."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:462
+#, php-format
+msgid "A new comment from %s on \"%s\""
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:463
+msgid ""
+"Your subscription has been removed. You'll be redirect to the home page "
+"within few seconds."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:471
+msgid "Thank you for your first comment"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:473
+#, php-format
+msgid "Hi %s,"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:475
+msgid "I received and published your first comment on my blog on the article:"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:477
+msgid "Have a nice day!"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:497
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:92
+msgid "Comment Notifier No Spammers"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/comment-notifier-no-spammers.php:501
+msgid "Settings"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:18
+msgid "Author name"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:21
+msgid "A wonderful post title"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:22
+msgid ""
+"This is a long comment. They say that love is more important than money, but "
+"have you ever tried to pay your bills with a hug?"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:40
+msgid "Author"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:43
+msgid "The post title"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:44
+msgid ""
+"This is a long comment. Be a yardstick of quality. Some people are not used "
+"to an environment where excellence is expected."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:58
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:65
+msgid "Security violated"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:96
+#, php-format
+msgid ""
+"On activation, this plugin removed <strong>%s</strong> spammer email address "
+"from your database."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:100
+msgid "Email Management"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:104
+msgid "Remove this email: "
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:105
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:300
+msgid "Remove"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:113
+msgid "Subscription Checkbox Configuration"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:116
+msgid "Add The Checkbox"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:119
+msgid ""
+"Check this to add the \"Notify me\" checkbox to the comment form. (Not all "
+"themes support this function. Read below.)"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:125
+msgid ""
+"Your theme seems to NOT have the \"comment_form\" action call. Read below."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:128
+msgid ""
+"Your theme needs to call the WordPress \"comment_form\" (usually in comments."
+"php theme file). Not all themes have it. If you want to manually add the "
+"subscription checkbox, use this code for an unchecked checkbox:"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:130
+msgid "or the one below for a checked checkbox:"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:136
+msgid "Subscription Checkbox Label"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:139
+msgid "Label to be displayed near the subscription checkbox"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:143
+msgid "Checkbox Default Status"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:146
+msgid ""
+"Check here if you want the \"Notify me\" checkbox to be checked by default"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:151
+msgid "Notification Email Settings"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:154
+msgid "Notification Sender Name"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:161
+msgid "Notification Sender Email"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:167
+msgid "Notification Subject"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:171
+#, php-format
+msgid ""
+"Tags: %1$s - the post title, %2$s - the subscriber name, %3$s - the "
+"commenter name"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:176
+msgid "Notification Message Body"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:178
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:249
+msgid " send emails as html"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:179
+msgid "preview"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:183
+#, php-format
+msgid ""
+"Tags: %1$s - the subscriber name, %2$s - the unsubscribe link, %3$s - the "
+"post title, %4$s - the commenter name, %5$s - the post link, %6$s - the "
+"comment text (eventually truncated)."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:187
+msgid "Comment Excerpt Length"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:190
+msgid " characters"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:192
+msgid ""
+"The length of the comment excerpt to be inserted in the email notification. "
+"If blank, the default is 155 characters."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:197
+msgid "Unsubscribe Settings"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:199
+msgid ""
+"Here you can configure what to show to unsubscribing users. Set an "
+"\"Unsubscribe page URL\" to send the user to a specific page or configure a "
+"specific message."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:205
+msgid "Unsubscribe Page URL"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:208
+msgid ""
+"If you want to create a page with your content to say \"ok, you are "
+"unsubscribed\", enter the URL here. Otherwise, leave this field blank and "
+"the following message will be used."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:213
+msgid "Unsubscribe Message"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:216
+msgid ""
+"Example: You have unsubscribed successfully. Thank you. I will send you to "
+"the home page in 3 seconds."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:222
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:259
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:280
+msgid "Save"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:223
+msgid "Save and send a test email"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:227
+msgid "Thank You Message Settings"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:228
+msgid ""
+"Configure a thank you message for <strong>first time commentators</strong>. "
+"Messages are sent when comments are approved."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:232
+msgid "Enable Thank You Message"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:235
+msgid "send a \"Thank You\" message sent to visitor on their first comment"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:239
+msgid "Subject"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:243
+#, php-format
+msgid "Tags: %1$s - the post title, %2$s - the commenter name"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:247
+msgid "Notification message body"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:253
+#, php-format
+msgid ""
+"Tags: %1$s - the post title, %2$s - the commenter name, %3$s - the post "
+"link, %4$s - the comment text."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:260
+msgid "Save and send a thank you test email"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:262
+msgid "Advanced Settings"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:266
+msgid "Extra email address where to send a copy of EACH notification:"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:269
+msgid ""
+"Leave empty to disable. You still get notifications at the site's admin "
+"email (which is set in General Settings)."
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:274
+msgid "Email address where to send test emails:"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:286
+msgid "Long List of Subscribers"
+msgstr ""
+
+#: /var/www/html/wp-content/plugins/Comment-Notifier-No-Spammers/options.php:293
+msgid ", subscribers: "
+msgstr ""
