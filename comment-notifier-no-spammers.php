@@ -395,6 +395,7 @@ function cmnt_nospammers_mail(&$to, &$subject, &$message, $html=null) {
 * Load plugin textdomain
 */
  function cmnt_nospammers_load_textdomain() {
+ 	// @todo fix textdomain!
 	load_plugin_textdomain( 'cmnt_nospammers_options_page', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'plugins_loaded', 'cmnt_nospammers_load_textdomain' );
@@ -421,7 +422,6 @@ function cmnt_nospammers_cleanup_prior() {
 	// delete every email in the comment_notifier table that doesn’t have a corresponding (pending or approved) comment.
 	$count = $wpdb->query("DELETE FROM " . $comment_notifier_table . " WHERE email NOT IN ( SELECT comment_author_email FROM " . $wpdb->comments . " )");
 	update_option( 'cmnt_nospammers_cleanup', $count );
-
 }
 /** Upon activation, create table unless it exists from Comment Notifier plugin, in which case existing spammer emails will be removed from table. Also set up default settings.
 */
@@ -481,6 +481,8 @@ register_activation_hook( __FILE__, 'cmnt_nospammers_activate' );
 */
 function cmnt_nospammers_deactivate() {
 	delete_option( 'cmnt_nospammers_cleanup' );
+
+	// @todo delete all options.
 }
 register_deactivation_hook( __FILE__, 'cmnt_nospammers_deactivate' );
 

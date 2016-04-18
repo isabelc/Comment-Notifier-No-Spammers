@@ -84,7 +84,7 @@ For test emails to work, you must enter an email address in the "Email address w
 
 == Changelog ==
 = 1.4 =
-
+* Fix - Removed annoying admin notice. It will only show up once upon plugin activation, only if spam/pending commenter emails were removed from the database.
 
 = 1.3 =
 * Fix - If using paged comments, the comments link may have been wrong if it was a comment that appeared on a page other than the first comments page.

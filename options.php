@@ -92,6 +92,7 @@ function cmnt_nospammers_options_page() {
     <h1><?php _e('Comment Notifier No Spammers', 'comment-notifier-no-spammers'); ?></h1>
 	<?php 
 	$cleaned = get_option('cmnt_nospammers_cleanup');
+    delete_option('cmnt_nospammers_cleanup');
 	if ( $cleaned > 0 ) { ?>
 		<div class="updated"><p><?php printf( _n( 'On activation, this plugin removed <strong>%s</strong> spammer email address from your database.', 'On activation, this plugin removed <strong>%s</strong> spammer email addresses from your database.', $cleaned, 'comment-notifier-no-spammers' ), $cleaned ); ?></p></div>
 	<?php } ?>
