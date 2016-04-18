@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Comment Notifier No Spammers
-Plugin URI: https://github.com/isabelc/Comment-Notifier-No-Spammers
+Plugin URI: http://isabelcastillo.com/free-plugins/comment-notifier-no-spammers
 Description: Subscribe to comments and notify only approved comment authors, not spammers.
-Version: 1.3
+Version: 1.4-beta1
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
 License: GPL2
