@@ -3,7 +3,7 @@
 Plugin Name: Comment Notifier No Spammers
 Plugin URI: http://isabelcastillo.com/free-plugins/comment-notifier-no-spammers
 Description: Subscribe to comments and notify only approved comment authors, not spammers.
-Version: 1.5.alpha.1
+Version: 1.5.alpha.2
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
 License: GPL2
@@ -393,6 +393,48 @@ function cmnt_nospammers_mail( &$to, &$subject, &$message ) {
 add_action( 'plugins_loaded', 'cmnt_nospammers_load_textdomain' );
 
 /**
+ * Migrate subscribers from Subscribe to Comments Reloaded.  This only runs on activation.
+ */
+function lstc_migrate_subscribers_from_stcr() {
+	global $wpdb;
+	$stcr_table = $wpdb->prefix . 'subscribe_reloaded_subscribers';
+
+	// Check if the Subscribe to Comments Reloaded table exists
+
+	if ( $wpdb->get_var( "SHOW TABLES LIKE '$stcr_table'" ) != $stcr_table ) {
+		return;
+	}
+	
+	$join = 'SELECT t1.* FROM ' . $wpdb->prefix . 'comments t1 WHERE EXISTS (SELECT subscriber_email FROM ' . $stcr_table . ' t2 WHERE t2.subscriber_email = t1.comment_author_email)';
+
+	$result = $wpdb->get_results( $join );
+
+	if ( empty( $result ) ) {
+		return;
+	}
+
+	foreach ( $result as $row ) {
+
+	    $token = md5(rand());
+
+		$wpdb->query( $wpdb->prepare(
+			'INSERT IGNORE INTO ' . $wpdb->prefix . 'comment_notifier 
+				( post_id, name, email, token )
+				VALUES ( %d, %s, %s, %s )
+			', 
+			array(
+				$row->comment_post_ID, 
+				$row->comment_author,
+				$row->comment_author_email,
+				$token
+			) 
+		) );
+
+	}
+	  
+}
+
+/**
 * Remove spammers that were previously subscribed. This only runs on activation.
 */
 function cmnt_nospammers_cleanup_prior() {
@@ -462,7 +504,13 @@ $default_options['ty_message'] =
 	$options = get_option('cmnt_nospammers', array());
 	$options = array_merge($default_options, $options);
 	update_option('cmnt_nospammers', $options);
+	// Remove spammers that were previously subscribed by Comment Notifier plugin.
 	cmnt_nospammers_cleanup_prior();
+	// Migrate subscribers from Subscribe to Comments Reloaded
+ 	lstc_migrate_subscribers_from_stcr();
+
+
+
 }
 register_activation_hook( __FILE__, 'cmnt_nospammers_activate' );
 
@@ -475,8 +523,7 @@ register_deactivation_hook( __FILE__, 'cmnt_nospammers_deactivate' );
 
 include_once plugin_dir_path(__FILE__) . '/options.php';
 
-function cmnt_nospammers_admin_menu()
-{
+function cmnt_nospammers_admin_menu() {
 	add_options_page(__('Comment Notifier No Spammers', 'comment-notifier-no-spammers'), __('Comment Notifier No Spammers', 'comment-notifier-no-spammers'), 'manage_options', 'comment-notifier-no-spammers', 'cmnt_nospammers_options_page');
 }
 function cmnt_nospammers_settings_link($links) {
