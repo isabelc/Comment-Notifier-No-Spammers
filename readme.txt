@@ -1,4 +1,4 @@
-=== Comment Notifier No Spammers ===
+=== Lightweight Subscribe To Comments ===
 Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
 Tags: comment, comments, comments reply, comments subscribe, notifications, notify, notifier, subscribe, subscription, email
@@ -8,7 +8,7 @@ Stable tag: 1.4
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Subscribe to comments and notify only approved comment authors, not spammers.
+Simply lets visitors subcribe to comments to get an email notification of new comments. Migrates from 'Subscribe To Comments Reloaded' and 'Comment Notifier.'
 
 == Description ==
 
@@ -18,9 +18,13 @@ You can customize the notification emails on the setting page.
 
 The settings page also shows, at the bottom, the list of all subscribers. From there, you can unsubscribe people, if you wish.
 
-**Languages**
+This plugin focuses on a lightweight footprint. It simply just works upon activation. All settings are optional.
 
-This plugin is translation-ready and includes a `.pot` file to make it easy to translate.
+**Easily Switch From Subscribe To Comments Reloaded**
+
+This plugin will migrate your subscribers from the "Subscribe to Comments Reloaded" plugin. This is done automatically upon activation.
+
+**Easily Switch From Comment Notifier**
 
 **This plugin is an alternative to [Comment Notifier](http://wordpress.org/plugins/comment-notifier/) by Stefano Lissa.**
 
@@ -32,7 +36,7 @@ The problem is that the original Comment Notifier plugin subscribes the email ad
 
 You could have hundreds, even thousands, of spammer email addresses in that list. Then, when you approve a legit comment, your server sends out emails to all of the post subscribers (including spammers), which can cause server overload, among other problems.
 
-This plugin, **Comment Notifier No Spammers**, fixes that by ignoring comments in moderation until they are approved by you. This means less load on your server.
+This plugin, **Lightweight Subscribe To Comments**, fixes that by ignoring comments in moderation until they are approved by you. This means less load on your server.
 
 **Easily Switch From Comment Notifier**
 
@@ -45,17 +49,21 @@ If you were using Comment Notifier plugin, then it is easy to switch to this plu
 
 Upon activation, this plugin will clean up your "comment_notifier" list (database table) by removing all spammer emails (emails of people that do NOT have an approved comment). (This only applies to you if you were using the original Comment Notifier plugin.) It will also empty your Comments "Trash" and "Spam". This clean up is only done once, upon plugin activation.
 
+**Languages**
+
+This plugin is translation-ready and includes a `.pot` file to make it easy to translate.
+
 Fork it on [GitHub](https://github.com/isabelc/Comment-Notifier-No-Spammers).
 
 == Installation ==
 
 **Step 1 - Activate The Plugin**
 
-In your WordPress dashboard -> Plugins -> Add New, search for "Comment Notifier No Spammers". Click "Install Now", then click "Activate Plugin".
+In your WordPress dashboard -> Plugins -> Add New, search for "Lightweight Subscribe To Comments". Click "Install Now", then click "Activate Plugin".
 
 **Step 2 - Set a "Notification Sender Email"**
 
-Go to "Settings --> Comment Notifier No Spammers". You must enter a "**Notification Sender Email**".
+Go to "Settings --> Lightweight Subscribe To Comments". You must enter a "**Notification Sender Email**".
 
 Some web hosts require that this be an email at your actual website. For example, if your website is `www.mysite.com`, then your sender email must be `something@mysite.com`, in which the first part "something" can be anything as long as it ends with **"@mysite.com"**. Bluehost is one host that requires this.
 

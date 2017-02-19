@@ -1,6 +1,6 @@
 <?php
-function cmnt_nospammers_options_page() {
-	$options = get_option('cmnt_nospammers');
+function lstc_options_page() {
+	$options = get_option( 'lstc' );
 	global $wpdb;
 	// prevent warnings
 	$unsubscribe_url = empty($options['unsubscribe_url']) ? '' : htmlspecialchars($options['unsubscribe_url']);
@@ -9,45 +9,45 @@ function cmnt_nospammers_options_page() {
 	$copy = empty($options['copy']) ? '' : htmlspecialchars($options['copy']);
 	if(!empty($_POST['_wpnonce'])){
 
-		if (wp_verify_nonce($_POST['_wpnonce'], 'update-comment-notifier-options')) {
+		if (wp_verify_nonce($_POST['_wpnonce'], 'update-lstc-options')) {
 			$options = stripslashes_deep($_POST['options']);
-			update_option('cmnt_nospammers', $options);
+			update_option('lstc', $options);
 			
 			if (isset($_POST['savetest'])) {
-				$cmnt_nospammers_data = new stdClass();
-				$cmnt_nospammers_data->author = __('Author name', 'comment-notifier-no-spammers');
-				$cmnt_nospammers_data->link = get_option('home');
-				$cmnt_nospammers_data->comment_link = get_option('home');
-				$cmnt_nospammers_data->title = __('A wonderful post title', 'comment-notifier-no-spammers');
-				$cmnt_nospammers_data->content = __('This is a long comment. They say that love is more important than money, but have you ever tried to pay your bills with a hug?', 'comment-notifier-no-spammers');
-				$message = cmnt_nospammers_replace($options['message'], $cmnt_nospammers_data);
+				$lstc_data = new stdClass();
+				$lstc_data->author = __('Author name', 'comment-notifier-no-spammers');
+				$lstc_data->link = get_option('home');
+				$lstc_data->comment_link = get_option('home');
+				$lstc_data->title = __('A wonderful post title', 'comment-notifier-no-spammers');
+				$lstc_data->content = __('This is a long comment. They say that love is more important than money, but have you ever tried to pay your bills with a hug?', 'comment-notifier-no-spammers');
+				$message = lstc_replace($options['message'], $lstc_data);
 
 				$message = str_replace('{name}', 'Subscriber name', $message);
 
-				$message = str_replace('{unsubscribe}', get_option('home') . '/?cmnt_nospammers_id=0&cmnt_nospammers_t=fake', $message);
+				$message = str_replace('{unsubscribe}', get_option('home') . '/?lstc_id=0&lstc_t=fake', $message);
 
 
 				$subject = $options['subject'];
-				$subject = str_replace('{title}', $cmnt_nospammers_data->title, $subject);
-				$subject = str_replace('{author}', $cmnt_nospammers_data->author, $subject);
+				$subject = str_replace('{title}', $lstc_data->title, $subject);
+				$subject = str_replace('{author}', $lstc_data->author, $subject);
 				$subject = str_replace('{name}', 'Subscriber name', $subject);
 
-				cmnt_nospammers_mail($test, $subject, $message);
+				lstc_mail( $test, $subject, $message );
 			}
 
 			if (isset($_POST['savethankyou'])) {
-				$cmnt_nospammers_data = new stdClass();
-				$cmnt_nospammers_data->author = __('Author', 'comment-notifier-no-spammers');
-				$cmnt_nospammers_data->link = get_option('home');
-				$cmnt_nospammers_data->comment_link = get_option('home');
-				$cmnt_nospammers_data->title = __('The post title', 'comment-notifier-no-spammers');
-				$cmnt_nospammers_data->content = __('This is a long comment. Be a yardstick of quality. Some people are not used to an environment where excellence is expected.', 'comment-notifier-no-spammers');
-				$message = cmnt_nospammers_replace($options['ty_message'], $cmnt_nospammers_data);
+				$lstc_data = new stdClass();
+				$lstc_data->author = __('Author', 'comment-notifier-no-spammers');
+				$lstc_data->link = get_option('home');
+				$lstc_data->comment_link = get_option('home');
+				$lstc_data->title = __('The post title', 'comment-notifier-no-spammers');
+				$lstc_data->content = __('This is a long comment. Be a yardstick of quality. Some people are not used to an environment where excellence is expected.', 'comment-notifier-no-spammers');
+				$message = lstc_replace($options['ty_message'], $lstc_data);
 
 				$subject = $options['ty_subject'];
-				$subject = str_replace('{title}', $cmnt_nospammers_data->title, $subject);
-				$subject = str_replace('{author}', $cmnt_nospammers_data->author, $subject);
-				cmnt_nospammers_mail( $test, $subject, $message );
+				$subject = str_replace('{title}', $lstc_data->title, $subject);
+				$subject = str_replace('{author}', $lstc_data->author, $subject);
+				lstc_mail( $test, $subject, $message );
 			}
 		}
 	}
@@ -69,11 +69,11 @@ function cmnt_nospammers_options_page() {
 	?>
 
 <script type="text/javascript">
-    function cmnt_nospammers_preview()
+    function lstc_preview()
     {
         var m = document.getElementById("message").value;
         m = m.replace("{content}", "I totally agree with your opinion about him, he's really...");
-        var h = window.open("", "cmnt_nospammers","status=0,toolbar=0,height=400,width=550");
+        var h = window.open("", "lstc","status=0,toolbar=0,height=400,width=550");
         var d = h.document;
         d.write('<html><head><title>Email preview</title>');
         d.write('</head><body>');
@@ -89,13 +89,7 @@ function cmnt_nospammers_options_page() {
     }
 </script>
 <div class="wrap">
-    <h1><?php _e('Comment Notifier No Spammers', 'comment-notifier-no-spammers'); ?></h1>
-	<?php 
-	$cleaned = get_option('cmnt_nospammers_cleanup');
-    delete_option('cmnt_nospammers_cleanup');
-	if ( $cleaned > 0 ) { ?>
-		<div class="updated"><p><?php printf( _n( 'On activation, this plugin removed <strong>%s</strong> spammer email address from your database.', 'On activation, this plugin removed <strong>%s</strong> spammer email addresses from your database.', $cleaned, 'comment-notifier-no-spammers' ), $cleaned ); ?></p></div>
-	<?php } ?>
+    <h1><?php _e( 'Lightweight Subscribe To Comments', 'comment-notifier-no-spammers' ); ?></h1>
     <form action="" method="post">
         <?php wp_nonce_field('remove_email') ?>
         <h3><?php _e('Email Management', 'comment-notifier-no-spammers'); ?></h3>
@@ -110,7 +104,7 @@ function cmnt_nospammers_options_page() {
     </form>
 
     <form action="" method="post">
-        <?php wp_nonce_field('update-comment-notifier-options') ?>
+        <?php wp_nonce_field('update-lstc-options') ?>
         <h3><?php _e('Subscription Checkbox Configuration', 'comment-notifier-no-spammers'); ?></h3>
         <table class="form-table">
             <tr>
@@ -164,7 +158,7 @@ function cmnt_nospammers_options_page() {
             <tr>
                 <th><?php _e('Notification Message Body', 'comment-notifier-no-spammers'); ?></th>
                 <td>
-                    ( <a href="javascript:void(cmnt_nospammers_preview());"><?php _e('preview', 'comment-notifier-no-spammers'); ?></a>)
+                    ( <a href="javascript:void(lstc_preview());"><?php _e('preview', 'comment-notifier-no-spammers'); ?></a>)
                     <br />
                     <textarea name="options[message]" id="message" wrap="off" rows="10" style="width: 100%"><?php echo htmlspecialchars($options['message']) ?></textarea>
                     <br />

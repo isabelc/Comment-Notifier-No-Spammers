@@ -1,31 +1,31 @@
 <?php
 /*
 Plugin Name: Lightweight Subscribe To Comments
-Plugin URI: http://isabelcastillo.com/free-plugins/comment-notifier-no-spammers
-Description: Subscribe to comments and notify only approved comment authors, not spammers.
-Version: 1.5.alpha.2
+Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
+Description: Simply lets visitors subcribe to comments to get an email notification of new comments. Migrates from 'Subscribe To Comments Reloaded' and 'Comment Notifier.'
+Version: 1.5.alpha.3
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
 License: GPL2
 Text Domain: comment-notifier-no-spammers
 Domain Path: languages
 
-Copyright 2014 - 2016 Isabel Castillo
+Copyright 2014 - 2017 Isabel Castillo
 
-This file is part of Comment Notifier No Spammers.
+This file is part of Lightweight Subscribe To Comments.
 
-Comment Notifier No Spammers is free software: you can redistribute it and/or modify
+Lightweight Subscribe To Comments is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 any later version.
  
-Comment Notifier No Spammers is distributed in the hope that it will be useful,
+Lightweight Subscribe To Comments is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
  
 You should have received a copy of the GNU General Public License
-along with Comment Notifier No Spammers. If not, see <http://www.gnu.org/licenses/>.
+along with Lightweight Subscribe To Comments. If not, see <http://www.gnu.org/licenses/>.
 */
 
 /**
@@ -40,7 +40,7 @@ along with Comment Notifier No Spammers. If not, see <http://www.gnu.org/license
  * @param int $comment_id the database id of the comment
  * @param mixed $status, 0, 1 or spam
  */
-function cmnt_nospammers_comment_post( $comment_id, $status ) {
+function lstc_comment_post( $comment_id, $status ) {
 
 		$comment = get_comment($comment_id);
 		$name = $comment->comment_author;
@@ -50,20 +50,20 @@ function cmnt_nospammers_comment_post( $comment_id, $status ) {
 	// Only subscribe if comment is approved; skip those in moderation.
 
 	// if comment author subscribed, and if comment is automatically approved, subscribe author
-	if ( ( $status === 1 ) && isset( $_POST['cnns_subscribe'] ) ) {
-		cmnt_nospammers_subscribe( $post_id, $email, $name );
+	if ( ( $status === 1 ) && isset( $_POST['lstc_subscribe'] ) ) {
+		lstc_subscribe( $post_id, $email, $name );
 	}
 
 	// If comment is approved automatically, notify subscribers
 	if ( $status == 1 ) {
-		cmnt_nospammers_thankyou( $comment_id );
-		cmnt_nospammers_notify( $comment_id );
+		lstc_thankyou( $comment_id );
+		lstc_notify( $comment_id );
 	}
 
 	// If comment goes to moderation, and if comment author subscribed,
 	// add comment meta key for pending subscription.
-	if ( ( $status === 0 ) && isset( $_POST['cnns_subscribe'] ) ) {
-		add_comment_meta( $comment_id, 'cnns_subscribe', true, true );
+	if ( ( $status === 0 ) && isset( $_POST['lstc_subscribe'] ) ) {
+		add_comment_meta( $comment_id, 'lstc_subscribe', true, true );
 	}
 	
 }
@@ -80,7 +80,7 @@ function cmnt_nospammers_comment_post( $comment_id, $status ) {
  * @param int $comment_id the comment id
  * @param string $status either 'hold', 'approve', 'spam', or 'delete'.
  */
-function cmnt_nospammers_wp_set_comment_status( $comment_id, $status ) {
+function lstc_wp_set_comment_status( $comment_id, $status ) {
 
 	// get original comment info
 	$comment = get_comment( $comment_id );
@@ -90,9 +90,9 @@ function cmnt_nospammers_wp_set_comment_status( $comment_id, $status ) {
 
 	// When a comment is approved later, notify the subscribers, and subscribe this comment author
 	if ( $status === 'approve' ) {
-		cmnt_nospammers_thankyou( $comment_id );
-		cmnt_nospammers_notify( $comment_id );
-		cmnt_nospammers_subscribe_later( $post_id, $email, $name, $comment_id );
+		lstc_thankyou( $comment_id );
+		lstc_notify( $comment_id );
+		lstc_subscribe_later( $post_id, $email, $name, $comment_id );
 	}
 }
 
@@ -100,9 +100,9 @@ function cmnt_nospammers_wp_set_comment_status( $comment_id, $status ) {
  * Send thank you message to first timers after their 1st comment is approved,
  * regardless of whether they subscribe.
  */
-function cmnt_nospammers_thankyou( $comment_id ) {
+function lstc_thankyou( $comment_id ) {
 	global $wpdb;
-	$options = get_option( 'cmnt_nospammers' );
+	$options = get_option( 'lstc' );
 	if (!isset($options['ty_enabled'])){
 		return;
 	}
@@ -126,27 +126,27 @@ function cmnt_nospammers_thankyou( $comment_id ) {
 	$data->author = $comment->comment_author;
 	$data->content = $comment->comment_content;
 
-	$message = $message = cmnt_nospammers_replace( $options['ty_message'], $data );
+	$message = $message = lstc_replace( $options['ty_message'], $data );
 
 	// Fill the message subject with same for all data.
 	$subject = $options['ty_subject'];
 	$subject = str_replace( '{title}', $post->post_title, $subject );
 	$subject = str_replace( '{author}', $comment->comment_author, $subject );
 
-	cmnt_nospammers_mail( $comment->comment_author_email, $subject, $message );
+	lstc_mail( $comment->comment_author_email, $subject, $message );
 }
 
 /**
  * Add a subscribe checkbox after the form content.
  */
-function cmnt_nospammers_comment_form() {
-	$options = get_option('cmnt_nospammers');
+function lstc_comment_form() {
+	$options = get_option('lstc');
 	if (isset($options['checkbox'])) {
-		echo '<p class="cnns-comment-subscription"><input type="checkbox" value="1" name="cnns_subscribe" id="cnns_subscribe"';
+		echo '<p class="cnns-comment-subscription lstc-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
 		if (isset($options['checked'])) {
 			echo ' checked="checked"';
 		}
-		echo '/>&nbsp;<label id="cnns-label" for="cnns_subscribe">' . $options['label'] . '</label></p>';
+		echo '/>&nbsp;<label id="cnns-label" class="lstc-label" for="lstc_subscribe">' . $options['label'] . '</label></p>';
 	}
 }
 /** Replace placeholders in body message with subscriber data and post/comment
@@ -155,8 +155,8 @@ function cmnt_nospammers_comment_form() {
  * @param <type> $data
  * @return <type>
  */
-function cmnt_nospammers_replace($message, $data) {
-	$options = get_option('cmnt_nospammers');
+function lstc_replace($message, $data) {
+	$options = get_option('lstc');
 	$message = str_replace('{title}', $data->title, $message);
 	$message = str_replace('{link}', $data->link, $message);
 	$message = str_replace('{comment_link}', $data->comment_link, $message);
@@ -185,13 +185,13 @@ function cmnt_nospammers_replace($message, $data) {
  * of this plugin. The notification is not sent to the email address of the author
  * of the comment.
  */
-function cmnt_nospammers_notify($comment_id)
+function lstc_notify($comment_id)
 {
 	global $wpdb;
 
 	//@set_time_limit(0);
 
-	$options = get_option('cmnt_nospammers');
+	$options = get_option('lstc');
 	$comment = get_comment($comment_id);
 
 	if ($comment->comment_type == 'trackback' || $comment->comment_type == 'pingback')
@@ -200,7 +200,7 @@ function cmnt_nospammers_notify($comment_id)
 	}
 
 	$post_id = $comment->comment_post_ID;
-	if (empty($post_id)) {
+	if ( empty( $post_id ) ) {
 		return;
 	}
 	$email = strtolower(trim($comment->comment_author_email));
@@ -209,8 +209,7 @@ function cmnt_nospammers_notify($comment_id)
 		$wpdb->prepare("select * from " . $wpdb->prefix . "comment_notifier where post_id=%d and email<>%s",
 		$post_id, $email) );
 
-	if (!$subscriptions)
-	{
+	if ( ! $subscriptions ) {
 		return;
 	}
 
@@ -230,7 +229,7 @@ function cmnt_nospammers_notify($comment_id)
 	$data->author = $comment->comment_author;
 	$data->content = $comment->comment_content;
 
-	$message = cmnt_nospammers_replace($options['message'], $data);
+	$message = lstc_replace($options['message'], $data);
 
 	// Fill the message subject with same for all data.
 	$subject = $options['subject'];
@@ -253,12 +252,12 @@ function cmnt_nospammers_notify($comment_id)
 		$idx++;
 		$m = $message;
 		$m = str_replace('{name}', $subscription->name, $m);
-		$m = str_replace('{unsubscribe}', $url . 'cmnt_nospammers_id=' . $subscription->id . '&cmnt_nospammers_t=' . $subscription->token, $m);
+		$m = str_replace('{unsubscribe}', $url . 'lstc_id=' . $subscription->id . '&lstc_t=' . $subscription->token, $m);
 
 		$s = $subject;
 		$s = str_replace('{name}', $subscription->name, $s);
 
-		if (cmnt_nospammers_mail($subscription->email, $s, $m)) $ok++;
+		if (lstc_mail($subscription->email, $s, $m)) $ok++;
 	}
 }
 
@@ -269,7 +268,7 @@ function cmnt_nospammers_notify($comment_id)
  * @param string $email user's email
  * @param string $name user's name
  */
-function cmnt_nospammers_subscribe( $post_id, $email, $name ) {
+function lstc_subscribe( $post_id, $email, $name ) {
 	global $wpdb;
 
 	// Check if user is already subscribed to this post
@@ -299,7 +298,7 @@ function cmnt_nospammers_subscribe( $post_id, $email, $name ) {
  * @param string $name comment author's name
  * @param int $comment_id comment id
  */
-function cmnt_nospammers_subscribe_later( $post_id, $email, $name, $comment_id ) {
+function lstc_subscribe_later( $post_id, $email, $name, $comment_id ) {
 	global $wpdb;
 
 	// Check if user is already subscribed to this post
@@ -313,7 +312,7 @@ function cmnt_nospammers_subscribe_later( $post_id, $email, $name, $comment_id )
 
 	// Did the comment author check the box to subscribe?
 	if ( $comment_id ) {
-		if ( get_comment_meta( $comment_id, 'cnns_subscribe', true ) ) {
+		if ( get_comment_meta( $comment_id, 'lstc_subscribe', true ) ) {
 
 			// The random token for unsubscription
 			$token = md5(rand());
@@ -323,30 +322,30 @@ function cmnt_nospammers_subscribe_later( $post_id, $email, $name, $comment_id )
 				'name' => $name,
 				'token' => $token ));
 
-			delete_comment_meta( $comment_id, 'cnns_subscribe' );
+			delete_comment_meta( $comment_id, 'lstc_subscribe' );
 		}
 	}
 
 }
 
-function cmnt_nospammers_init() {
-	$options = get_option('cmnt_nospammers');
+function lstc_init() {
+	$options = get_option('lstc');
 
 	if (is_admin()) {
-		add_action('admin_menu', 'cmnt_nospammers_admin_menu');
+		add_action( 'admin_menu', 'lstc_admin_menu' );
 	}
 
-	add_action('comment_form', 'cmnt_nospammers_comment_form', 99);
-	add_action('wp_set_comment_status', 'cmnt_nospammers_wp_set_comment_status', 10, 2);
-	add_action('comment_post', 'cmnt_nospammers_comment_post', 10, 2);
+	add_action('comment_form', 'lstc_comment_form', 99);
+	add_action('wp_set_comment_status', 'lstc_wp_set_comment_status', 10, 2);
+	add_action('comment_post', 'lstc_comment_post', 10, 2);
 
-	if (empty($_GET['cmnt_nospammers_id'])) return;
+	if (empty($_GET['lstc_id'])) return;
 
-	$token = $_GET['cmnt_nospammers_t'];
-	$id = $_GET['cmnt_nospammers_id'];
+	$token = $_GET['lstc_t'];
+	$id = $_GET['lstc_id'];
 
 
-	cmnt_nospammers_unsubscribe($id, $token);
+	lstc_unsubscribe($id, $token);
 	
 	$unsubscribe_url = empty($options['unsubscribe_url']) ? '' : $options['unsubscribe_url'];
 
@@ -364,12 +363,12 @@ function cmnt_nospammers_init() {
 
 	die();
 }
-add_action('init', 'cmnt_nospammers_init');
+add_action('init', 'lstc_init');
 
 /**
  * Removes a subscription.
  */
-function cmnt_nospammers_unsubscribe($id, $token) {
+function lstc_unsubscribe($id, $token) {
 	global $wpdb;
 
 	$wpdb->query($wpdb->prepare("delete from " . $wpdb->prefix . "comment_notifier where id=%d and token=%s", $id, $token));
@@ -378,8 +377,8 @@ function cmnt_nospammers_unsubscribe($id, $token) {
 /**
  * Send an email
  */
-function cmnt_nospammers_mail( $to, $subject, $message ) {
-	$options = get_option( 'cmnt_nospammers' );
+function lstc_mail( $to, $subject, $message ) {
+	$options = get_option( 'lstc' );
 	$headers = "Content-type: text/html; charset=UTF-8\n";
 	if ( ! empty( $options['name'] ) && ! empty( $options['from'] ) ) {
 		$headers .= 'From: "' . $options['name'] . '" <' . $options['from'] . ">\n";
@@ -390,13 +389,13 @@ function cmnt_nospammers_mail( $to, $subject, $message ) {
 /** 
 * Load plugin textdomain
 */
- function cmnt_nospammers_load_textdomain() {
+ function lstc_load_textdomain() {
 	load_plugin_textdomain( 'comment-notifier-no-spammers', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-add_action( 'init', 'cmnt_nospammers_load_textdomain' );
+add_action( 'init', 'lstc_load_textdomain' );
 
 /**
- * Migrate subscribers from Subscribe to Comments Reloaded.  This only runs on activation.
+ * Migrate subscribers from Subscribe to Comments Reloaded. This only runs on activation.
  */
 function lstc_migrate_subscribers_from_stcr() {
 	global $wpdb;
@@ -440,7 +439,7 @@ function lstc_migrate_subscribers_from_stcr() {
 /**
 * Remove spammers that were previously subscribed. This only runs on activation.
 */
-function cmnt_nospammers_cleanup_prior() {
+function lstc_cleanup_prior() {
 	global $wpdb;
 	// get table name
 	$pre = $wpdb->base_prefix;
@@ -458,11 +457,10 @@ function cmnt_nospammers_cleanup_prior() {
 
 	// delete every email in the comment_notifier table that doesn’t have a corresponding (pending or approved) comment.
 	$count = $wpdb->query("DELETE FROM " . $comment_notifier_table . " WHERE email NOT IN ( SELECT comment_author_email FROM " . $wpdb->comments . " )");
-	update_option( 'cmnt_nospammers_cleanup', $count );
 }
 /** Upon activation, create table unless it exists from Comment Notifier plugin, in which case existing spammer emails will be removed from table. Also set up default settings.
 */
-function cmnt_nospammers_activate() {
+function lstc_activate() {
 	global $wpdb;
 	//   $wpdb->query("RENAME TABLE " . $wpdb->prefix . "subscriptions TO " . $wpdb->prefix . "comment_notifier");
 
@@ -503,40 +501,19 @@ $default_options['ty_message'] =
 <p>' . __('I received and published your first comment on my blog on the article:', 'comment-notifier-no-spammers'). '</p>
 <p><a href="{link}">{title}</a></p>
 <p>' . __('Have a nice day!', 'comment-notifier-no-spammers') . '</p>';
-
-	$options = get_option('cmnt_nospammers', array());
+	$options = get_option('lstc', array());
 	$options = array_merge($default_options, $options);
-	update_option('cmnt_nospammers', $options);
+	update_option('lstc', $options);
 	// Remove spammers that were previously subscribed by Comment Notifier plugin.
-	cmnt_nospammers_cleanup_prior();
+	lstc_cleanup_prior();
 	// Migrate subscribers from Subscribe to Comments Reloaded
  	lstc_migrate_subscribers_from_stcr();
 
-
-
 }
-register_activation_hook( __FILE__, 'cmnt_nospammers_activate' );
-
-/* Upon deactivation, delete the option that holds the number of deleted spammers from this activation
-*/
-function cmnt_nospammers_deactivate() {
-	delete_option( 'cmnt_nospammers_cleanup' );
-}
-register_deactivation_hook( __FILE__, 'cmnt_nospammers_deactivate' );
+register_activation_hook( __FILE__, 'lstc_activate' );
 
 include_once plugin_dir_path(__FILE__) . '/options.php';
 
-function cmnt_nospammers_admin_menu() {
-	add_options_page(__('Comment Notifier No Spammers', 'comment-notifier-no-spammers'), __('Comment Notifier No Spammers', 'comment-notifier-no-spammers'), 'manage_options', 'comment-notifier-no-spammers', 'cmnt_nospammers_options_page');
+function lstc_admin_menu() {
+	add_options_page(__('Lightweight Subscribe To Comments', 'comment-notifier-no-spammers'), __('Lightweight Subscribe To Comments', 'comment-notifier-no-spammers'), 'manage_options', 'lightweight-subscribe-comments', 'lstc_options_page');
 }
-function cmnt_nospammers_settings_link($links) {
-	$url = get_admin_url().'options-general.php?page=comment-notifier-no-spammers';
-	$settings_link = '<a href="'.$url.'">' . __('Settings', 'comment-notifier-no-spammers') . '</a>';
-	array_unshift($links, $settings_link);
-	return $links;
-}
-
-function cmnt_nospammers_after_setup_theme() {
-	 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'cmnt_nospammers_settings_link');
-}
-add_action ('after_setup_theme', 'cmnt_nospammers_after_setup_theme');
