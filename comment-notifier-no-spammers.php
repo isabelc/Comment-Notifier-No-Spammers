@@ -3,7 +3,7 @@
 Plugin Name: Comment Notifier No Spammers
 Plugin URI: http://isabelcastillo.com/free-plugins/comment-notifier-no-spammers
 Description: Subscribe to comments and notify only approved comment authors, not spammers.
-Version: 1.4
+Version: 1.5.alpha.1
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
 License: GPL2
@@ -126,14 +126,14 @@ function cmnt_nospammers_thankyou( $comment_id ) {
 	$data->author = $comment->comment_author;
 	$data->content = $comment->comment_content;
 
-	$message = $message = cmnt_nospammers_replace($options['ty_message'], $data);
+	$message = $message = cmnt_nospammers_replace( $options['ty_message'], $data );
 
 	// Fill the message subject with same for all data.
 	$subject = $options['ty_subject'];
-	$subject = str_replace('{title}', $post->post_title, $subject);
-	$subject = str_replace('{author}', $comment->comment_author, $subject);
+	$subject = str_replace( '{title}', $post->post_title, $subject );
+	$subject = str_replace( '{author}', $comment->comment_author, $subject );
 
-	cmnt_nospammers_mail($comment->comment_author_email, $subject, $message, isset($options['ty_html']));
+	cmnt_nospammers_mail( $comment->comment_author_email, $subject, $message );
 }
 
 /**
@@ -377,20 +377,13 @@ function cmnt_nospammers_unsubscribe($id, $token) {
 
 }
 
-function cmnt_nospammers_mail(&$to, &$subject, &$message, $html=null) {
-	$options = get_option('cmnt_nospammers');
-
-	if ($html == null) $html = isset($options['html']);
-
-	if ($html)
-		$headers = "Content-type: text/html; charset=UTF-8\n";
-	else
-		$headers = "Content-type: text/plain; charset=UTF-8\n";
-
+function cmnt_nospammers_mail( &$to, &$subject, &$message ) {
+	$options = get_option( 'cmnt_nospammers' );
+	$headers = "Content-type: text/html; charset=UTF-8\n";
 	$headers .= 'From: "' . $options['name'] . '" <' . $options['from'] . ">\n";
-
-	return wp_mail($to, $subject, $message, $headers);
+	return wp_mail( $to, $subject, $message, $headers );
 }
+
 /** 
 * Load plugin textdomain
 */
@@ -458,9 +451,6 @@ $default_options['name'] = get_option('blogname');
 $default_options['from'] = get_option('admin_email');
 $default_options['checkbox'] = '1';
 $default_options['checked'] = '1';
-$default_options['ty_html'] = '1';
-$default_options['html'] = '1';
-
 $default_options['ty_subject'] = __('Thank you for your first comment', 'comment-notifier-no-spammers');
 $default_options['ty_message'] = 
 '<p>' . sprintf(__('Hi %s,', 'comment-notifier-no-spammers'), '{author}') . '</p>

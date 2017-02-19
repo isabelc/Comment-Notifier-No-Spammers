@@ -47,7 +47,7 @@ function cmnt_nospammers_options_page() {
 				$subject = $options['ty_subject'];
 				$subject = str_replace('{title}', $cmnt_nospammers_data->title, $subject);
 				$subject = str_replace('{author}', $cmnt_nospammers_data->author, $subject);
-				cmnt_nospammers_mail($test, $subject, $message, isset($options['ty_html']));
+				cmnt_nospammers_mail( $test, $subject, $message );
 			}
 		}
 	}
@@ -164,7 +164,6 @@ function cmnt_nospammers_options_page() {
             <tr>
                 <th><?php _e('Notification Message Body', 'comment-notifier-no-spammers'); ?></th>
                 <td>
-                    <input type="checkbox" name="options[html]" value="1" <?php echo $options['html'] != null ? 'checked' : ''; ?> /> <?php _e(' send emails as html', 'comment-notifier-no-spammers'); ?> 
                     ( <a href="javascript:void(cmnt_nospammers_preview());"><?php _e('preview', 'comment-notifier-no-spammers'); ?></a>)
                     <br />
                     <textarea name="options[message]" id="message" wrap="off" rows="10" style="width: 100%"><?php echo htmlspecialchars($options['message']) ?></textarea>
@@ -235,8 +234,6 @@ function cmnt_nospammers_options_page() {
             <tr>
                 <th><?php _e('Notification message body', 'comment-notifier-no-spammers'); ?></th>
                 <td>
-                    <input type="checkbox" name="options[ty_html]" value="1" <?php echo isset($options['ty_html']) ? 'checked' : ''; ?> />  <?php _e(' send emails as html', 'comment-notifier-no-spammers'); ?>
-                    <br />
                     <textarea name="options[ty_message]" wrap="off" rows="10" cols="70" style="width: 500px"><?php echo htmlspecialchars($options['ty_message']); ?></textarea>
                     <br />
                     <?php printf(__('Tags: %1$s - the post title, %2$s - the commenter name, %3$s - the post link, %4$s - the comment text.', 'comment-notifier-no-spammers'), '{title}', '{author}', '{link}', '{content}'); ?><br /><br />
