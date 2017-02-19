@@ -5,7 +5,7 @@ Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-commen
 Description: Lets visitors subcribe to comments to get an email notification of new comments. Migrates from 'Subscribe To Comments Reloaded' and 'Comment Notifier.'
 Version: 1.5.alpha.3
 Author: Isabel Castillo
-Author URI: http://isabelcastillo.com
+Author URI: https://isabelcastillo.com
 License: GPL2
 Text Domain: comment-notifier-no-spammers
 Domain Path: languages
