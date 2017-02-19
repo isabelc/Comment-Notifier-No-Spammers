@@ -390,7 +390,7 @@ function cmnt_nospammers_mail( &$to, &$subject, &$message ) {
  function cmnt_nospammers_load_textdomain() {
 	load_plugin_textdomain( 'comment-notifier-no-spammers', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-add_action( 'plugins_loaded', 'cmnt_nospammers_load_textdomain' );
+add_action( 'init', 'cmnt_nospammers_load_textdomain' );
 
 /**
  * Migrate subscribers from Subscribe to Comments Reloaded.  This only runs on activation.
