@@ -114,22 +114,10 @@ function cmnt_nospammers_options_page() {
         <h3><?php _e('Subscription Checkbox Configuration', 'comment-notifier-no-spammers'); ?></h3>
         <table class="form-table">
             <tr>
-                <th><?php _e('Add The Checkbox', 'comment-notifier-no-spammers'); ?></th>
+                <th><?php _e('Enable The Checkbox', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input type="checkbox" name="options[checkbox]" value="1" <?php echo isset($options['checkbox']) ? 'checked' : ''; ?> />
-                    <?php _e('Check this to add the "Notify me" checkbox to the comment form. (Not all themes support this function. Read below.)', 'comment-notifier-no-spammers'); ?>
-
-                    <br /><br />
-                    <?php
-                    $commentsphp = @file_get_contents(get_template_directory() . '/comments.php');
-                    if (strpos($commentsphp, 'comment_form') === false) {
-                        echo '<strong>' .__('Your theme seems to NOT have the "comment_form" action call. Read below.', 'comment-notifier-no-spammers') . '</strong><br /><br />';
-                    }
-
-                    _e('Your theme needs to call the WordPress "comment_form" (usually in comments.php theme file). Not all themes have it. If you want to manually add the subscription checkbox, use this code for an unchecked checkbox:', 'comment-notifier-no-spammers'); ?><br /><br />
-                    &nbsp;&nbsp;&nbsp;<code>&lt;input type="checkbox" value="1" name="cnns_subscribe" id="cnns_subscribe"/&gt;</code><br /><br />
-                    <?php _e('or the one below for a checked checkbox:', 'comment-notifier-no-spammers'); ?><br /><br />
-                    &nbsp;&nbsp;&nbsp;<code>&lt;input type="checkbox" value="1" name="cnns_subscribe" id="cnns_subscribe" checked="checked"/&gt;</code>
+                    <?php _e('Check this to add the "Notify me" subscription checkbox to the comment form.', 'comment-notifier-no-spammers'); ?>
                 </td>
             </tr>
 
@@ -144,7 +132,7 @@ function cmnt_nospammers_options_page() {
                 <th><?php _e('Checkbox Default Status', 'comment-notifier-no-spammers'); ?></th>
                 <td>
                     <input type="checkbox" name="options[checked]" value="1" <?php echo isset($options['checked']) ? 'checked' : ''; ?> />
-                    <?php _e('Check here if you want the "Notify me" checkbox to be checked by default', 'comment-notifier-no-spammers'); ?>
+                    <?php _e('Check here if you want the "Notify me" subscription checkbox to be checked by default', 'comment-notifier-no-spammers'); ?>
                 </td>
             </tr>
         </table>
