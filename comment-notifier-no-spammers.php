@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Comment Notifier No Spammers
+Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: http://isabelcastillo.com/free-plugins/comment-notifier-no-spammers
 Description: Subscribe to comments and notify only approved comment authors, not spammers.
 Version: 1.5.alpha.2
@@ -249,8 +249,7 @@ function cmnt_nospammers_notify($comment_id)
 
 	$idx = 0;
 	$ok = 0;
-	foreach ($subscriptions as $subscription)
-	{
+	foreach ( $subscriptions as $subscription ) {
 		$idx++;
 		$m = $message;
 		$m = str_replace('{name}', $subscription->name, $m);
@@ -376,11 +375,15 @@ function cmnt_nospammers_unsubscribe($id, $token) {
 	$wpdb->query($wpdb->prepare("delete from " . $wpdb->prefix . "comment_notifier where id=%d and token=%s", $id, $token));
 
 }
-
-function cmnt_nospammers_mail( &$to, &$subject, &$message ) {
+/**
+ * Send an email
+ */
+function cmnt_nospammers_mail( $to, $subject, $message ) {
 	$options = get_option( 'cmnt_nospammers' );
 	$headers = "Content-type: text/html; charset=UTF-8\n";
-	$headers .= 'From: "' . $options['name'] . '" <' . $options['from'] . ">\n";
+	if ( ! empty( $options['name'] ) && ! empty( $options['from'] ) ) {
+		$headers .= 'From: "' . $options['name'] . '" <' . $options['from'] . ">\n";
+	}
 	return wp_mail( $to, $subject, $message, $headers );
 }
 
