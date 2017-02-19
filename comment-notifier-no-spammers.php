@@ -2,7 +2,7 @@
 /*
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
-Description: Simply lets visitors subcribe to comments to get an email notification of new comments. Migrates from 'Subscribe To Comments Reloaded' and 'Comment Notifier.'
+Description: Lets visitors subcribe to comments to get an email notification of new comments. Migrates from 'Subscribe To Comments Reloaded' and 'Comment Notifier.'
 Version: 1.5.alpha.3
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
@@ -126,7 +126,7 @@ function lstc_thankyou( $comment_id ) {
 	$data->author = $comment->comment_author;
 	$data->content = $comment->comment_content;
 
-	$message = $message = lstc_replace( $options['ty_message'], $data );
+	$message = lstc_replace( $options['ty_message'], $data );
 
 	// Fill the message subject with same for all data.
 	$subject = $options['ty_subject'];
@@ -155,14 +155,14 @@ function lstc_comment_form() {
  * @param <type> $data
  * @return <type>
  */
-function lstc_replace($message, $data) {
+function lstc_replace( $message, $data ) {
 	$options = get_option('lstc');
 	$message = str_replace('{title}', $data->title, $message);
 	$message = str_replace('{link}', $data->link, $message);
 	$message = str_replace('{comment_link}', $data->comment_link, $message);
 	$message = str_replace('{author}', $data->author, $message);
 	$temp = strip_tags($data->content);
-	$length = empty($options['length']) ? 155 : htmlspecialchars($options['length']);
+	$length = empty( $options['length'] ) ? 155 : htmlspecialchars( $options['length'] );
 	
 	if ( ! is_numeric($length) ) {
 		$length = 155;
@@ -185,8 +185,7 @@ function lstc_replace($message, $data) {
  * of this plugin. The notification is not sent to the email address of the author
  * of the comment.
  */
-function lstc_notify($comment_id)
-{
+function lstc_notify( $comment_id ) {
 	global $wpdb;
 
 	//@set_time_limit(0);
@@ -383,6 +382,7 @@ function lstc_mail( $to, $subject, $message ) {
 	if ( ! empty( $options['name'] ) && ! empty( $options['from'] ) ) {
 		$headers .= 'From: "' . $options['name'] . '" <' . $options['from'] . ">\n";
 	}
+	$message = wpautop( $message );
 	return wp_mail( $to, $subject, $message, $headers );
 }
 
@@ -479,14 +479,18 @@ function lstc_activate() {
 	@$wpdb->query($sql);
 
 $default_options['message'] = 
-'<p>' . sprintf(__( 'Hi %s', 'comment-notifier-no-spammers' ), '{name}') . '</p>
-<p>' . sprintf( __( '%s has just written a new comment on "%s". Here is an excerpt:', 'comment-notifier-no-spammers' ), '{author}', '{title}') . '</p>
-<p>{content}</p>
-<p>' . sprintf(__('To read more, <a href="%s">click here</a>', 'comment-notifier-no-spammers'), '{comment_link}') . '</p>
+sprintf(__( 'Hi %s', 'comment-notifier-no-spammers' ), '{name}') .
+"\n\n" .
+sprintf( __( '%s has just written a new comment on "%s". Here is an excerpt:', 'comment-notifier-no-spammers' ), '{author}', '{title}') .
+"\n\n" .
+ '{content}' .
+ "\n\n" .
+ sprintf(__('To read more, <a href="%s">click here</a>.', 'comment-notifier-no-spammers'), '{comment_link}') .
+ "\n\n" .
+ __('Bye', 'comment-notifier-no-spammers') .
+ "\n\n" .
+sprintf(__('To unsubscribe this notification service, <a href="%s">click here</a>.', 'comment-notifier-no-spammers'), '{unsubscribe}');
 
-<p>' . __('Bye', 'comment-notifier-no-spammers') . '</p>
-
-<p>' . sprintf(__('To unsubscribe this notification service, <a href="%s">click here</a>', 'comment-notifier-no-spammers'), '{unsubscribe}') . '</p>';
 $default_options['label'] = __( 'Notify me when new comments are added.', 'comment-notifier-no-spammers');
 $default_options['subject'] = sprintf(__( 'A new comment from %s on "%s"', 'comment-notifier-no-spammers'), '{author}', '{title}');
 $default_options['thankyou'] = __( 'Your subscription has been removed. You\'ll be redirect to the home page within few seconds.', 'comment-notifier-no-spammers');
@@ -496,11 +500,14 @@ $default_options['checkbox'] = '1';
 $default_options['checked'] = '1';
 $default_options['ty_subject'] = __('Thank you for your first comment', 'comment-notifier-no-spammers');
 $default_options['ty_message'] = 
-'<p>' . sprintf(__('Hi %s,', 'comment-notifier-no-spammers'), '{author}') . '</p>
+sprintf(__('Hi %s,', 'comment-notifier-no-spammers'), '{author}') .
+"\n\n" .
+__('I received and published your first comment on my blog on the article:', 'comment-notifier-no-spammers') .
+"\n\n" .
+'<a href="{link}">{title}</a>' .
+"\n\n" .
+__('Have a nice day!', 'comment-notifier-no-spammers');
 
-<p>' . __('I received and published your first comment on my blog on the article:', 'comment-notifier-no-spammers'). '</p>
-<p><a href="{link}">{title}</a></p>
-<p>' . __('Have a nice day!', 'comment-notifier-no-spammers') . '</p>';
 	$options = get_option('lstc', array());
 	$options = array_merge($default_options, $options);
 	update_option('lstc', $options);
