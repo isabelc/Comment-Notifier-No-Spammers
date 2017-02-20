@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5
+Version: 1.5.1.alpha-1
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -547,9 +547,9 @@ __('I received and published your first comment on my blog on the article:', 'co
 "\n\n" .
 __('Have a nice day!', 'comment-notifier-no-spammers');
 
-	$options = get_option('lstc', array());
-	$options = array_merge($default_options, $options);
-	update_option('lstc', $options);
+	$options = get_option( 'lstc', array() );
+	$options = array_merge( $default_options, $options );
+	update_option( 'lstc', $options );
 	// Remove spammers that were previously subscribed by Comment Notifier plugin.
 	lstc_cleanup_prior();
 	// Migrate subscribers from Subscribe to Comments Reloaded
@@ -563,3 +563,18 @@ include_once plugin_dir_path(__FILE__) . '/options.php';
 function lstc_admin_menu() {
 	add_options_page(__('Lightweight Subscribe To Comments', 'comment-notifier-no-spammers'), __('Lightweight Subscribe To Comments', 'comment-notifier-no-spammers'), 'manage_options', 'lightweight-subscribe-comments', 'lstc_options_page');
 }
+
+/**
+ * Migrate options to new handle 
+ * @since 1.5.1
+ * @todo remove this function in version 2.0, and del lstc_migrate_options_complete on uninstall
+ */
+function lstc_migrate_options() {
+	// Run this update only once
+	if ( get_option( 'lstc_migrate_options_complete' ) != 'completed' ) {
+		$old_options = get_option( 'cmnt_nospammers' );
+		update_option( 'lstc', $old_options );
+		update_option( 'lstc_migrate_options_complete', 'completed' );
+	}
+}
+add_action( 'init', 'lstc_migrate_options' );
