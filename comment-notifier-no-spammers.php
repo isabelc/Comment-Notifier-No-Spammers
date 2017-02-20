@@ -2,7 +2,7 @@
 /*
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
-Description: Lets visitors subcribe to comments to get an email notification of new comments. Migrates from 'Subscribe To Comments Reloaded' and 'Comment Notifier.'
+Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
 Version: 1.5.alpha.4
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com

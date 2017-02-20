@@ -8,17 +8,21 @@ Stable tag: 1.4
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simply lets visitors subcribe to comments to get an email notification of new comments. Migrates from 'Subscribe To Comments Reloaded' and 'Comment Notifier.'
+Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
 
 == Description ==
 
-Let your visitors subscribe to comments. They will then be notified by email when others comment on the same post. 
+Very simply, let your visitors subscribe to comments. They will then be notified by email when others comment on the same post. Works automatically upon activation, no settings required.
 
-You can customize the notification emails on the setting page.
+This plugin focuses on a lightweight footprint. It simply just works upon activation. All settings are optional. For fastest pagespeed, no stylesheets or scripts are added.
 
-The settings page also shows, at the bottom, the list of all subscribers. From there, you can unsubscribe people, if you wish.
+You can unsubscribe people from the settings page, if you wish.
 
-This plugin focuses on a lightweight footprint. It simply just works upon activation. All settings are optional.
+**Optional Settings** include: 
+* You can customize the notification emails.
+* Set a custom "Unsubscribe Page" URL or unsubscribe message.
+* Send a "Thank You" message for first time commentators.
+* Send a copy of EACH notification to emails of your choice.
 
 **Easily Switch From Subscribe To Comments Reloaded**
 
@@ -26,26 +30,23 @@ This plugin will migrate your subscribers from the "Subscribe to Comments Reload
 
 **Easily Switch From Comment Notifier**
 
-**This plugin is an alternative to [Comment Notifier](http://wordpress.org/plugins/comment-notifier/) by Stefano Lissa.**
+This plugin will migrate your subscribers from the [Comment Notifier](https://wordpress.org/plugins/comment-notifier/) plugin.
 
-The main difference is that this new plugin will not subscribe spammers while their comment is pending moderation. Only approved comments will be subscribed. Comments authors in moderation will only be subscribed if, and when, you approve their comment. 
+**"Lightweight Subscribe to Comments" fixes a major problem with the Comment Notifier plugin:**
 
-In particular, this new plugin fixes [this problem](http://wordpress.org/support/topic/remove-subscribed-emails-whose-comments-are-trashedmarked-as-spam).
+In particular, "Lightweight Subscribe to Comments" fixes [this problem](https://wordpress.org/support/topic/remove-subscribed-emails-whose-comments-are-trashedmarked-as-spam).
 
-The problem is that the original Comment Notifier plugin subscribes the email address as soon as the submitted comment goes into moderation. This means that spammers get added to the list of subscribers, immediately. Later, when you delete the spam comments, the spammer's email remains in the list of subscribers. 
+Lightweight Subscribe to Comments will not subscribe spammers while their comment is pending moderation. Only approved comments will be subscribed. Comments authors in moderation will only be subscribed if, and when, you approve their comment. 
+
+The problem is that Comment Notifier plugin subscribes the email address as soon as the submitted comment goes into moderation. This means that spammers get added to the list of subscribers, immediately. Later, when you delete the spam comments, the spammer's email remains in the list of subscribers. 
 
 You could have hundreds, even thousands, of spammer email addresses in that list. Then, when you approve a legit comment, your server sends out emails to all of the post subscribers (including spammers), which can cause server overload, among other problems.
 
 This plugin, **Lightweight Subscribe To Comments**, fixes that by ignoring comments in moderation until they are approved by you. This means less load on your server.
 
-**Easily Switch From Comment Notifier**
+**Bonus Clean Up For Comment Notifier plugin users:**
 
-* Removes spammers from your "Comment Notifier" list.
-* Seamlessly and easily switch from "Comment Notifier".
-
-If you were using Comment Notifier plugin, then it is easy to switch to this plugin. Simply install this one, and deactivate that one. Your existing approved comments, and legit subscribers, will not be lost. If you want to make sure you don't get any new spammers added to your comment_notifier list, then you should deactivate the old plugin immediately after activating this new one. The reason is because the new plugin will only clean up after the old plugin once, upon activation. If you leave the old plugin activated, you'll continue to get spammers added to your list.
-
-**Bonus Clean Up**
+This plugin removes spammers from your "Comment Notifier" list.
 
 Upon activation, this plugin will clean up your "comment_notifier" list (database table) by removing all spammer emails (emails of people that do NOT have an approved comment). (This only applies to you if you were using the original Comment Notifier plugin.) It will also empty your Comments "Trash" and "Spam". This clean up is only done once, upon plugin activation.
 
@@ -57,35 +58,36 @@ Fork it on [GitHub](https://github.com/isabelc/Comment-Notifier-No-Spammers).
 
 == Installation ==
 
-**Step 1 - Activate The Plugin**
+**Step 1: Install The Plugin**
 
 In your WordPress dashboard -> Plugins -> Add New, search for "Lightweight Subscribe To Comments". Click "Install Now", then click "Activate Plugin".
 
-**Step 2 - Set a "Notification Sender Email"**
+Upon activation, the plugin automatically works. There will be a checkbox underneath your comment form so that visitors can subscribe to comments as they make a comment.
 
-Go to "Settings --> Lightweight Subscribe To Comments". You must enter a "**Notification Sender Email**".
+**(Optional) Step 2: Maybe Add CSS Styles**
 
-Some web hosts require that this be an email at your actual website. For example, if your website is `www.mysite.com`, then your sender email must be `something@mysite.com`, in which the first part "something" can be anything as long as it ends with **"@mysite.com"**. Bluehost is one host that requires this.
+Since this plugin focuses on a lightweight footprint, no CSS stylesheet is added. Depending on how your theme styles checkboxes, you may want to add the following CSS to align the subscription checkbox:
 
-However, GoDaddy hosting does not require this. GoDaddy will allow you to use any email address as the sender email (for example, a Gmail or Yahoo email). If you are unsure whether your web host allows this, then stick with an email at your own site to ensure that your notification emails will be sent.
+(It is very easy to add this CSS. In your dashboard, go to Appearance --> Customize, then click on "Additional CSS" and paste it there. Then, click "Save &amp; Publish.") 
 
-In addition to the requirement described above, some web hosts require that the email address be an actual existing address. For example, if your site is `www.mysite.com`, and you want to use "`wordpress@mysite.com`" as your "Notification Sender Email", but that email does not actually exist, then your notification emails will not send. In this case, you would have to create the email address "`wordpress@mysite.com`" on your hosting server.
+`#lstc-comment-subscription label.lstc-label {
+	display: inline-block;
+	vertical-align: middle;
+}
+#lstc-comment-subscription {
+	margin-top: 1em;
+}
+#lstc-comment-subscription input#lstc_subscribe {
+	margin-right: 0.5em;
+}`
 
-**Step 3 (Optional) Customize the Settings**
+**(Optional) Step 3: Customize The Settings**
 
-Optionally, you can customize the rest of the settings on this page.
+If you want to customize any settings, then go to "Settings --> Lightweight Subscribe To Comments". 
 
-**Step 4 (Optional) Depending on how your theme styles checkboxes, you may want to add this CSS to align the subscription checkbox under the comment form: 
+**(Optional) Step 4 - Only For Those That Were Using Comment Notifier Plugin**
 
-`#cnns-label {display: inline-block;}`
-
-**Step 5 - For those that were using Comment Notifier Plugin**
-
-If you were using Comment Notifier plugin, then deactivate it right away to avoid having it add new spammers to your comment_notifier list.
-
-Only once, upon activation, this plugin will clean up your "comment_notifier" list (database table) by removing all spammer emails that were subscribed by the Comment Notifier Plugin. It will also empty your Comments "Trash" and "Spam". This is done automatically upon activation.
-
-Your existing approved comments, and legit subscribers, will not be lost.
+If you were using Comment Notifier plugin, then deactivate it right away to avoid having it add new spammers to your comment_notifier list. Only once, upon activation, this plugin will clean up your "comment_notifier" list (database table) by removing all spammer emails that were subscribed by the Comment Notifier Plugin. It will also empty your Comments "Trash" and "Spam". This is done automatically upon activation. Your existing approved comments, and legit subscribers, will not be lost.
 
 == Frequently Asked Questions ==
 
@@ -94,11 +96,9 @@ Your existing approved comments, and legit subscribers, will not be lost.
 For test emails to work, you must enter an email address in the "Email address where to send test emails:" option, under "Advanced Settings". 
 **Tip:** Do not use the sender address for this; some mail servers do not accept "from" and "to" set to the same value.
 
-= How can I style the subscription checkbox =
+== Screenshots ==
 
-Depending on how your theme styles checkboxes, you may want to add this CSS to align the subscription checkbox under the comment form: 
-
-`#cnns-label {display: inline-block;}`
+1. This is the subscription checkbox that is added beneath your comment form.
 
 == Changelog ==
 = 1.4 =
@@ -136,7 +136,7 @@ Depending on how your theme styles checkboxes, you may want to add this CSS to a
 == Upgrade Notice ==
 
 = 1.1 =
-Fix - Every approved comment author was being subscribed even if they did not subcribe.
+Fix - Every approved comment author was being subscribed even if they did not subscribe.
 
 = 1.0 =
 Removed several PHP errors from the options page.
