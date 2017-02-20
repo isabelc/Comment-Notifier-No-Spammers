@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Lets visitors subcribe to comments to get an email notification of new comments. Migrates from 'Subscribe To Comments Reloaded' and 'Comment Notifier.'
-Version: 1.5.alpha.3
+Version: 1.5.alpha.4
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -140,10 +140,10 @@ function lstc_thankyou( $comment_id ) {
  * Add a subscribe checkbox after the form content.
  */
 function lstc_comment_form() {
-	$options = get_option('lstc');
-	if (isset($options['checkbox'])) {
-		echo '<p class="cnns-comment-subscription lstc-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
-		if (isset($options['checked'])) {
+	$options = get_option( 'lstc' );
+	if ( isset( $options['checkbox'] ) ) {
+		echo '<p id="lstc-comment-subscription" class="cnns-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
+		if ( isset( $options['checked'] ) ) {
 			echo ' checked="checked"';
 		}
 		echo '/>&nbsp;<label id="cnns-label" class="lstc-label" for="lstc_subscribe">' . $options['label'] . '</label></p>';
@@ -393,6 +393,45 @@ function lstc_mail( $to, $subject, $message ) {
 	load_plugin_textdomain( 'comment-notifier-no-spammers', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'init', 'lstc_load_textdomain' );
+
+/**
+ * Align the subscription checkbox without adding a stylesheet, piggyback on current theme's stylesheet.
+ * @since 1.5
+ */
+function lstc_inline_style() {
+	if ( ! is_singular() ) {
+		return;
+	}
+	global $wp_styles;
+	$stylesheets = $wp_styles->queue;
+	foreach( $stylesheets as $sheet ) {
+		$sheetlen = strlen( $sheet );
+		$testlen = 6;
+		if ( $testlen > $sheetlen ) {
+			return false;
+		}
+		if ( substr_compare( $sheet, '-style', $sheetlen - $testlen, $testlen ) === 0 ) {
+			$handle = $sheet;
+			break;
+		}
+	}
+
+	if ( ! empty( $handle ) ) {
+
+		$custom_css = "#lstc-comment-subscription label.lstc-label {
+						display: inline-block;
+						vertical-align: middle;
+					}
+					#lstc-comment-subscription {
+						margin-top: 1em;
+					}
+					#lstc-comment-subscription input#lstc_subscribe {
+						margin-right: 0.5em;
+					}";
+		wp_add_inline_style( $handle, $custom_css );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'lstc_inline_style', 999 );
 
 /**
  * Migrate subscribers from Subscribe to Comments Reloaded. This only runs on activation.
