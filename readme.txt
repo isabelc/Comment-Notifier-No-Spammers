@@ -3,8 +3,8 @@ Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
 Tags: comment, comments, comments reply, comments subscribe, notifications, notify, notifier, subscribe, subscription, email
 Requires at least: 3.7
-Tested up to: 4.7.2
-Stable tag: 1.5
+Tested up to: 4.8-alpha-40080
+Stable tag: 1.5.1
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,10 @@ For test emails to work, you must enter an email address in the "Email address w
 
 == Changelog ==
 
+= 1.5.1 =
+* New - Updated the `.pot` translation file.
+* Fix - Options were not migrated in version 1.5. This properly migrates the options to the new handle. If you are on version 1.5, and you don't update to 1.5.1, then you would have to go into the settings page and click "Save" to save the new options. Or simply update to version 1.5.1 which takes care of that.
+
 = 1.5 =
 * New - Simplified settings page. All settings are optional. The plugin now works upon activation without the need to configure any settings. HTML p tags have been removed from the message textareas to make it easier to customize the messages. There is now only 1 Save button on the settings page, rather than 3.
 * New - Changed plugin name to Lightweight Subscribe To Comments.
@@ -132,6 +136,9 @@ For test emails to work, you must enter an email address in the "Email address w
 * First release.
 
 == Upgrade Notice ==
+
+= 1.5.1 =
+Fix: Options were not migrated in v1.5. Please update.
 
 = 1.5 =
 HTML p tags have been removed from the message textareas to make it easier to customize the emails.
