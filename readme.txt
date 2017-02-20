@@ -19,6 +19,8 @@ This plugin focuses on a lightweight footprint. It simply just works upon activa
 You can unsubscribe people from the settings page, if you wish.
 
 **Optional Settings** include: 
+
+
 * You can customize the notification emails.
 * Set a custom "Unsubscribe Page" URL or unsubscribe message.
 * Send a "Thank You" message for first time commentators.
@@ -66,20 +68,8 @@ Upon activation, the plugin automatically works. There will be a checkbox undern
 
 **(Optional) Step 2: Maybe Add CSS Styles**
 
-Since this plugin focuses on a lightweight footprint, no CSS stylesheet is added. Depending on how your theme styles checkboxes, you may want to add the following CSS to align the subscription checkbox:
+See [the documentation](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments#jl-install) for this step.
 
-(It is very easy to add this CSS. In your dashboard, go to Appearance --> Customize, then click on "Additional CSS" and paste it there. Then, click "Save &amp; Publish.") 
-
-`#lstc-comment-subscription label.lstc-label {
-	display: inline-block;
-	vertical-align: middle;
-}
-#lstc-comment-subscription {
-	margin-top: 1em;
-}
-#lstc-comment-subscription input#lstc_subscribe {
-	margin-right: 0.5em;
-}`
 
 **(Optional) Step 3: Customize The Settings**
 
