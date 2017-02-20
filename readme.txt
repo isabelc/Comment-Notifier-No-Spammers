@@ -3,7 +3,7 @@ Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
 Tags: comment, comments, comments reply, comments subscribe, notifications, notify, notifier, subscribe, subscription, email
 Requires at least: 3.7
-Tested up to: 4.6
+Tested up to: 4.7.2
 Stable tag: 1.5
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
