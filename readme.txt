@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40
 Tags: comment, comments, comments reply, comments subscribe, notifications, notify, notifier, subscribe, subscription, email
 Requires at least: 3.7
 Tested up to: 4.6
-Stable tag: 1.4
+Stable tag: 1.5
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,14 @@ For test emails to work, you must enter an email address in the "Email address w
 1. This is the subscription checkbox that is added beneath your comment form.
 
 == Changelog ==
+
+= 1.5 =
+* New - Simplified settings page. All settings are optional. The plugin now works upon activation without the need to configure any settings. HTML p tags have been removed from the message textareas to make it easier to customize the messages. There is now only 1 Save button on the settings page, rather than 3.
+* New - Changed plugin name to Lightweight Subscribe To Comments.
+* New - Upon activation, will migrate subscribers from the "Subscribe to Comments Reloaded" plugin for an easy switch from that plugin to this one.
+* Fix - Update values on the settings page after saving and sending test email. Previously, the email to send test emails to was not refreshing on the page even though it was being saved.
+* Tweak - textdomain in now loaded on init which helps ensure that translations work.
+
 = 1.4 =
 * Fix - Removed annoying admin notice. It will only show up once upon plugin activation, only if spam/pending commenter emails were removed from the database.
 * Fix - Fixed incorrect textdomain. The correct textdomain is comment-notifier-no-spammers.
@@ -134,6 +142,9 @@ For test emails to work, you must enter an email address in the "Email address w
 * First release.
 
 == Upgrade Notice ==
+
+= 1.5 =
+HTML p tags have been removed from the message textareas to make it easier to customize the emails.
 
 = 1.1 =
 Fix - Every approved comment author was being subscribed even if they did not subscribe.
