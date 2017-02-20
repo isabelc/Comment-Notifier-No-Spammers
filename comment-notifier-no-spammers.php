@@ -558,7 +558,16 @@ __('Have a nice day!', 'comment-notifier-no-spammers');
 }
 register_activation_hook( __FILE__, 'lstc_activate' );
 
-include_once plugin_dir_path(__FILE__) . '/options.php';
+/**
+ * Upon deactivation, delete the migration option
+ * @since 1.5.1
+ */
+function lstc_deactivate() {
+	delete_option( 'lstc_migrate_options_complete' );
+}
+register_deactivation_hook( __FILE__, 'lstc_deactivate' );
+
+include_once plugin_dir_path(__FILE__) . 'options.php';
 
 function lstc_admin_menu() {
 	add_options_page(__('Lightweight Subscribe To Comments', 'comment-notifier-no-spammers'), __('Lightweight Subscribe To Comments', 'comment-notifier-no-spammers'), 'manage_options', 'lightweight-subscribe-comments', 'lstc_options_page');
@@ -567,13 +576,14 @@ function lstc_admin_menu() {
 /**
  * Migrate options to new handle 
  * @since 1.5.1
- * @todo remove this function in version 2.0, and del lstc_migrate_options_complete on uninstall
+ * @todo remove this function in version 2.0, and delete lstc_migrate_options_complete on deactivation
  */
 function lstc_migrate_options() {
 	// Run this update only once
 	if ( get_option( 'lstc_migrate_options_complete' ) != 'completed' ) {
 		$old_options = get_option( 'cmnt_nospammers' );
 		update_option( 'lstc', $old_options );
+		delete_option( 'cmnt_nospammers' );
 		update_option( 'lstc_migrate_options_complete', 'completed' );
 	}
 }
