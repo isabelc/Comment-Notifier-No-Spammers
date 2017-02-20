@@ -57,24 +57,24 @@ function lstc_options_page() {
 	?>
 
 <script type="text/javascript">
-	function lstc_preview()
-	{
-		var m = document.getElementById("message").value;
-		m = m.replace("{content}", "I totally agree with your opinion about him, he's really...");
-		var h = window.open("", "lstc","status=0,toolbar=0,height=400,width=550");
-		var d = h.document;
-		d.write('<html><head><title>Email preview</title>');
-		d.write('</head><body>');
-		d.write('<table width="100%" border="1" cellspacing="0" cellpadding="5">');
-		d.write('<tr><td align="right"><b>Subject</b></td><td>' + document.getElementById("subject").value + '</td></tr>');
-		d.write('<tr><td align="right"><b>From</b></td><td>' + document.getElementById("from_name").value + ' &lt;' + document.getElementById("from_email").value + '&gt;</td></tr>');
-		d.write('<tr><td align="right"><b>To</b></td><td>User name &lt;user@email&gt;</td></tr>');
-		d.write('<tr><td align="left" colspan="2">' + m + '</td></tr>');
-		d.write('</table>');
-		d.write('</body></html>');
-		d.close();
-		return false;
-	}
+function lstc_preview() {
+	var m = document.getElementById("message").value;
+	m = m.replace("{content}", "I totally agree with your opinion about him, he's really...");
+	m = m.replace(/\n/g, "<br />");
+	var h = window.open("", "lstc","status=0,toolbar=0,height=400,width=550");
+	var d = h.document;
+	d.write('<html><head><title>Email preview</title>');
+	d.write('</head><body>');
+	d.write('<table width="100%" border="1" cellspacing="0" cellpadding="5">');
+	d.write('<tr><td align="right"><b>Subject</b></td><td>' + document.getElementById("subject").value + '</td></tr>');
+	d.write('<tr><td align="right"><b>From</b></td><td>' + document.getElementById("from_name").value + ' &lt;' + document.getElementById("from_email").value + '&gt;</td></tr>');
+	d.write('<tr><td align="right"><b>To</b></td><td>User name &lt;user@email&gt;</td></tr>');
+	d.write('<tr><td align="left" colspan="2">' + m + '</td></tr>');
+	d.write('</table>');
+	d.write('</body></html>');
+	d.close();
+	return false;
+}
 </script>
 <div class="wrap">
 	<h1><?php _e( 'Lightweight Subscribe To Comments', 'comment-notifier-no-spammers' ); ?></h1>
@@ -145,7 +145,7 @@ function lstc_options_page() {
 			<tr>
 				<th><?php _e('Notification Message Body', 'comment-notifier-no-spammers'); ?></th>
 				<td>
-					( <a href="javascript:void(lstc_preview());"><?php _e('preview', 'comment-notifier-no-spammers'); ?></a>)
+					(<a href="javascript:void(lstc_preview());"><?php _e('preview', 'comment-notifier-no-spammers'); ?></a>)
 					<br />
 					<textarea name="options[message]" id="message" wrap="off" rows="10" style="width: 100%"><?php echo htmlspecialchars( $options['message'] ) ?></textarea>
 					<br />
