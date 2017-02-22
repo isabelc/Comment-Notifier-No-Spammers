@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.1
+Version: 1.5.2-alpha.1
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -528,7 +528,7 @@ sprintf( __( '%s has just written a new comment on "%s". Here is an excerpt:', '
  "\n\n" .
  __('Bye', 'comment-notifier-no-spammers') .
  "\n\n" .
-sprintf(__('To unsubscribe this notification service, <a href="%s">click here</a>.', 'comment-notifier-no-spammers'), '{unsubscribe}');
+sprintf(__('To unsubscribe from this notification service, <a href="%s">click here</a>.', 'comment-notifier-no-spammers'), '{unsubscribe}');
 
 $default_options['label'] = __( 'Notify me when new comments are added.', 'comment-notifier-no-spammers');
 $default_options['subject'] = sprintf(__( 'A new comment from %s on "%s"', 'comment-notifier-no-spammers'), '{author}', '{title}');
