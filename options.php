@@ -22,7 +22,7 @@ function lstc_options_page() {
 				$lstc_data->comment_link = get_option('home');
 				$lstc_data->title = __('The post title', 'comment-notifier-no-spammers');
 				$lstc_data->content = __('This is a long comment. Be a yardstick of quality. Some people are not used to an environment where excellence is expected.', 'comment-notifier-no-spammers');
-				$message = lstc_replace($options['ty_message'], $lstc_data);
+				$message = lstc_replace( $options['ty_message'], $lstc_data );
 
 				$subject = $options['ty_subject'];
 				$subject = str_replace('{title}', $lstc_data->title, $subject);
@@ -32,12 +32,17 @@ function lstc_options_page() {
 		}
 	}
 
-	// Update values after saving and sending test email
+	// Grab new values after "save and send test email"
 	$options = get_option( 'lstc' );
-	$unsubscribe_url = empty($options['unsubscribe_url']) ? '' : htmlspecialchars($options['unsubscribe_url']);
-	$length = empty($options['length']) ? '' : htmlspecialchars($options['length']);
-	$test = empty($options['test']) ? '' : htmlspecialchars($options['test']);
-	$copy = empty($options['copy']) ? '' : htmlspecialchars($options['copy']);
+	$unsubscribe_url = empty( $options['unsubscribe_url'] ) ? '' : htmlspecialchars( $options['unsubscribe_url'] );
+	$length = empty( $options['length'] ) ? '' : htmlspecialchars( $options['length'] );
+	$test = empty( $options['test'] ) ? '' : htmlspecialchars( $options['test'] );
+	$copy = empty( $options['copy'] ) ? '' : htmlspecialchars( $options['copy'] );
+	$label = empty( $options['label'] ) ? '' : htmlspecialchars( $options['label'] );
+	$ty_message = empty( $options['ty_message'] ) ? '' : htmlspecialchars( $options['ty_message'] );
+	$ty_subject = empty( $options['ty_subject'] ) ? '' : htmlspecialchars( $options['ty_subject'] );
+	$thankyou = empty( $options['thankyou'] ) ? '' : htmlspecialchars( $options['thankyou'] );
+
 
 
 	// Removes a single email for all subscriptions
@@ -105,7 +110,8 @@ function lstc_preview() {
 			<tr>
 				<th><?php _e('Subscription Checkbox Label', 'comment-notifier-no-spammers'); ?></th>
 				<td>
-					<input name="options[label]" type="text" size="50" value="<?php echo htmlspecialchars($options['label']) ?>"/>
+					<input name="options[label]" type="text" size="50"
+					 value="<?php echo $label; ?>"/>
 					<br /><?php _e('Label to be displayed near the subscription checkbox', 'comment-notifier-no-spammers'); ?>
 				</td>
 			</tr>
@@ -180,7 +186,7 @@ function lstc_preview() {
 			<tr>
 				<td>
 					<label><?php _e('Unsubscribe Message', 'comment-notifier-no-spammers'); ?></label><br />
-					<textarea name="options[thankyou]" wrap="off" rows="7" style="width: 500px"><?php echo htmlspecialchars($options['thankyou']) ?></textarea>
+					<textarea name="options[thankyou]" wrap="off" rows="7" style="width: 500px"><?php echo $thankyou; ?></textarea>
 					<br />
 					<?php _e('Example: You have unsubscribed successfully. Thank you. I will send you to the home page in 3 seconds.', 'comment-notifier-no-spammers'); ?><br />
 				</td>
@@ -194,14 +200,15 @@ function lstc_preview() {
 			<tr>
 				<th><?php _e('Enable Thank You Message', 'comment-notifier-no-spammers'); ?></th>
 				<td>
-					<input type="checkbox" name="options[ty_enabled]" value="1" <?php echo isset($options['ty_enabled']) ? 'checked' : ''; ?> />
+					<input type="checkbox" name="options[ty_enabled]" value="1" <?php echo isset( $options['ty_enabled'] ) ? 'checked' : ''; ?> />
 					<?php _e('send a "Thank You" message sent to visitor on their first comment', 'comment-notifier-no-spammers'); ?>
 				</td>
 			</tr>
 			<tr>
 				<th><?php _e('Subject', 'comment-notifier-no-spammers'); ?></th>
 				<td>
-					<input name="options[ty_subject]" type="text" size="70" value="<?php echo htmlspecialchars($options['ty_subject']) ?>"/>
+					<input name="options[ty_subject]" type="text"
+					 size="70" value="<?php echo $ty_subject; ?>"/>
 					<br />
 					<?php printf(__('Tags: %1$s - the post title, %2$s - the commenter name', 'comment-notifier-no-spammers'), '{title}', '{author}'); ?>
 				</td>
@@ -209,7 +216,8 @@ function lstc_preview() {
 			<tr>
 				<th><?php _e('Notification message body', 'comment-notifier-no-spammers'); ?></th>
 				<td>
-					<textarea name="options[ty_message]" wrap="off" rows="10" cols="70" style="width: 500px"><?php echo htmlspecialchars($options['ty_message']); ?></textarea>
+					<textarea name="options[ty_message]" wrap="off"
+					 rows="10" cols="70" style="width: 500px"><?php echo $ty_message; ?></textarea>
 					<br />
 					<?php printf(__('Tags: %1$s - the post title, %2$s - the commenter name, %3$s - the post link, %4$s - the comment text.', 'comment-notifier-no-spammers'), '{title}', '{author}', '{link}', '{content}'); ?><br /><br />
 				</td>
