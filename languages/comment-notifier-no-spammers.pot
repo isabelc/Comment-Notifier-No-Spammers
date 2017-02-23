@@ -31,7 +31,7 @@ msgstr ""
 
 #: comment-notifier-no-spammers.php:531
 msgid ""
-"To unsubscribe this notification service, <a href=\"%s\">click here</a>."
+"To unsubscribe from this notification service, <a href=\"%s\">click here</a>."
 msgstr ""
 
 #: comment-notifier-no-spammers.php:533
