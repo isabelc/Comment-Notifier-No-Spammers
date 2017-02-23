@@ -576,8 +576,10 @@ function lstc_migrate_options() {
 	// Run this update only once
 	if ( get_option( 'lstc_migrate_options_complete' ) != 'completed' ) {
 		$old_options = get_option( 'cmnt_nospammers' );
-		update_option( 'lstc', $old_options );
-		delete_option( 'cmnt_nospammers' );
+		if ! empty( $old_options ) {
+			update_option( 'lstc', $old_options );
+			delete_option( 'cmnt_nospammers' );
+		}
 		update_option( 'lstc_migrate_options_complete', 'completed' );
 	}
 }
