@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.2-alpha.1
+Version: 1.5.2-alpha.2
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -576,7 +576,7 @@ function lstc_migrate_options() {
 	// Run this update only once
 	if ( get_option( 'lstc_migrate_options_complete' ) != 'completed' ) {
 		$old_options = get_option( 'cmnt_nospammers' );
-		if ! empty( $old_options ) {
+		if ( ! empty( $old_options ) ) {
 			update_option( 'lstc', $old_options );
 			delete_option( 'cmnt_nospammers' );
 		}
