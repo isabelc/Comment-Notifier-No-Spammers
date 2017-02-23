@@ -1,7 +1,7 @@
 === Lightweight Subscribe To Comments ===
 Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
-Tags: comment, comments, comments reply, comments subscribe, notifications, notify, notifier, subscribe, subscription, email
+Tags: comment, comments, subscribe to comments, follow comments, notifications, subscription
 Requires at least: 3.7
 Tested up to: 4.8-alpha-40080
 Stable tag: 1.5.1
