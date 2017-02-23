@@ -134,11 +134,11 @@ function lstc_preview() {
 				</td>
 			</tr>
 			<tr>
-				<th><?php _e('Notification Subject', 'comment-notifier-no-spammers'); ?></th>
+				<th><?php _e( 'Notification Subject', 'comment-notifier-no-spammers' ); ?></th>
 				<td>
 					<input name="options[subject]" id="subject" type="text" size="70" value="<?php echo htmlspecialchars($options['subject']) ?>"/>
 					<br />
-					<?php printf(__('Tags: %1$s - the post title, %2$s - the subscriber name, %3$s - the commenter name', 'comment-notifier-no-spammers'), '{title}', '{name}', '{author}'); ?>
+					<?php printf(__( 'Tags: %4$s %1$s - the post title %4$s %2$s - the subscriber name %4$s %3$s - the commenter name', 'comment-notifier-no-spammers'), '{title}', '{name}', '{author}', '<br />' ); ?>
 				</td>
 			</tr>
 
@@ -149,7 +149,7 @@ function lstc_preview() {
 					<br />
 					<textarea name="options[message]" id="message" wrap="off" rows="10" style="width: 100%"><?php echo htmlspecialchars( $options['message'] ) ?></textarea>
 					<br />
-					<?php printf(__('Tags: %1$s - the subscriber name, %2$s - the unsubscribe link, %3$s - the post title, %4$s - the commenter name, %5$s - the post link, %6$s - the comment text (eventually truncated).'), '{name}', '{unsubscribe}', '{title}', '{author}', '{link}', '{content}'); ?><br /><br />
+					<?php printf( __( 'Tags: %8$s %1$s - the subscriber name %8$s %2$s - the commenter name %8$s %3$s - the post title %8$s %4$s - the comment text (eventually truncated) %8$s %5$s - link to the comment %8$s %6$s - link to the post/page %8$s %7$s - the unsubscribe link ' ), '{name}', '{author}', '{title}', '{content}', '{comment_link}', '{link}', '{unsubscribe}', '<br />' ); ?><br /><br />
 				</td>
 			</tr>
 			<tr>
