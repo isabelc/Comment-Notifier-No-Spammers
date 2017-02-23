@@ -547,7 +547,10 @@ __('I received and published your first comment on my blog on the article:', 'co
 "\n\n" .
 __('Have a nice day!', 'comment-notifier-no-spammers');
 
-	$options = get_option( 'lstc', array() );
+	$options = get_option( 'lstc' );
+	if ( ! $options ) {
+		$options =  array();// setting the get_option default to empty array did not work as expected.
+	}
 	$options = array_merge( $default_options, $options );
 	update_option( 'lstc', $options );
 	// Remove spammers that were previously subscribed by Comment Notifier plugin.
@@ -558,15 +561,6 @@ __('Have a nice day!', 'comment-notifier-no-spammers');
 }
 register_activation_hook( __FILE__, 'lstc_activate' );
 
-/**
- * Upon deactivation, delete the migration option
- * @since 1.5.1
- */
-function lstc_deactivate() {
-	delete_option( 'lstc_migrate_options_complete' );
-}
-register_deactivation_hook( __FILE__, 'lstc_deactivate' );
-
 include_once plugin_dir_path(__FILE__) . 'options.php';
 
 function lstc_admin_menu() {
@@ -576,7 +570,7 @@ function lstc_admin_menu() {
 /**
  * Migrate options to new handle 
  * @since 1.5.1
- * @todo remove this function in version 2.0
+ * @todo remove this function in version 2.0 and delete the option lstc_migrate_options_complete upon deactivation.
  */
 function lstc_migrate_options() {
 	// Run this update only once
