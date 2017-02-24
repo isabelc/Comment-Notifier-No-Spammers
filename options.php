@@ -2,12 +2,11 @@
 function lstc_options_page() {
 	$options = get_option( 'lstc' );
 	global $wpdb;
+	$test = empty( $options['test'] ) ? '' : htmlspecialchars( $options['test'] );
 
-	$test = empty($options['test']) ? '' : htmlspecialchars($options['test']);
-
+	// Maybe send a test message, if requested
 	if ( ! empty( $_POST['_wpnonce'] ) ) {
 		if ( wp_verify_nonce($_POST['_wpnonce'], 'update-lstc-options' ) ) {
-
 			$options = stripslashes_deep($_POST['options']);
 			update_option('lstc', $options);
 			
@@ -16,14 +15,15 @@ function lstc_options_page() {
 					$test = sanitize_email( $_POST['options']['test'] );
 				}
 
+				$ty_message = empty( $options['ty_message'] ) ? '' : htmlspecialchars( $options['ty_message'] );
+
 				$lstc_data = new stdClass();
 				$lstc_data->author = __('Author', 'comment-notifier-no-spammers');
 				$lstc_data->link = get_option('home');
 				$lstc_data->comment_link = get_option('home');
 				$lstc_data->title = __('The post title', 'comment-notifier-no-spammers');
 				$lstc_data->content = __('This is a long comment. Be a yardstick of quality. Some people are not used to an environment where excellence is expected.', 'comment-notifier-no-spammers');
-				$message = lstc_replace( $options['ty_message'], $lstc_data );
-
+				$message = lstc_replace( $ty_message, $lstc_data );
 				$subject = $options['ty_subject'];
 				$subject = str_replace('{title}', $lstc_data->title, $subject);
 				$subject = str_replace('{author}', $lstc_data->author, $subject);
@@ -33,7 +33,7 @@ function lstc_options_page() {
 	}
 
 	// Grab new values after "save and send test email"
-	$options = get_option( 'lstc' );
+	$options = get_option( 'lstc' );// @todo need?
 	$unsubscribe_url = empty( $options['unsubscribe_url'] ) ? '' : htmlspecialchars( $options['unsubscribe_url'] );
 	$length = empty( $options['length'] ) ? '' : htmlspecialchars( $options['length'] );
 	$test = empty( $options['test'] ) ? '' : htmlspecialchars( $options['test'] );
