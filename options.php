@@ -43,8 +43,6 @@ function lstc_options_page() {
 	$ty_subject = empty( $options['ty_subject'] ) ? '' : htmlspecialchars( $options['ty_subject'] );
 	$thankyou = empty( $options['thankyou'] ) ? '' : htmlspecialchars( $options['thankyou'] );
 
-
-
 	// Removes a single email for all subscriptions
 	if (isset($_POST['remove_email'])) {
 		if (!wp_verify_nonce($_POST['_wpnonce'], 'remove_email'))
@@ -62,16 +60,37 @@ function lstc_options_page() {
 	?>
 
 <script type="text/javascript">
-function lstc_preview() {
+// Replace all tags, not just the first instance of a tag
+function lstcReplaceTags( tag, replacement, text ) {
+	var intIndexOfMatch = text.indexOf( tag );
+	while (intIndexOfMatch != -1) {
+	    text = text.replace( tag, replacement );
+	    intIndexOfMatch = text.indexOf( tag );
+	}
+	return text;
+}
+function lstcPreview() {
+	var s = document.getElementById("subject").value;
 	var m = document.getElementById("message").value;
-	m = m.replace("{content}", "I totally agree with your opinion about him, he's really...");
+	// Replace tags in Subject for preview
+	s = lstcReplaceTags( '{title}', 'Sample Title', s );
+	s = lstcReplaceTags( '{name}', 'You', s );
+	s = lstcReplaceTags( '{author}', 'Bob', s );
+	// Replace tags in Message Body for preview
+	m = lstcReplaceTags( '{title}', 'Sample Title', m );
+	m = lstcReplaceTags( '{name}', 'You', m );
+	m = lstcReplaceTags( '{author}', 'Bob' , m );
+	m = lstcReplaceTags( "{content}", "I totally agree with your opinion about him, he's really...", m );
+	m = lstcReplaceTags( '{link}', '#', m );
+	m = lstcReplaceTags( '{comment_link}', '#', m );
+	m = lstcReplaceTags( '{unsubscribe}', '#', m );
 	m = m.replace(/\n/g, "<br />");
 	var h = window.open("", "lstc","status=0,toolbar=0,height=400,width=550");
 	var d = h.document;
 	d.write('<html><head><title>Email preview</title>');
 	d.write('</head><body>');
 	d.write('<table width="100%" border="1" cellspacing="0" cellpadding="5">');
-	d.write('<tr><td align="right"><b>Subject</b></td><td>' + document.getElementById("subject").value + '</td></tr>');
+	d.write('<tr><td align="right"><b>Subject</b></td><td>' + s + '</td></tr>');
 	d.write('<tr><td align="right"><b>From</b></td><td>' + document.getElementById("from_name").value + ' &lt;' + document.getElementById("from_email").value + '&gt;</td></tr>');
 	d.write('<tr><td align="right"><b>To</b></td><td>User name &lt;user@email&gt;</td></tr>');
 	d.write('<tr><td align="left" colspan="2">' + m + '</td></tr>');
@@ -151,11 +170,11 @@ function lstc_preview() {
 			<tr>
 				<th><?php _e('Notification Message Body', 'comment-notifier-no-spammers'); ?></th>
 				<td>
-					(<a href="javascript:void(lstc_preview());"><?php _e('preview', 'comment-notifier-no-spammers'); ?></a>)
+					(<a href="javascript:void(lstcPreview());"><?php _e('preview', 'comment-notifier-no-spammers'); ?></a>)
 					<br />
 					<textarea name="options[message]" id="message" wrap="off" rows="10" style="width: 100%"><?php echo htmlspecialchars( $options['message'] ) ?></textarea>
 					<br />
-					<?php printf( __( 'Tags: %8$s %1$s - the subscriber name %8$s %2$s - the commenter name %8$s %3$s - the post title %8$s %4$s - the comment text (eventually truncated) %8$s %5$s - link to the comment %8$s %6$s - link to the post/page %8$s %7$s - the unsubscribe link ' ), '{name}', '{author}', '{title}', '{content}', '{comment_link}', '{link}', '{unsubscribe}', '<br />' ); ?><br /><br />
+					<?php printf( __( 'Tags: %8$s %1$s - the subscriber name %8$s %2$s - the commenter name %8$s %3$s - the post title %8$s %4$s - the comment text (eventually truncated) %8$s %5$s - link to the comment %8$s %6$s - link to the post/page %8$s %7$s - the unsubscribe link' ), '{name}', '{author}', '{title}', '{content}', '{comment_link}', '{link}', '{unsubscribe}', '<br />' ); ?><br /><br />
 				</td>
 			</tr>
 			<tr>
