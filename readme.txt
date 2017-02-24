@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40
 Tags: comment, comments, subscribe to comments, follow comments, notifications, subscription
 Requires at least: 3.7
 Tested up to: 4.8-alpha-40080
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Easiest and most lightweight plugin to let visitors subscribe to comments and ge
 
 == Description ==
 
-Very simply, this plugin adds a subscription checkbox to your WordPress comments form, to let your visitors subscribe to comments. They will then be notified by email when others comment on the same post. Works automatically upon activation, no settings required.
+Very simply, this plugin adds a subscription checkbox to your WordPress comments form to let your visitors subscribe to comments. They will then be notified by email when others comment on the same post. Works automatically upon activation, no settings required.
 
 This plugin focuses on a lightweight footprint. It simply just works upon activation. All settings are optional. For fastest pagespeed, no stylesheets or scripts are added.
 
@@ -26,13 +26,18 @@ You can unsubscribe people from the settings page, if you wish.
 * Send a "Thank You" message for first time commentators.
 * Send a copy of EACH notification to emails of your choice.
 
-**Easily Switch From "Subscribe To Comments Reloaded"**
+= Easily Switch From Other Comments Subcription Plugins =
 
-This plugin will migrate your subscribers from the "Subscribe to Comments Reloaded" plugin. This is done automatically upon activation.
+Your subscribers will be imported for an easy switch from the following listed plugins. This is done automatically upon activation. Your comment subscribers will be migrated from these plugins:
 
-**Easily Switch From "Comment Notifier"**
 
-This plugin will migrate your subscribers from the [Comment Notifier](https://wordpress.org/plugins/comment-notifier/) plugin.
+
+- "Subscribe To Comments" plugin
+- "Subscribe To Comments Reloaded" plugin
+- "Comment Notifier" plugin
+
+
+= Special Condition For "Comment Notifier" Plugin Users: =
 
 **"Lightweight Subscribe to Comments" fixes a major problem with the "Comment Notifier" plugin:**
 
@@ -44,7 +49,7 @@ The problem is that "Comment Notifier" plugin subscribes the email address as so
 
 You could have hundreds, even thousands, of spammer email addresses in that list. Then, when you approve a legit comment, your server sends out emails to all of the post subscribers (including spammers), which can cause server overload, among other problems.
 
-This plugin, **Lightweight Subscribe To Comments**, fixes that by ignoring comments in moderation until they are approved by you. This means less load on your server.
+This plugin fixes that by ignoring comments in moderation until they are approved by you. This means less load on your server.
 
 **Bonus Clean Up For "Comment Notifier" Plugin Users:**
 
@@ -52,32 +57,32 @@ This plugin removes spammers from your "Comment Notifier" list.
 
 Upon activation, this plugin will clean up your "comment_notifier" list (database table) by removing all spammer emails (emails of people that do NOT have an approved comment). (This only applies to you if you were using the "Comment Notifier" plugin.) It will also empty your Comments "Trash" and "Spam". This clean up is only done once, upon plugin activation.
 
-**Languages**
+= Languages =
 
 This plugin is translation-ready and includes a `.pot` file to make it easy to translate.
 
-Fork it on [GitHub](https://github.com/isabelc/Comment-Notifier-No-Spammers).
-
 == Installation ==
 
-**Step 1: Install The Plugin**
+= Step 1: Install The Plugin =
 
 In your WordPress dashboard -> Plugins -> Add New, search for "Lightweight Subscribe To Comments". Click "Install Now", then click "Activate Plugin".
 
 Upon activation, the plugin automatically works. There will be a checkbox underneath your comment form so that visitors can subscribe to comments as they make a comment.
 
-**(Optional) Step 2: Maybe Add CSS Styles**
+To troubleshoot a problem, see the Troubleshooting section on the [full documentation page](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments).
 
-See [the documentation](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments#jl-install) for this step.
+= (Optional) Step 2: Maybe Add CSS Styles =
+
+Most themes do not need this step. If your theme uses common WP standards to load its stylesheet, your checkbox style will be just fine. However, if you notice that your checkbox is not aligned properly underneath your comment reply form, then see [the documentation](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments#jl-install) for a quick way to add the proper CSS style to align your checkbox.
 
 
-**(Optional) Step 3: Customize The Settings**
+= (Optional) Step 3: Customize The Settings =
 
-If you want to customize any settings, then go to "Settings --> Lightweight Subscribe To Comments". See the [full documentation](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments).
+If you want to customize any settings, then go to "Settings --> Lightweight Subscribe To Comments". See the full documentation (link above).
 
-**(Optional) Step 4 - Only For Those That Were Using "Comment Notifier" Plugin**
+= (Optional) Step 4 - Only For Those That Were Using "Comment Notifier" Plugin =
 
-If you were using "Comment Notifier" plugin, then deactivate it right away to avoid having it add new spammers to your comment_notifier list. Only once, upon activation, this plugin will clean up your "comment_notifier" list (database table) by removing all spammer emails that were subscribed by the "Comment Notifier" plugin. It will also empty your Comments "Trash" and "Spam". This is done automatically upon activation. Your existing approved comments, and legit subscribers, will not be lost.
+If you were using "Comment Notifier" plugin, then deactivate it right away to avoid having it add new spammers to your comment_notifier list. Only once, upon activation, this plugin will clean up your "comment_notifier" list (database table) by removing all spammer emails that were subscribed by the "Comment Notifier" plugin. It will also empty your Comments "Trash" and "Spam". This is done automatically upon activation. Your existing approved comments, and legit subscribers, will remain intact.
 
 == Frequently Asked Questions ==
 
@@ -91,6 +96,12 @@ For test emails to work, you must enter an email address in the "Email address w
 1. This is the subscription checkbox that is added beneath your comment form.
 
 == Changelog ==
+
+= 1.5.2 =
+* New - Easily switch from the "Subscribe to Comments" plugin by Jaquith. Also, improved importing for subscribers from the "Subscribe to Comments Reloaded" plugin.
+* New - Replace tags with sample text in preview. This means you get a better preview of the message body when you click "preview".
+* Fix - Fixed a bug that would delete the plugin settings (not subscribers, just settings) upon plugin deactivation. This is fixed, and currently, settings are kept intact. Future updates will bring an option to erase all data.
+* Tweak - Added the {comment_link} to the list of tags available for editing the message body.
 
 = 1.5.1 =
 * New - Updated the `.pot` translation file.
@@ -136,6 +147,8 @@ For test emails to work, you must enter an email address in the "Email address w
 * First release.
 
 == Upgrade Notice ==
+= 1.5.2 =
+Fixed a bug that would delete the plugin settings (not subscriber data) upon plugin deactivation.
 
 = 1.5.1 =
 Fix: Options were not migrated in v1.5. Please update.
