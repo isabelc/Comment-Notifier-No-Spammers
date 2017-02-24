@@ -229,7 +229,7 @@ function lstcPreview() {
 					<input name="options[ty_subject]" type="text"
 					 size="70" value="<?php echo $ty_subject; ?>"/>
 					<br />
-					<?php printf(__('Tags: %1$s - the post title, %2$s - the commenter name', 'comment-notifier-no-spammers'), '{title}', '{author}'); ?>
+					<?php printf(__('Tags: %3$s %1$s - the post title %3$s %2$s - the commenter name', 'comment-notifier-no-spammers'), '{title}', '{author}', '<br />'); ?>
 				</td>
 			</tr>
 			<tr>
@@ -238,7 +238,7 @@ function lstcPreview() {
 					<textarea name="options[ty_message]" wrap="off"
 					 rows="10" cols="70" style="width: 500px"><?php echo $ty_message; ?></textarea>
 					<br />
-					<?php printf(__('Tags: %1$s - the post title, %2$s - the commenter name, %3$s - the post link, %4$s - the comment text.', 'comment-notifier-no-spammers'), '{title}', '{author}', '{link}', '{content}'); ?><br /><br />
+					<?php printf(__('Tags: %5$s %1$s - the post title %5$s %2$s - the commenter name %5$s %3$s - link to the post/page %5$s %6$s - link to the comment %5$s %4$s - the comment text.', 'comment-notifier-no-spammers'), '{title}', '{author}', '{link}', '{content}', '<br />', '{comment_link}' ); ?><br /><br />
 				</td>
 			</tr>
 		</table>
@@ -275,10 +275,11 @@ function lstcPreview() {
 		<ul>
 			<?php
 			$list = $wpdb->get_results("select distinct post_id, count(post_id) as total from " . $wpdb->prefix . "comment_notifier group by post_id order by total desc");
-			foreach ($list as $r) {
-				$post = get_post($r->post_id);
-				$link = get_permalink($r->post_id);
-				echo '<li><a href="' . $link . '" target="_blank">' . $post->post_title . '</a> (id: ' . $r->post_id . __(', subscribers: ', 'comment-notifier-no-spammers') . $r->total . ')</li>';
+			foreach ( $list as $r ) {
+				$post = get_post( $r->post_id );
+				echo '<li><a href="' . esc_url( get_permalink( $r->post_id ) ) . '" target="_blank">' .
+				$post->post_title . '</a> (id: ' . $r->post_id .
+				__(', subscribers: ', 'comment-notifier-no-spammers') . $r->total . ')</li>';
 				$list2 = $wpdb->get_results("select id,email,name from " . $wpdb->prefix . "comment_notifier where post_id=" . $r->post_id);
 				echo '<ul>';
 				foreach ($list2 as $r2) {
