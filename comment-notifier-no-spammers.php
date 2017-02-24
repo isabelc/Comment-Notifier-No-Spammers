@@ -98,12 +98,15 @@ function lstc_wp_set_comment_status( $comment_id, $status ) {
 
 /**
  * Send thank you message to first timers after their 1st comment is approved,
- * regardless of whether they subscribe.
+ * regardless of whether they subscribe, if enabled.
  */
 function lstc_thankyou( $comment_id ) {
 	global $wpdb;
 	$options = get_option( 'lstc' );
-	if (!isset($options['ty_enabled'])){
+	if ( ! isset( $options['ty_enabled'] ) ) {
+		return;
+	}
+	if ( empty( $options['ty_message'] ) ) {
 		return;
 	}
 
@@ -329,7 +332,6 @@ function lstc_subscribe_later( $post_id, $email, $name, $comment_id ) {
 
 function lstc_init() {
 	$options = get_option('lstc');
-
 	if (is_admin()) {
 		add_action( 'admin_menu', 'lstc_admin_menu' );
 	}
@@ -351,10 +353,14 @@ function lstc_init() {
 	if ( $unsubscribe_url ) {
 		header('Location: ' . $unsubscribe_url);
 	} else {
+		$thankyou = empty( $options['thankyou'] ) ?
+		__( 'Your subscription has been removed. You\'ll be redirect to the home page within few seconds.', 'comment-notifier-no-spammers') :
+		htmlspecialchars( $options['thankyou'] );
+
 		echo '<html><head>';
 		echo '<meta http-equiv="refresh" content="3;url=' . get_option('home') . '"/>';
 		echo '</head><body>';
-		echo $options['thankyou'];
+		echo $thankyou;
 		echo '</body></html>';
 	}
 
