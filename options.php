@@ -144,6 +144,8 @@ function lstcPreview() {
 		</table>
 
 		<h3><?php _e('Notification Email Settings', 'comment-notifier-no-spammers'); ?></h3>
+		<p><?php _e('Here you can configure the message which is sent to subscribers.', 'comment-notifier-no-spammers'); ?></p>
+
 		<table class="form-table">
 			<tr>
 				<th><?php _e('Notification Sender Name', 'comment-notifier-no-spammers'); ?></th>
@@ -190,7 +192,7 @@ function lstcPreview() {
 
 		<h3><?php _e('Unsubscribe Settings', 'comment-notifier-no-spammers'); ?></h3>
 		<p>
-			<?php _e('Here you can configure what to show to unsubscribing users. Set an "Unsubscribe page URL" to send the user to a specific page or configure a specific message.', 'comment-notifier-no-spammers'); ?>
+			<?php _e('Here you can configure what to show to unsubscribing users. You may set an "Unsubscribe page URL" to send the user to a specific page, or configure a specific message.', 'comment-notifier-no-spammers'); ?>
 		</p>
 
 		<table class="form-table">
@@ -238,7 +240,7 @@ function lstcPreview() {
 					<textarea name="options[ty_message]" wrap="off"
 					 rows="10" cols="70" style="width: 500px"><?php echo $ty_message; ?></textarea>
 					<br />
-					<?php printf(__('Tags: %5$s %1$s - the post title %5$s %2$s - the commenter name %5$s %3$s - link to the post/page %5$s %6$s - link to the comment %5$s %4$s - the comment text.', 'comment-notifier-no-spammers'), '{title}', '{author}', '{link}', '{content}', '<br />', '{comment_link}' ); ?><br /><br />
+					<?php printf(__('Tags: %5$s %1$s - the post title %5$s %2$s - the commenter name %5$s %3$s - link to the post/page %5$s %6$s - link to the comment %5$s %4$s - the comment text', 'comment-notifier-no-spammers'), '{title}', '{author}', '{link}', '{content}', '<br />', '{comment_link}' ); ?><br /><br />
 				</td>
 			</tr>
 		</table>
