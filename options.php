@@ -14,9 +14,7 @@ function lstc_options_page() {
 				if ( ! empty( $_POST['options']['test'] ) ) {
 					$test = sanitize_email( $_POST['options']['test'] );
 				}
-
-				$ty_message = empty( $options['ty_message'] ) ? '' : htmlspecialchars( $options['ty_message'] );
-
+				$ty_message = empty( $options['ty_message'] ) ? '' : $options['ty_message'];
 				$lstc_data = new stdClass();
 				$lstc_data->author = __('Author', 'comment-notifier-no-spammers');
 				$lstc_data->link = get_option('home');
@@ -33,7 +31,6 @@ function lstc_options_page() {
 	}
 
 	// Grab new values after "save and send test email"
-	$options = get_option( 'lstc' );// @todo need?
 	$unsubscribe_url = empty( $options['unsubscribe_url'] ) ? '' : htmlspecialchars( $options['unsubscribe_url'] );
 	$length = empty( $options['length'] ) ? '' : htmlspecialchars( $options['length'] );
 	$test = empty( $options['test'] ) ? '' : htmlspecialchars( $options['test'] );
