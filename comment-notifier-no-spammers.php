@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.2-alpha.2
+Version: 1.5.2-alpha.6
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -434,45 +434,39 @@ function lstc_inline_style() {
 add_action( 'wp_enqueue_scripts', 'lstc_inline_style', 999 );
 
 /**
- * Migrate subscribers from Subscribe to Comments Reloaded. This only runs on activation.
+ * Process subcriber data, then import subcribers into our table
  */
-function lstc_migrate_subscribers_from_stcr() {
+function lstc_process_import_subscribers( $subscriber_data ) {
 	global $wpdb;
-	$stcr_table = $wpdb->prefix . 'subscribe_reloaded_subscribers';
-
-	// Check if the Subscribe to Comments Reloaded table exists
-
-	if ( $wpdb->get_var( "SHOW TABLES LIKE '$stcr_table'" ) != $stcr_table ) {
-		return;
+	// Get comment author name, which is missing from STC and STCR postmeta
+	foreach( $subscriber_data as $key => $data ) {
+		$comment_author = $wpdb->get_var( $wpdb->prepare( 
+			"SELECT comment_author FROM {$wpdb->prefix}comments WHERE comment_author_email = %s",
+			$data->email
+		) );
+		// Add the name to the array of subscriber data.
+		$subscriber_data[ $key ]->name =  empty( $comment_author ) ? __( 'Subscriber', 'comment-notifier-no-spammers ' ) : $comment_author;
 	}
-	
-	$join = 'SELECT t1.* FROM ' . $wpdb->prefix . 'comments t1 WHERE EXISTS (SELECT subscriber_email FROM ' . $stcr_table . ' t2 WHERE t2.subscriber_email = t1.comment_author_email)';
-
-	$result = $wpdb->get_results( $join );
-
-	if ( empty( $result ) ) {
-		return;
-	}
-
-	foreach ( $result as $row ) {
-
+	// Insert subscribers into our table
+	foreach ( $subscriber_data as $data ) {
+		// Skip if something is missing
+		if ( empty( $data->post_id ) || empty( $data->name ) || empty( $data->email ) ) {
+			continue;
+		}
 	    $token = md5(rand());
-
 		$wpdb->query( $wpdb->prepare(
 			'INSERT IGNORE INTO ' . $wpdb->prefix . 'comment_notifier 
 				( post_id, name, email, token )
 				VALUES ( %d, %s, %s, %s )
 			', 
 			array(
-				$row->comment_post_ID, 
-				$row->comment_author,
-				$row->comment_author_email,
+				$data->post_id,
+				$data->name,
+				$data->email,
 				$token
 			) 
 		) );
-
 	}
-	  
 }
 
 /**
@@ -497,13 +491,13 @@ function lstc_cleanup_prior() {
 	// delete every email in the comment_notifier table that doesn’t have a corresponding (pending or approved) comment.
 	$count = $wpdb->query("DELETE FROM " . $comment_notifier_table . " WHERE email NOT IN ( SELECT comment_author_email FROM " . $wpdb->comments . " )");
 }
-/** Upon activation, create table unless it exists from Comment Notifier plugin, in which case existing spammer emails will be removed from table. Also set up default settings.
-*/
+/**
+ * Upon activation, setup the database table, default settings, and migrate
+ * subscribers from other comment subscriber plugins.
+ */
 function lstc_activate() {
 	global $wpdb;
-	//   $wpdb->query("RENAME TABLE " . $wpdb->prefix . "subscriptions TO " . $wpdb->prefix . "comment_notifier");
-
-	// SQL to create the table
+	//Create table unless it exists from Comment Notifier plugin
 	$sql = 'create table if not exists ' . $wpdb->prefix . 'comment_notifier (
 		`id` int unsigned not null AUTO_INCREMENT,
 		`post_id` int unsigned not null default 0,
@@ -518,7 +512,7 @@ function lstc_activate() {
 	@$wpdb->query($sql);
 
 $default_options['message'] = 
-sprintf(__( 'Hi %s', 'comment-notifier-no-spammers' ), '{name}') .
+sprintf(__( 'Hi %s,', 'comment-notifier-no-spammers' ), '{name}') .
 "\n\n" .
 sprintf( __( '%s has just written a new comment on "%s". Here is an excerpt:', 'comment-notifier-no-spammers' ), '{author}', '{title}') .
 "\n\n" .
@@ -555,8 +549,16 @@ __('Have a nice day!', 'comment-notifier-no-spammers');
 	update_option( 'lstc', $options );
 	// Remove spammers that were previously subscribed by Comment Notifier plugin.
 	lstc_cleanup_prior();
-	// Migrate subscribers from Subscribe to Comments Reloaded
- 	lstc_migrate_subscribers_from_stcr();
+	// Import subscribers from Subscribe to Comments plugin, if any exist
+	$stc_subscribers = $wpdb->get_results( "SELECT LCASE(meta_value) as email, post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '_sg_subscribe-to-comments'" );
+	if ( $stc_subscribers ) {
+		lstc_process_import_subscribers( $stc_subscribers );
+	}
+	// Import subscribers from Subscribe to Comments Reloaded, if any active subscribers exist
+	$stcr_subscribers = $wpdb->get_results( "SELECT REPLACE(meta_key, '_stcr@_', '') AS email, post_id FROM {$wpdb->prefix}postmeta WHERE meta_key LIKE '\_stcr@\_%' AND meta_value LIKE '%|Y'" );
+	if ( $stcr_subscribers ) {
+		lstc_process_import_subscribers( $stcr_subscribers );
+	}
 
 }
 register_activation_hook( __FILE__, 'lstc_activate' );
