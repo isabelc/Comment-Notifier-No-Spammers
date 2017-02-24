@@ -114,7 +114,7 @@ function lstcPreview() {
 			</tr>
 		</table>
 	</form>
-
+	<hr />
 	<form action="" method="post">
 		<h3><?php _e('Subscription Checkbox Configuration', 'comment-notifier-no-spammers'); ?></h3>
 		<table class="form-table">
@@ -142,7 +142,7 @@ function lstcPreview() {
 				</td>
 			</tr>
 		</table>
-
+		<hr />
 		<h3><?php _e('Notification Email Settings', 'comment-notifier-no-spammers'); ?></h3>
 		<p><?php _e('Here you can configure the message which is sent to subscribers.', 'comment-notifier-no-spammers'); ?></p>
 
@@ -189,7 +189,7 @@ function lstcPreview() {
 				</td>
 			</tr>
 		</table>
-
+		<hr />
 		<h3><?php _e('Unsubscribe Settings', 'comment-notifier-no-spammers'); ?></h3>
 		<p>
 			<?php _e('Here you can configure what to show to unsubscribing users. You may set an "Unsubscribe page URL" to send the user to a specific page, or configure a specific message.', 'comment-notifier-no-spammers'); ?>
@@ -213,7 +213,7 @@ function lstcPreview() {
 				</td>
 			</tr>
 		</table>
-
+		<hr />
 		<h3><?php _e('Thank You Message Settings', 'comment-notifier-no-spammers'); ?></h3>
 		<p><?php _e('Configure a thank you message for <strong>first time commentators</strong>. Messages are sent when comments are approved.', 'comment-notifier-no-spammers'); ?></p>
 
@@ -244,7 +244,7 @@ function lstcPreview() {
 				</td>
 			</tr>
 		</table>
-
+		<hr />
 		<h3><?php _e('Advanced Settings', 'comment-notifier-no-spammers'); ?></h3>
 		<table class="form-table">
 			<tr>
@@ -270,7 +270,7 @@ function lstcPreview() {
 
 		</p>
 
-	</form>
+	</form><hr />
 	<form action="" method="post">
 		<?php wp_nonce_field('remove') ?>
 		<h3><?php _e('Long List of Subscribers', 'comment-notifier-no-spammers'); ?></h3>
