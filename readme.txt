@@ -26,7 +26,7 @@ You can unsubscribe people from the settings page, if you wish.
 * Send a "Thank You" message for first time commentators.
 * Send a copy of EACH notification to emails of your choice.
 
-= Easily Switch From Other Comments Subcription Plugins =
+= Easily Switch From Other Comments Subscription Plugins =
 
 Your subscribers will be imported for an easy switch from the following listed plugins. This is done automatically upon activation. Your comment subscribers will be migrated from these plugins:
 
