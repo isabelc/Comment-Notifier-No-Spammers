@@ -78,7 +78,7 @@ function lstc_comment_post( $comment_id, $status ) {
  * a comment that has been held in moderation.
  * 
  * @param int $comment_id the comment id
- * @param string $status either 'hold', 'approve', 'spam', or 'delete'.
+ * @param string $status New comment status, either 'hold', 'approve', 'spam', or 'trash'.
  */
 function lstc_wp_set_comment_status( $comment_id, $status ) {
 
@@ -190,14 +190,10 @@ function lstc_replace( $message, $data ) {
  */
 function lstc_notify( $comment_id ) {
 	global $wpdb;
+	$options = get_option( 'lstc' );
+	$comment = get_comment( $comment_id );
 
-	//@set_time_limit(0);
-
-	$options = get_option('lstc');
-	$comment = get_comment($comment_id);
-
-	if ($comment->comment_type == 'trackback' || $comment->comment_type == 'pingback')
-	{
+	if ( 'trackback' == $comment->comment_type || 'pingback' == $comment->comment_type ) {
 		return;
 	}
 
@@ -205,7 +201,7 @@ function lstc_notify( $comment_id ) {
 	if ( empty( $post_id ) ) {
 		return;
 	}
-	$email = strtolower(trim($comment->comment_author_email));
+	$email = strtolower( trim( $comment->comment_author_email ) );
 
 	$subscriptions = $wpdb->get_results(
 		$wpdb->prepare("select * from " . $wpdb->prefix . "comment_notifier where post_id=%d and email<>%s",
@@ -217,8 +213,8 @@ function lstc_notify( $comment_id ) {
 
 
 	// Fill the message body with same for all data.
-	$post = get_post($post_id);
-	if (empty($post)) {
+	$post = get_post( $post_id );
+	if ( empty( $post ) ) {
 		 return;
 	}
 	
