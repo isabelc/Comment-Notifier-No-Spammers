@@ -41,8 +41,7 @@ along with Lightweight Subscribe To Comments. If not, see <http://www.gnu.org/li
  * @param mixed $status, 0, 1 or spam
  */
 function lstc_comment_post( $comment_id, $status ) {
-
-		$comment = get_comment($comment_id);
+		$comment = get_comment( $comment_id );
 		$name = $comment->comment_author;
 		$email = strtolower( trim( $comment->comment_author_email ) );
 		$post_id = $comment->comment_post_ID;
@@ -50,19 +49,19 @@ function lstc_comment_post( $comment_id, $status ) {
 	// Only subscribe if comment is approved; skip those in moderation.
 
 	// if comment author subscribed, and if comment is automatically approved, subscribe author
-	if ( ( $status === 1 ) && isset( $_POST['lstc_subscribe'] ) ) {
+	if ( ( 1 === $status ) && isset( $_POST['lstc_subscribe'] ) ) {
 		lstc_subscribe( $post_id, $email, $name );
 	}
 
 	// If comment is approved automatically, notify subscribers
-	if ( $status == 1 ) {
+	if ( 1 === $status ) {
 		lstc_thankyou( $comment_id );
 		lstc_notify( $comment_id );
 	}
 
 	// If comment goes to moderation, and if comment author subscribed,
 	// add comment meta key for pending subscription.
-	if ( ( $status === 0 ) && isset( $_POST['lstc_subscribe'] ) ) {
+	if ( ( 0 === $status ) && isset( $_POST['lstc_subscribe'] ) ) {
 		add_comment_meta( $comment_id, 'lstc_subscribe', true, true );
 	}
 	
@@ -81,7 +80,6 @@ function lstc_comment_post( $comment_id, $status ) {
  * @param string $status New comment status, either 'hold', 'approve', 'spam', or 'trash'.
  */
 function lstc_wp_set_comment_status( $comment_id, $status ) {
-
 	// get original comment info
 	$comment = get_comment( $comment_id );
 	$post_id = $comment->comment_post_ID;
@@ -89,7 +87,7 @@ function lstc_wp_set_comment_status( $comment_id, $status ) {
 	$name = $comment->comment_author;
 
 	// When a comment is approved later, notify the subscribers, and subscribe this comment author
-	if ( $status === 'approve' ) {
+	if ( 'approve' === $status ) {
 		lstc_thankyou( $comment_id );
 		lstc_notify( $comment_id );
 		lstc_subscribe_later( $post_id, $email, $name, $comment_id );
