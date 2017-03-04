@@ -3,8 +3,8 @@ Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
 Tags: comment, comments, subscribe to comments, follow comments, notifications, subscription
 Requires at least: 3.7
-Tested up to: 4.8-alpha-40080
-Stable tag: 1.5.2
+Tested up to: 4.8-alpha-40147
+Stable tag: 1.5.3
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Easiest and most lightweight plugin to let visitors subscribe to comments and ge
 
 Very simply, this plugin adds a subscription checkbox to your WordPress comments form to let your visitors subscribe to comments. They will then be notified by email when others comment on the same post. Works automatically upon activation, no settings required.
 
-This plugin focuses on a lightweight footprint. It simply just works upon activation. All settings are optional. For fastest pagespeed, no stylesheets or scripts are added.
+This plugin focuses on a lightweight footprint. It simply just works upon activation. All settings are optional. For fastest pagespeed, no scripts are added.
 
 You can unsubscribe people from the settings page, if you wish.
 
@@ -97,6 +97,12 @@ For test emails to work, you must enter an email address in the "Email address w
 
 == Changelog ==
 
+= 1.5.3 =
+* New - New option to disable the inline CSS styles.
+* Fix - Don't import invalid subscribers from other plugins. Version 1.5.2 had a bug which would import subscribers from "Subscribe to Comments Reloaded" and "Subscribe to Comments" plugins, **as is**. Now, only subscribers with valid emails will be imported from those plugins. (This bug did not apply to you if you had never used either of those 2 plugins.) In addition, upon updating to version 1.5.3, any invalid spammy subscribers that were erroneously imported from other plugins will be removed from our subscriber list. However, note that we do NOT remove any data that was inserted and attached to the posts by those 2 plugins. This means that if you had spammy, invalid subscribers with invalid emails attached to your posts, they still remain there because this plugin doesn't modify any postmeta. Those 2 plugins attach the subscribers to the actual post as "postmeta" and that data will remain there unless those plugins have a way to remove its data. (I will soon release an extra utility plugin that you can use to clean that data from those plugins.)
+* Tweak - Add scrollbars to the message preview in the settings page.
+* Tweak - Simplify settings names.
+
 = 1.5.2 =
 * New - Easily switch from the "Subscribe to Comments" plugin by Jaquith. Also, improved importing for subscribers from the "Subscribe to Comments Reloaded" plugin.
 * New - Replace tags with sample text in preview. This means you get a better preview of the message body when you click "preview".
@@ -147,6 +153,10 @@ For test emails to work, you must enter an email address in the "Email address w
 * First release.
 
 == Upgrade Notice ==
+
+= 1.5.3 =
+Fix - Don't import invalid subscribers from other plugins. 
+
 = 1.5.2 =
 Fixed a bug that would delete the plugin settings (not subscriber data) upon plugin deactivation.
 
