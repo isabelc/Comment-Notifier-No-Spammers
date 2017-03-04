@@ -82,7 +82,7 @@ function lstcPreview() {
 	m = lstcReplaceTags( '{comment_link}', '#', m );
 	m = lstcReplaceTags( '{unsubscribe}', '#', m );
 	m = m.replace(/\n/g, "<br />");
-	var h = window.open("", "lstc","status=0,toolbar=0,height=400,width=550");
+	var h = window.open("", "lstc","status=0,toolbar=0,scrollbars=1,height=400,width=550");
 	var d = h.document;
 	d.write('<html><head><title>Email preview</title>');
 	d.write('</head><body>');
