@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.3.alpha2
+Version: 1.5.3.alpha3
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -453,7 +453,7 @@ function lstc_process_import_subscribers( $subscriber_data ) {
 			$data->email = $valid;// sanitize emails to be inserted
 		} else {
 			unset( $subscriber_data[ $key ] );// remove invalid subscribers
-			continue;			
+			continue;
 		}
 		
 		// Get comment author name, which is missing from STC and STCR postmeta
@@ -590,7 +590,7 @@ function lstc_admin_menu() {
 /**
  * Migrate options to new handle 
  * @since 1.5.1
- * @todo remove this function in version 2.0 and delete the option lstc_migrate_options_complete upon deactivation.
+ * @todo remove this at some future point, and delete the option lstc_migrate_options_complete upon deactivation.
  */
 function lstc_migrate_options() {
 	// Run this update only once
@@ -601,6 +601,34 @@ function lstc_migrate_options() {
 			delete_option( 'cmnt_nospammers' );
 		}
 		update_option( 'lstc_migrate_options_complete', 'completed' );
+	}
+
+	/* Remove invalid subscribers that were imported from other plugins.
+	 * Run this cleanup only once
+	 * @since 1.5.3 
+	 * @todo remove this at some future point, and delete the option lstc_cleanup_emails_done upon deactivation.
+	 */
+	if ( get_option( 'lstc_cleanup_emails_done' ) != 'completed' ) {
+		global $wpdb;
+		$pre = $wpdb->base_prefix;
+		if ( is_multisite() ) { 
+			global $blog_id;
+			$comment_notifier_table = $pre . get_current_blog_id() . '_comment_notifier';
+		} else {
+			// not Multisite
+			$comment_notifier_table = $pre . 'comment_notifier';
+		}
+		// Get email list
+		$lstc_subscribers = $wpdb->get_col("SELECT email FROM " . $comment_notifier_table);
+		// delete every email in the comment_notifier table isn't valid
+		foreach ( $lstc_subscribers as $email ) {
+			if ( ! lstc_valid_email( $email ) ) {
+				$wpdb->query( 
+					$wpdb->prepare( "DELETE FROM " . $comment_notifier_table . " WHERE email = %s", $email )
+				);			
+			}
+		}
+		update_option( 'lstc_cleanup_emails_done', 'completed' );
 	}
 }
 add_action( 'init', 'lstc_migrate_options' );
