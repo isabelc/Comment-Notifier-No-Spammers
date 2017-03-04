@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.2
+Version: 1.5.3.alpha2
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -276,13 +276,12 @@ function lstc_subscribe( $post_id, $email, $name ) {
 		 return;
 	}
 
-	// The random token for unsubscription
-	$token = md5(rand());
-	$res = $wpdb->insert($wpdb->prefix ."comment_notifier", array(
+	$token = md5( rand() );// The random token for unsubscription
+	$res = $wpdb->insert( $wpdb->prefix ."comment_notifier", array(
 		'post_id' => $post_id,
 		'email' => $email,
 		'name' => $name,
-		'token' => $token ));
+		'token' => $token ) );
 }
 
 /**
@@ -434,12 +433,30 @@ function lstc_inline_style() {
 add_action( 'wp_enqueue_scripts', 'lstc_inline_style', 999 );
 
 /**
+ * Check that an email is a valid email structure and if so, sanitize it.
+ * @return string|bool A sanitized email if a valid email was passed, otherwise false.
+ * @since 1.5.3
+ */
+function lstc_valid_email( $email ) {
+	return is_email( $email ) ? sanitize_email( $email ) : false;
+}
+
+/**
  * Process subcriber data, then import subcribers into our table
  */
 function lstc_process_import_subscribers( $subscriber_data ) {
 	global $wpdb;
-	// Get comment author name, which is missing from STC and STCR postmeta
-	foreach( $subscriber_data as $key => $data ) {
+	
+	foreach ( $subscriber_data as $key => $data ) {
+		$valid = lstc_valid_email( $data->email );
+		if ( $valid ) {
+			$data->email = $valid;// sanitize emails to be inserted
+		} else {
+			unset( $subscriber_data[ $key ] );// remove invalid subscribers
+			continue;			
+		}
+		
+		// Get comment author name, which is missing from STC and STCR postmeta
 		$comment_author = $wpdb->get_var( $wpdb->prepare( 
 			"SELECT comment_author FROM {$wpdb->prefix}comments WHERE comment_author_email = %s",
 			$data->email
@@ -470,7 +487,8 @@ function lstc_process_import_subscribers( $subscriber_data ) {
 }
 
 /**
-* Remove spammers that were previously subscribed. This only runs on activation.
+* Remove spammers that were previously subscribed with Comment Notifier plugin.
+* This only runs on activation.
 */
 function lstc_cleanup_prior() {
 	global $wpdb;
@@ -483,13 +501,13 @@ function lstc_cleanup_prior() {
 		// not Multisite
 		$comment_notifier_table = $pre . 'comment_notifier';
 	}
-
 	// Empty the trash and spam
 	$wpdb->delete( $wpdb->comments, array( 'comment_approved' => 'trash' ) );
 	$wpdb->delete( $wpdb->comments, array( 'comment_approved' => 'spam' ) );
 
 	// delete every email in the comment_notifier table that doesn’t have a corresponding (pending or approved) comment.
 	$count = $wpdb->query("DELETE FROM " . $comment_notifier_table . " WHERE email NOT IN ( SELECT comment_author_email FROM " . $wpdb->comments . " )");
+
 }
 /**
  * Upon activation, setup the database table, default settings, and migrate
