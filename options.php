@@ -124,7 +124,7 @@ function lstcPreview() {
 			</tr>
 
 			<tr>
-				<th><?php _e('Subscription Checkbox Label', 'comment-notifier-no-spammers'); ?></th>
+				<th><?php _e('Checkbox Label', 'comment-notifier-no-spammers'); ?></th>
 				<td>
 					<input name="options[label]" type="text" size="50"
 					 value="<?php echo $label; ?>"/>
@@ -141,24 +141,24 @@ function lstcPreview() {
 		</table>
 		<hr />
 		<h3><?php _e('Notification Email Settings', 'comment-notifier-no-spammers'); ?></h3>
-		<p><?php _e('Here you can configure the message which is sent to subscribers.', 'comment-notifier-no-spammers'); ?></p>
+		<p><?php _e('Here you can configure the message which is sent to subscribers to notify them that a new comment was posted.', 'comment-notifier-no-spammers'); ?></p>
 
 		<table class="form-table">
 			<tr>
-				<th><?php _e('Notification Sender Name', 'comment-notifier-no-spammers'); ?></th>
+				<th><?php _e('From Name', 'comment-notifier-no-spammers'); ?></th>
 				<td>
 					<input name="options[name]" id="from_name" type="text" size="50" value="<?php echo htmlspecialchars($options['name']) ?>"/>
 				</td>
 			</tr>
 
 			<tr>
-				<th><?php _e('Notification Sender Email', 'comment-notifier-no-spammers'); ?></th>
+				<th><?php _e('From Email', 'comment-notifier-no-spammers'); ?></th>
 				<td>
 					<input name="options[from]" id="from_email" type="text" size="50" value="<?php echo htmlspecialchars($options['from']) ?>"/>
 				</td>
 			</tr>
 			<tr>
-				<th><?php _e( 'Notification Subject', 'comment-notifier-no-spammers' ); ?></th>
+				<th><?php _e( 'Subject', 'comment-notifier-no-spammers' ); ?></th>
 				<td>
 					<input name="options[subject]" id="subject" type="text" size="70" value="<?php echo htmlspecialchars($options['subject']) ?>"/>
 					<br />
@@ -167,7 +167,7 @@ function lstcPreview() {
 			</tr>
 
 			<tr>
-				<th><?php _e('Notification Message Body', 'comment-notifier-no-spammers'); ?></th>
+				<th><?php _e('Message Body', 'comment-notifier-no-spammers'); ?></th>
 				<td>
 					(<a href="javascript:void(lstcPreview());"><?php _e('preview', 'comment-notifier-no-spammers'); ?></a>)
 					<br />
@@ -232,7 +232,7 @@ function lstcPreview() {
 				</td>
 			</tr>
 			<tr>
-				<th><?php _e('Notification message body', 'comment-notifier-no-spammers'); ?></th>
+				<th><?php _e('Message Body', 'comment-notifier-no-spammers'); ?></th>
 				<td>
 					<textarea name="options[ty_message]" wrap="off"
 					 rows="10" cols="70" style="width: 500px"><?php echo $ty_message; ?></textarea>
