@@ -394,11 +394,15 @@ function lstc_mail( $to, $subject, $message ) {
 add_action( 'init', 'lstc_load_textdomain' );
 
 /**
- * Align the subscription checkbox without adding a stylesheet, piggyback on current theme's stylesheet.
+ * Align the subscription checkbox by piggybacking on current theme's stylesheet.
  * @since 1.5
  */
 function lstc_inline_style() {
 	if ( ! is_singular() ) {
+		return;
+	}
+	$options = get_option( 'lstc' );
+	if ( isset( $options['disable_css'] ) ) {
 		return;
 	}
 	global $wp_styles;
