@@ -41,11 +41,11 @@ function lstc_options_page() {
 	$thankyou = empty( $options['thankyou'] ) ? '' : htmlspecialchars( $options['thankyou'] );
 
 	// Removes a single email for all subscriptions
-	if (isset($_POST['remove_email'])) {
-		if (!wp_verify_nonce($_POST['_wpnonce'], 'remove_email'))
-			die(__('Security violated', 'comment-notifier-no-spammers'));
-		$email = strtolower(trim($_POST['email']));
-		$wpdb->query($wpdb->prepare("delete from " . $wpdb->prefix . "comment_notifier where email=%s", $email));
+	if ( isset( $_POST['remove_email'] ) ) {
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'remove_email' ) )
+			die( __( 'Security violated', 'comment-notifier-no-spammers' ) );
+		$email = strtolower( sanitize_email( $_POST['email'] ) );
+		$wpdb->query( $wpdb->prepare( "delete from " . $wpdb->prefix . "comment_notifier where email=%s", $email ) );
 	}
 
 	if (isset($_POST['remove'])) {
@@ -245,19 +245,30 @@ function lstcPreview() {
 		<h3><?php _e('Advanced Settings', 'comment-notifier-no-spammers'); ?></h3>
 		<table class="form-table">
 			<tr>
+				<th><label><?php _e('Extra email address where to send a copy of EACH notification:', 'comment-notifier-no-spammers'); ?></label><br /><br /></th>
 				<td>
-					<label><?php _e('Extra email address where to send a copy of EACH notification:', 'comment-notifier-no-spammers'); ?></label><br /><br />
 					<input name="options[copy]" type="text" size="50" value="<?php echo $copy; ?>"/>
 					<br />
 					<?php _e('Leave empty to disable.', 'comment-notifier-no-spammers'); ?>
 				</td>
 			</tr>
+
 			<tr>
+				<th><label><?php _e('Email address where to send test emails:', 'comment-notifier-no-spammers'); ?></label><br /><br /></th>
 				<td>
-					<label><?php _e('Email address where to send test emails:', 'comment-notifier-no-spammers'); ?></label><br /><br />
 					<input name="options[test]" type="text" size="50" value="<?php echo $test; ?>"/>
+					<br />
 				</td>
 			</tr>
+
+			<tr>
+				<th><label><?php _e('Disable CSS Styles', 'comment-notifier-no-spammers'); ?></label></th>
+				<td>
+					<input type="checkbox" name="options[disable_css]" value="" <?php echo isset($options['disable_css']) ? 'checked' : ''; ?> />
+					<?php _e('Check this to stop the CSS styles from being added to the checkbox.', 'comment-notifier-no-spammers'); ?>
+				</td>
+			</tr>
+
 		</table>
 		<p class="submit">
 			<?php wp_nonce_field('update-lstc-options') ?>
@@ -281,7 +292,7 @@ function lstcPreview() {
 				__(', subscribers: ', 'comment-notifier-no-spammers') . $r->total . ')</li>';
 				$list2 = $wpdb->get_results("select id,email,name from " . $wpdb->prefix . "comment_notifier where post_id=" . $r->post_id);
 				echo '<ul>';
-				foreach ($list2 as $r2) {
+				foreach ( $list2 as $r2 ) {
 					echo '<li><input type="checkbox" name="s[]" value="' . $r2->id . '"/> ' . $r2->email . '</li>';
 				}
 				echo '</ul>';
