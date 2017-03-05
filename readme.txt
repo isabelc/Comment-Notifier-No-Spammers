@@ -91,6 +91,8 @@ If you were using "Comment Notifier" plugin, then deactivate it right away to av
 For test emails to work, you must enter an email address in the "Email address where to send test emails:" option, under "Advanced Settings". 
 **Tip:** Do not use the sender address for this; some mail servers do not accept "from" and "to" set to the same value.
 
+See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments#jl-faq).
+
 == Screenshots ==
 
 1. This is the subscription checkbox that is added beneath your comment form.
