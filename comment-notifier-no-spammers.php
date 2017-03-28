@@ -498,15 +498,8 @@ function lstc_process_import_subscribers( $subscriber_data ) {
 */
 function lstc_cleanup_prior() {
 	global $wpdb;
-	// get table name
-	$pre = $wpdb->base_prefix;
-	if ( is_multisite() ) { 
-		global $blog_id;
-		$comment_notifier_table = $pre . get_current_blog_id() . '_comment_notifier';
-	} else {
-		// not Multisite
-		$comment_notifier_table = $pre . 'comment_notifier';
-	}
+	$comment_notifier_table = $wpdb->prefix . 'comment_notifier';
+
 	// Empty the trash and spam
 	$wpdb->delete( $wpdb->comments, array( 'comment_approved' => 'trash' ) );
 	$wpdb->delete( $wpdb->comments, array( 'comment_approved' => 'spam' ) );
@@ -625,14 +618,8 @@ function lstc_migrate_options() {
 	 */
 	if ( get_option( 'lstc_cleanup_emails_done' ) != 'completed' ) {
 		global $wpdb;
-		$pre = $wpdb->base_prefix;
-		if ( is_multisite() ) { 
-			global $blog_id;
-			$comment_notifier_table = $pre . get_current_blog_id() . '_comment_notifier';
-		} else {
-			// not Multisite
-			$comment_notifier_table = $pre . 'comment_notifier';
-		}
+		$comment_notifier_table = $wpdb->prefix . 'comment_notifier';
+
 		// Get email list
 		$lstc_subscribers = $wpdb->get_col("SELECT email FROM " . $comment_notifier_table);
 		// delete every email in the comment_notifier table isn't valid
