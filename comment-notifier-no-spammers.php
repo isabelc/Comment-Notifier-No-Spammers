@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.6.alpha1
+Version: 1.6.alpha2
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -511,9 +511,18 @@ function lstc_cleanup_prior() {
 	$wpdb->delete( $wpdb->comments, array( 'comment_approved' => 'trash' ) );
 	$wpdb->delete( $wpdb->comments, array( 'comment_approved' => 'spam' ) );
 
-	// delete every email in the comment_notifier table that doesn’t have a corresponding (pending or approved) comment.
+	// delete every email in the comment_notifier table that doesn’t have a corresponding comment.
 	$count = $wpdb->query("DELETE FROM " . $comment_notifier_table . " WHERE email NOT IN ( SELECT comment_author_email FROM " . $wpdb->comments . " )");
 
+	// Delete every email in the comment_notifier table isn't valid
+	$lstc_subscribers = $wpdb->get_col( "SELECT email FROM " . $comment_notifier_table );
+	foreach ( $lstc_subscribers as $email ) {
+		if ( ! lstc_valid_email( $email ) ) {
+			$wpdb->query( 
+				$wpdb->prepare( "DELETE FROM " . $comment_notifier_table . " WHERE email = %s", $email )
+			);			
+		}
+	}	
 }
 /**
  * Upon activation, setup the database table, default settings, and migrate
