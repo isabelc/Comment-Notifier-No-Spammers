@@ -3,8 +3,8 @@ Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R7BHLMCQ437SS
 Tags: comment, comments, subscribe to comments, follow comments, notifications, subscription
 Requires at least: 3.7
-Tested up to: 4.8-alpha-40147
-Stable tag: 1.5.3
+Tested up to: 4.8-alpha-40341
+Stable tag: 1.5.4
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,11 @@ See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-
 1. This is the subscription checkbox that is added beneath your comment form.
 
 == Changelog ==
+
+= 1.5.4 =
+* New - Moved the subscription checkbox above the submit button.
+* API - Use the $commentdata arg, which was added in WP 4.5, on comment_post hook.
+* API - Use $wpdb->prefix instead of constructing the prefix from base_prefix.
 
 = 1.5.3 =
 * New - New option to disable the inline CSS styles.
