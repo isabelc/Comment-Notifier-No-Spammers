@@ -1,6 +1,6 @@
 === Lightweight Subscribe To Comments ===
 Contributors: isabel104
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R7BHLMCQ437SS
 Tags: comment, comments, subscribe to comments, follow comments, notifications, subscription
 Requires at least: 3.7
 Tested up to: 4.8-alpha-40147
@@ -60,6 +60,8 @@ Upon activation, this plugin will clean up your "comment_notifier" list (databas
 = Languages =
 
 This plugin is translation-ready and includes a `.pot` file to make it easy to translate.
+
+See the [full documentation](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments).
 
 == Installation ==
 
