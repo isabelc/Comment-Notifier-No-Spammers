@@ -37,14 +37,14 @@ along with Lightweight Subscribe To Comments. If not, see <http://www.gnu.org/li
  * '0' - in moderation,
  * '1' - approved,
  * 'spam' if it is spam.
- * @param int $comment_id the database id of the comment
- * @param mixed $status, 0, 1 or spam
+ * @param int $comment_id the database id of the comment.
+ * @param int|string $status Whether the comment is approved, 0, 1 or spam.
+ * @param array $commentdata The comment data
  */
-function lstc_comment_post( $comment_id, $status ) {
-		$comment = get_comment( $comment_id );
-		$name = $comment->comment_author;
-		$email = strtolower( trim( $comment->comment_author_email ) );
-		$post_id = $comment->comment_post_ID;
+function lstc_comment_post( $comment_id, $status, $commentdata ) {
+	$name = $commentdata->comment_author;
+	$email = strtolower( trim( $commentdata->comment_author_email ) );
+	$post_id = $commentdata->comment_post_ID;
 	
 	// Only subscribe if comment is approved; skip those in moderation.
 
@@ -334,7 +334,7 @@ function lstc_init() {
 
 	add_filter( 'comment_form_submit_field', 'lstc_comment_form', 99, 2 );
 	add_action( 'wp_set_comment_status', 'lstc_wp_set_comment_status', 10, 2 );
-	add_action( 'comment_post', 'lstc_comment_post', 10, 2 );
+	add_action( 'comment_post', 'lstc_comment_post', 10, 3 );
 
 	if (empty($_GET['lstc_id'])) return;
 
