@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.3
+Version: 1.6.alpha1
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -138,18 +138,21 @@ function lstc_thankyou( $comment_id ) {
 }
 
 /**
- * Add a subscribe checkbox after the form content.
+ * Add a subscribe checkbox above the submit button.
  */
-function lstc_comment_form() {
+function lstc_comment_form( $submit_field, $args ) {
+	$checkbox = '';
 	$options = get_option( 'lstc' );
 	if ( isset( $options['checkbox'] ) ) {
-		echo '<p id="lstc-comment-subscription" class="cnns-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
+		$checkbox .= '<p id="lstc-comment-subscription" class="cnns-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
 		if ( isset( $options['checked'] ) ) {
-			echo ' checked="checked"';
+			$checkbox .= ' checked="checked"';
 		}
-		echo '/>&nbsp;<label id="cnns-label" class="lstc-label" for="lstc_subscribe">' . $options['label'] . '</label></p>';
+		$checkbox .= '/>&nbsp;<label id="cnns-label" class="lstc-label" for="lstc_subscribe">' . esc_html( $options['label'] ) . '</label></p>';
 	}
+	return $checkbox . $submit_field;
 }
+
 /** Replace placeholders in body message with subscriber data and post/comment
  * data.
  * @param <type> $message
@@ -329,19 +332,18 @@ function lstc_init() {
 		add_action( 'admin_menu', 'lstc_admin_menu' );
 	}
 
-	add_action('comment_form', 'lstc_comment_form', 99);
-	add_action('wp_set_comment_status', 'lstc_wp_set_comment_status', 10, 2);
-	add_action('comment_post', 'lstc_comment_post', 10, 2);
+	add_filter( 'comment_form_submit_field', 'lstc_comment_form', 99, 2 );
+	add_action( 'wp_set_comment_status', 'lstc_wp_set_comment_status', 10, 2 );
+	add_action( 'comment_post', 'lstc_comment_post', 10, 2 );
 
 	if (empty($_GET['lstc_id'])) return;
 
 	$token = $_GET['lstc_t'];
 	$id = $_GET['lstc_id'];
 
-
-	lstc_unsubscribe($id, $token);
+	lstc_unsubscribe( $id, $token );
 	
-	$unsubscribe_url = empty($options['unsubscribe_url']) ? '' : $options['unsubscribe_url'];
+	$unsubscribe_url = empty( $options['unsubscribe_url'] ) ? '' : $options['unsubscribe_url'];
 
 	if ( $unsubscribe_url ) {
 		header('Location: ' . $unsubscribe_url);
