@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.4
+Version: 1.5.5.alpha.2
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -41,22 +41,25 @@ along with Lightweight Subscribe To Comments. If not, see <http://www.gnu.org/li
  * @param int|string $status Whether the comment is approved, 0, 1 or spam.
  * @param array $commentdata The comment data
  */
-function lstc_comment_post( $comment_id, $status, $commentdata ) {
-	$name = $commentdata->comment_author;
-	$email = strtolower( trim( $commentdata->comment_author_email ) );
-	$post_id = $commentdata->comment_post_ID;
+function lstc_comment_post( $comment_id, $status, $commentdata ) {// @test
+	if ( empty( $commentdata ) ) {
+		$commentdata = get_comment( $comment_id );
+	}
+	$name = isset( $commentdata->comment_author ) ? $commentdata->comment_author : '';
+	$email = isset( $commentdata->comment_author_email ) ? strtolower( trim( $commentdata->comment_author_email ) ) : '';
+	$post_id = isset( $commentdata->comment_post_ID ) ? $commentdata->comment_post_ID : 0;
 	
 	// Only subscribe if comment is approved; skip those in moderation.
-
-	// if comment author subscribed, and if comment is automatically approved, subscribe author
-	if ( ( 1 === $status ) && isset( $_POST['lstc_subscribe'] ) ) {
-		lstc_subscribe( $post_id, $email, $name );
-	}
 
 	// If comment is approved automatically, notify subscribers
 	if ( 1 === $status ) {
 		lstc_thankyou( $comment_id );
 		lstc_notify( $comment_id );
+
+		// If comment author subscribed, subscribe author since the comment is automatically approved.
+		if ( isset( $_POST['lstc_subscribe'] ) ) {
+			lstc_subscribe( $post_id, $email, $name );
+		}
 	}
 
 	// If comment goes to moderation, and if comment author subscribed,
@@ -140,7 +143,7 @@ function lstc_thankyou( $comment_id ) {
 /**
  * Add a subscribe checkbox above the submit button.
  */
-function lstc_comment_form( $submit_field, $args ) {
+function lstc_comment_form( $submit_field ) {
 	$checkbox = '';
 	$options = get_option( 'lstc' );
 	if ( isset( $options['checkbox'] ) ) {
@@ -332,7 +335,7 @@ function lstc_init() {
 		add_action( 'admin_menu', 'lstc_admin_menu' );
 	}
 
-	add_filter( 'comment_form_submit_field', 'lstc_comment_form', 99, 2 );
+	add_filter( 'comment_form_submit_field', 'lstc_comment_form', 99 );
 	add_action( 'wp_set_comment_status', 'lstc_wp_set_comment_status', 10, 2 );
 	add_action( 'comment_post', 'lstc_comment_post', 10, 3 );
 
