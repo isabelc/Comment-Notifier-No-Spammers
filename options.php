@@ -280,20 +280,22 @@ function lstcPreview() {
 
 	</form><hr />
 	<form action="" method="post">
-		<?php wp_nonce_field('remove') ?>
-		<h3><?php _e('Long List of Subscribers', 'comment-notifier-no-spammers'); ?></h3>
+		<?php wp_nonce_field( 'remove' ) ?>
+		<h3><?php _e( 'Long List of Subscribers', 'comment-notifier-no-spammers' ); ?></h3>
 		<ul>
 			<?php
-			$list = $wpdb->get_results("select distinct post_id, count(post_id) as total from " . $wpdb->prefix . "comment_notifier group by post_id order by total desc");
+			$list = $wpdb->get_results( "select distinct post_id, count(post_id) as total from " . $wpdb->prefix . "comment_notifier where post_id != 0 group by post_id order by total desc" );
 			foreach ( $list as $r ) {
-				$post = get_post( $r->post_id );
-				echo '<li><a href="' . esc_url( get_permalink( $r->post_id ) ) . '" target="_blank">' .
-				$post->post_title . '</a> (id: ' . $r->post_id .
-				__(', subscribers: ', 'comment-notifier-no-spammers') . $r->total . ')</li>';
-				$list2 = $wpdb->get_results("select id,email,name from " . $wpdb->prefix . "comment_notifier where post_id=" . $r->post_id);
+				$post_id = (int) $r->post_id;
+				$total = (int) $r->total;
+				$post = get_post( $post_id );
+				echo '<li><a href="' . esc_url( get_permalink( $post_id ) ) . '" target="_blank">' .
+				esc_html( $post->post_title ) . '</a> (id: ' . $post_id .
+				__(', subscribers: ', 'comment-notifier-no-spammers') . $total . ')</li>';
+				$list2 = $wpdb->get_results( "select id,email,name from " . $wpdb->prefix . "comment_notifier where post_id=" . $post_id );
 				echo '<ul>';
 				foreach ( $list2 as $r2 ) {
-					echo '<li><input type="checkbox" name="s[]" value="' . $r2->id . '"/> ' . $r2->email . '</li>';
+					echo '<li><input type="checkbox" name="s[]" value="' . esc_attr( $r2->id ) . '"/> ' . esc_html( $r2->email ) . '</li>';
 				}
 				echo '</ul>';
 				echo '<input type="submit" name="remove" value="' . __('Remove', 'comment-notifier-no-spammers') . '"/>';
