@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.5.alpha.2
+Version: 1.5.5.alpha.3
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -39,15 +39,12 @@ along with Lightweight Subscribe To Comments. If not, see <http://www.gnu.org/li
  * 'spam' if it is spam.
  * @param int $comment_id the database id of the comment.
  * @param int|string $status Whether the comment is approved, 0, 1 or spam.
- * @param array $commentdata The comment data
  */
-function lstc_comment_post( $comment_id, $status, $commentdata ) {// @test
-	if ( empty( $commentdata ) ) {
-		$commentdata = get_comment( $comment_id );
-	}
-	$name = isset( $commentdata->comment_author ) ? $commentdata->comment_author : '';
-	$email = isset( $commentdata->comment_author_email ) ? strtolower( trim( $commentdata->comment_author_email ) ) : '';
-	$post_id = isset( $commentdata->comment_post_ID ) ? $commentdata->comment_post_ID : 0;
+function lstc_comment_post( $comment_id, $status ) {
+	$comment = get_comment( $comment_id );
+	$name = $comment->comment_author;
+	$email = strtolower( trim( $comment->comment_author_email ) );
+	$post_id = $comment->comment_post_ID;
 	
 	// Only subscribe if comment is approved; skip those in moderation.
 
@@ -275,19 +272,19 @@ function lstc_subscribe( $post_id, $email, $name ) {
 
 	// Check if user is already subscribed to this post
 	$subscribed = $wpdb->get_var(
-		$wpdb->prepare("select count(*) from " . $wpdb->prefix . "comment_notifier where post_id=%d and email=%s",
-		$post_id, $email));
+		$wpdb->prepare( "select count(*) from " . $wpdb->prefix . "comment_notifier where post_id=%d and email=%s",
+		$post_id, $email ) );
 
-	if ($subscribed > 0) {
-		 return;
+	if ( $subscribed > 0 ) {
+		return;
 	}
 
 	$token = md5( rand() );// The random token for unsubscription
 	$res = $wpdb->insert( $wpdb->prefix ."comment_notifier", array(
-		'post_id' => $post_id,
-		'email' => $email,
-		'name' => $name,
-		'token' => $token ) );
+		'post_id'	=> $post_id,
+		'email'		=> $email,
+		'name'		=> $name,
+		'token'		=> $token ) );
 }
 
 /**
@@ -337,7 +334,7 @@ function lstc_init() {
 
 	add_filter( 'comment_form_submit_field', 'lstc_comment_form', 99 );
 	add_action( 'wp_set_comment_status', 'lstc_wp_set_comment_status', 10, 2 );
-	add_action( 'comment_post', 'lstc_comment_post', 10, 3 );
+	add_action( 'comment_post', 'lstc_comment_post', 10, 2 );
 
 	if (empty($_GET['lstc_id'])) return;
 
