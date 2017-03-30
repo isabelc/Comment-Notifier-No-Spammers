@@ -3,8 +3,8 @@ Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R7BHLMCQ437SS
 Tags: comment, comments, subscribe to comments, follow comments, notifications, subscription
 Requires at least: 3.7
-Tested up to: 4.8-alpha-40341
-Stable tag: 1.5.4
+Tested up to: 4.8-alpha-40350
+Stable tag: 1.5.5
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,10 @@ See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-
 
 == Changelog ==
 
+= 1.5.5 =
+* Fix - If comment moderation was NOT enabled, subscribers were not properly subscribed in version 1.5.4. The problem was due to trying out the new $commentdata argument, which was added in WP 4.5. This issue has been fixed by reverting the use of the $commentdata arg.
+* Fix - Removed 2nd argument from comment_form_submit_field filter.
+
 = 1.5.4 =
 * New - Moved the subscription checkbox above the submit button.
 * API - Use the $commentdata arg, which was added in WP 4.5, on comment_post hook.
@@ -162,6 +166,9 @@ See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-
 * First release.
 
 == Upgrade Notice ==
+
+= 1.5.5 =
+Fixed - If comment moderation was not enabled, subscribers were not properly subscribed in version 1.5.4.
 
 = 1.5.3 =
 Fix - Don't import invalid subscribers from other plugins. 
