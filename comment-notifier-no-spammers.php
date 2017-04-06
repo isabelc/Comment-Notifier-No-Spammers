@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.5
+Version: 1.5.6.alpha.1
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -140,17 +140,15 @@ function lstc_thankyou( $comment_id ) {
 /**
  * Add a subscribe checkbox above the submit button.
  */
-function lstc_comment_form( $submit_field ) {
-	$checkbox = '';
+function lstc_comment_form() {
 	$options = get_option( 'lstc' );
 	if ( isset( $options['checkbox'] ) ) {
-		$checkbox .= '<p id="lstc-comment-subscription" class="cnns-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
+		echo '<p id="lstc-comment-subscription" class="cnns-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
 		if ( isset( $options['checked'] ) ) {
-			$checkbox .= ' checked="checked"';
+			echo ' checked="checked"';
 		}
-		$checkbox .= '/>&nbsp;<label id="cnns-label" class="lstc-label" for="lstc_subscribe">' . esc_html( $options['label'] ) . '</label></p>';
+		echo '/>&nbsp;<label id="cnns-label" class="lstc-label" for="lstc_subscribe">' . esc_html( $options['label'] ) . '</label></p>';
 	}
-	return $checkbox . $submit_field;
 }
 
 /** Replace placeholders in body message with subscriber data and post/comment
@@ -332,7 +330,7 @@ function lstc_init() {
 		add_action( 'admin_menu', 'lstc_admin_menu' );
 	}
 
-	add_filter( 'comment_form_submit_field', 'lstc_comment_form', 99 );
+	add_action( 'comment_form_after_fields', 'lstc_comment_form', 999 );
 	add_action( 'wp_set_comment_status', 'lstc_wp_set_comment_status', 10, 2 );
 	add_action( 'comment_post', 'lstc_comment_post', 10, 2 );
 
