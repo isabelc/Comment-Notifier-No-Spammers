@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.6.alpha.1
+Version: 1.5.6.alpha.8
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -591,6 +591,57 @@ include_once plugin_dir_path(__FILE__) . 'options.php';
 
 function lstc_admin_menu() {
 	add_options_page(__('Lightweight Subscribe To Comments', 'comment-notifier-no-spammers'), __('Lightweight Subscribe To Comments', 'comment-notifier-no-spammers'), 'manage_options', 'lightweight-subscribe-comments', 'lstc_options_page');
+}
+/**
+ * Sanitize settings before saving
+ * @param array $options The array of options to be saved
+ */
+function lstc_sanitize_settings( $options ) {
+	// integers
+	$int_keys = array( 'checkbox',
+		'checked',
+		'ty_enabled',
+		'disable_css',
+		'delete_data'
+	);
+	foreach ( $int_keys as $int_key ) {
+		if ( isset( $options[ $int_key ] ) ) {
+			$options[ $int_key ] = (int) $options[ $int_key ];
+		}
+	}
+	// text
+	$text_keys = array( 'label',
+		'name',
+		'subject',
+		'unsubscribe_url',
+		'ty_subject',
+		'copy'
+	);
+	foreach ( $text_keys as $text_key ) {
+		if ( isset( $options[ $text_key ] ) ) {
+			$options[ $text_key ] = sanitize_text_field( $options[ $text_key ] );
+		}
+	}
+	// some html
+	$richtext_keys = array( 'message',
+		'thankyou',
+		'ty_message'
+	);
+	foreach ( $richtext_keys as $richtext_key ) {
+		if ( isset( $options[ $richtext_key ] ) ) {
+			$options[ $richtext_key ] = wp_kses_post( $options[ $richtext_key ] );
+		}
+	}
+	// emails
+	if ( isset( $options['from'] ) ) {
+		$options['from'] = sanitize_email( $options['from'] );
+	}
+
+	if ( isset( $options['test'] ) ) {
+		$options['test'] = sanitize_email( $options['test'] );
+	}
+
+	return $options;
 }
 
 /**

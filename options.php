@@ -7,8 +7,9 @@ function lstc_options_page() {
 	// Maybe send a test message, if requested
 	if ( ! empty( $_POST['_wpnonce'] ) ) {
 		if ( wp_verify_nonce($_POST['_wpnonce'], 'update-lstc-options' ) ) {
-			$options = stripslashes_deep($_POST['options']);
-			update_option('lstc', $options);
+			$options = stripslashes_deep( $_POST['options'] );
+			$sane_options = lstc_sanitize_settings( $options );
+			update_option( 'lstc', $sane_options );
 			
 			if ( isset( $_POST['savethankyou'] ) ) {
 				if ( ! empty( $_POST['options']['test'] ) ) {
@@ -31,6 +32,7 @@ function lstc_options_page() {
 	}
 
 	// Grab new values after "save and send test email"
+	$options = get_option( 'lstc' );
 	$unsubscribe_url = empty( $options['unsubscribe_url'] ) ? '' : htmlspecialchars( $options['unsubscribe_url'] );
 	$length = empty( $options['length'] ) ? '' : htmlspecialchars( $options['length'] );
 	$test = empty( $options['test'] ) ? '' : htmlspecialchars( $options['test'] );
@@ -264,8 +266,16 @@ function lstcPreview() {
 			<tr>
 				<th><label><?php _e('Disable CSS Styles', 'comment-notifier-no-spammers'); ?></label></th>
 				<td>
-					<input type="checkbox" name="options[disable_css]" value="" <?php echo isset($options['disable_css']) ? 'checked' : ''; ?> />
+					<input type="checkbox" name="options[disable_css]" value="1" <?php echo isset($options['disable_css']) ? 'checked' : ''; ?> />
 					<?php _e('Check this to stop the CSS styles from being added to the checkbox.', 'comment-notifier-no-spammers'); ?>
+				</td>
+			</tr>
+
+			<tr>
+				<th><label><?php _e( 'Delete Data on Uninstall', 'comment-notifier-no-spammers'); ?></label></th>
+				<td>
+					<input type="checkbox" name="options[delete_data]" value="1" <?php echo isset( $options['delete_data'] ) ? 'checked' : ''; ?> />
+					<?php _e( 'Check this box if you would like this plugin to <strong>delete all</strong> of its data when the plugin is deleted. This would delete the entire list of subscribers and their subscriptions. This does NOT delete the actual comments.', 'comment-notifier-no-spammers' ); ?>
 				</td>
 			</tr>
 
