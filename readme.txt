@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: comment, comments, subscribe to comments, follow comments, notifications, subscription
 Requires at least: 3.7
 Tested up to: 4.8-alpha-40350
-Stable tag: 1.5.5
+Stable tag: 1.5.6
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,10 @@ See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-
 
 == Changelog ==
 
+= 1.5.6 =
+* New - Added option to delete all plugin data on uninstall. Enabling this option will delete the subscriber list and their subscriptions when the plugin is deleted.
+* Tweak - Added compatibility with more themes. Use comment_form_after_fields hook instead of comment_form_submit_field hook to show the checkbox.
+
 = 1.5.5 =
 * Fix - If comment moderation was NOT enabled, subscribers were not properly subscribed in version 1.5.4. The problem was due to trying out the new $commentdata argument, which was added in WP 4.5. This issue has been fixed by reverting the use of the $commentdata arg.
 * Fix - Removed 2nd argument from comment_form_submit_field filter.
@@ -170,6 +174,9 @@ See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-
 * First release.
 
 == Upgrade Notice ==
+
+= 1.5.6 =
+Added compatibility with more themes. New option to delete all plugin data on uninstall.
 
 = 1.5.5 =
 Fixed - If comment moderation was not enabled, subscribers were not properly subscribed in version 1.5.4.
