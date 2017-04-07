@@ -12,9 +12,15 @@ Easiest and most lightweight plugin to let visitors subscribe to comments and ge
 
 == Description ==
 
-Very simply, this plugin adds a subscription checkbox to your WordPress comments form to let your visitors subscribe to comments. They will then be notified by email when others comment on the same post. Works automatically upon activation, no settings required.
+This simply adds a subscription checkbox to your WordPress comments form to let your visitors subscribe to comments. They will then be notified by email when others comment on the same post. Works automatically upon activation, no settings required.
 
-This plugin focuses on a lightweight footprint. It simply just works upon activation. All settings are optional. For fastest pagespeed, no scripts are added.
+This plugin focuses on a lightweight footprint and fastest pagespeed. No scripts are added. It simply just works upon activation. All settings are optional. 
+
+= Easily Switch From Other Comments Subscription Plugins =
+
+Your subscribers will be imported for an easy switch from the following listed plugins. This is done automatically upon activation. 
+
+See the [Installation Guide](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments#jl-install).
 
 You can unsubscribe people from the settings page, if you wish.
 
@@ -26,9 +32,7 @@ You can unsubscribe people from the settings page, if you wish.
 * Send a "Thank You" message for first time commentators.
 * Send a copy of EACH notification to emails of your choice.
 
-= Easily Switch From Other Comments Subscription Plugins =
-
-Your subscribers will be imported for an easy switch from the following listed plugins. This is done automatically upon activation. Your comment subscribers will be migrated from these plugins:
+Automatically upon activation, your comment subscribers will be migrated from these plugins:
 
 
 
@@ -61,8 +65,6 @@ Upon activation, this plugin will clean up your "comment_notifier" list (databas
 
 This plugin is translation-ready and includes a `.pot` file to make it easy to translate.
 
-See the [full documentation](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments).
-
 == Installation ==
 
 = Step 1: Install The Plugin =
@@ -92,6 +94,8 @@ If you were using "Comment Notifier" plugin, then deactivate it right away to av
 
 For test emails to work, you must enter an email address in the "Email address where to send test emails:" option, under "Advanced Settings". 
 **Tip:** Do not use the sender address for this; some mail servers do not accept "from" and "to" set to the same value.
+
+= Where can I see more FAQ? =
 
 See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments#jl-faq).
 
