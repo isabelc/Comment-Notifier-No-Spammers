@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.7.alpha.1
+Version: 1.5.7.alpha.2
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -143,9 +143,9 @@ function lstc_thankyou( $comment_id ) {
 function lstc_checkbox_html() {
 	$html = '';
 	$options = get_option( 'lstc' );
-	if ( isset( $options['checkbox'] ) ) {
+	if ( ! empty( $options['checkbox'] ) ) {
 		$html .= '<p id="lstc-comment-subscription" class="cnns-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
-		if ( isset( $options['checked'] ) ) {
+		if ( ! empty( $options['checked'] ) ) {
 			$html .= ' checked="checked"';
 		}
 		$html .= '/>&nbsp;<label id="cnns-label" class="lstc-label" for="lstc_subscribe">' . esc_html( $options['label'] ) . '</label></p>';
@@ -364,7 +364,7 @@ function lstc_init() {
 
 	lstc_unsubscribe( $id, $token );
 	
-	$unsubscribe_url = empty( $options['unsubscribe_url'] ) ? '' : $options['unsubscribe_url'];
+	$unsubscribe_url = empty( $options['unsubscribe_url'] ) ? '' : esc_url_raw( $options['unsubscribe_url'] );
 
 	if ( $unsubscribe_url ) {
 		header( 'Location: ' . $unsubscribe_url );
@@ -374,7 +374,7 @@ function lstc_init() {
 		htmlspecialchars( $options['thankyou'] );
 
 		echo '<html><head>';
-		echo '<meta http-equiv="refresh" content="3;url=' . get_option('home') . '"/>';
+		echo '<meta http-equiv="refresh" content="3;url=' . esc_url( get_option( 'home' ) ) . '"/>';
 		echo '</head><body>';
 		echo $thankyou;
 		echo '</body></html>';
