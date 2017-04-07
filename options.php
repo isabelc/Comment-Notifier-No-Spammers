@@ -4,13 +4,14 @@ function lstc_options_page() {
 	global $wpdb;
 	$test = empty( $options['test'] ) ? '' : htmlspecialchars( $options['test'] );
 
-	// Maybe send a test message, if requested
+	// save the options
 	if ( ! empty( $_POST['_wpnonce'] ) ) {
 		if ( wp_verify_nonce($_POST['_wpnonce'], 'update-lstc-options' ) ) {
 			$options = stripslashes_deep( $_POST['options'] );
 			$sane_options = lstc_sanitize_settings( $options );
 			update_option( 'lstc', $sane_options );
 			
+			// Maybe send a test message, if requested
 			if ( isset( $_POST['savethankyou'] ) ) {
 				if ( ! empty( $_POST['options']['test'] ) ) {
 					$test = sanitize_email( $_POST['options']['test'] );
@@ -243,20 +244,33 @@ function lstcPreview() {
 				</td>
 			</tr>
 		</table>
+
 		<hr />
-		<h3><?php _e('Advanced Settings', 'comment-notifier-no-spammers'); ?></h3>
+		<h3><?php _e( 'Theme Compatibility', 'comment-notifier-no-spammers' ); ?></h3>
 		<table class="form-table">
 			<tr>
-				<th><label><?php _e('Extra email address where to send a copy of EACH notification:', 'comment-notifier-no-spammers'); ?></label><br /><br /></th>
+				<th><label><?php _e( 'Show Checkbox After The Comment Form', 'comment-notifier-no-spammers' ); ?></label></th>
+				<td>
+					<input type="checkbox" name="options[theme_compat]" value="1" <?php echo isset( $options['theme_compat'] ) ? 'checked' : ''; ?> />
+					<?php _e( 'If the checkbox is not appearing on your comment form, enable this option. This means your theme does not use standard WordPress comment form filters. Enabling this option will make the checkbox work on a larger variety of independent themes. This will add the checkbox <strong>below</strong> the comment form submit button.', 'comment-notifier-no-spammers' ); ?>
+				</td>
+			</tr>
+		</table>
+
+		<hr />
+		<h3><?php _e( 'Advanced Settings', 'comment-notifier-no-spammers' ); ?></h3>
+		<table class="form-table">
+			<tr>
+				<th><label><?php _e( 'Extra email address where to send a copy of EACH notification:', 'comment-notifier-no-spammers' ); ?></label><br /><br /></th>
 				<td>
 					<input name="options[copy]" type="text" size="50" value="<?php echo $copy; ?>"/>
 					<br />
-					<?php _e('Leave empty to disable.', 'comment-notifier-no-spammers'); ?>
+					<?php _e( 'Leave empty to disable.', 'comment-notifier-no-spammers' ); ?>
 				</td>
 			</tr>
 
 			<tr>
-				<th><label><?php _e('Email address where to send test emails:', 'comment-notifier-no-spammers'); ?></label><br /><br /></th>
+				<th><label><?php _e( 'Email address where to send test emails:', 'comment-notifier-no-spammers' ); ?></label><br /><br /></th>
 				<td>
 					<input name="options[test]" type="text" size="50" value="<?php echo $test; ?>"/>
 					<br />
@@ -281,7 +295,7 @@ function lstcPreview() {
 
 		</table>
 		<p class="submit">
-			<?php wp_nonce_field('update-lstc-options') ?>
+			<?php wp_nonce_field( 'update-lstc-options' ) ?>
 			<input class="button-primary" type="submit" name="save" value="<?php _e('Save', 'comment-notifier-no-spammers'); ?>"/>
 			   
 			<input class="button-secondary" type="submit" name="savethankyou" value="<?php _e('Save and send a Thank You test email', 'comment-notifier-no-spammers'); ?>"/>

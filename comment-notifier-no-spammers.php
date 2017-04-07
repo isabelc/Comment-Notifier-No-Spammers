@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.6
+Version: 1.5.7.alpha.1
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -138,17 +138,34 @@ function lstc_thankyou( $comment_id ) {
 }
 
 /**
- * Add a subscribe checkbox above the submit button.
+ * Returns the HTML for the checkbox as a string, if the checkbox is enabled.
  */
-function lstc_comment_form() {
+function lstc_checkbox_html() {
+	$html = '';
 	$options = get_option( 'lstc' );
 	if ( isset( $options['checkbox'] ) ) {
-		echo '<p id="lstc-comment-subscription" class="cnns-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
+		$html .= '<p id="lstc-comment-subscription" class="cnns-comment-subscription"><input type="checkbox" value="1" name="lstc_subscribe" id="lstc_subscribe"';
 		if ( isset( $options['checked'] ) ) {
-			echo ' checked="checked"';
+			$html .= ' checked="checked"';
 		}
-		echo '/>&nbsp;<label id="cnns-label" class="lstc-label" for="lstc_subscribe">' . esc_html( $options['label'] ) . '</label></p>';
+		$html .= '/>&nbsp;<label id="cnns-label" class="lstc-label" for="lstc_subscribe">' . esc_html( $options['label'] ) . '</label></p>';
 	}
+	return $html;
+}
+
+/**
+ * Add a subscribe checkbox below the comment form submit button.
+ */
+function lstc_comment_form() {
+	echo lstc_checkbox_html();
+}
+
+/**
+ * Add a subscribe checkbox above the submit button.
+ */
+function lstc_comment_form_submit_field( $submit_field ) {
+	$checkbox = lstc_checkbox_html();
+	return $checkbox . $submit_field;
 }
 
 /** Replace placeholders in body message with subscriber data and post/comment
@@ -250,10 +267,8 @@ function lstc_notify( $comment_id ) {
 		$m = $message;
 		$m = str_replace('{name}', $subscription->name, $m);
 		$m = str_replace('{unsubscribe}', $url . 'lstc_id=' . $subscription->id . '&lstc_t=' . $subscription->token, $m);
-
 		$s = $subject;
 		$s = str_replace('{name}', $subscription->name, $s);
-
 		if (lstc_mail($subscription->email, $s, $m)) $ok++;
 	}
 }
@@ -326,15 +341,23 @@ function lstc_subscribe_later( $post_id, $email, $name, $comment_id ) {
 
 function lstc_init() {
 	$options = get_option('lstc');
-	if (is_admin()) {
+	if ( is_admin() ) {
 		add_action( 'admin_menu', 'lstc_admin_menu' );
 	}
+	// If theme_compat is enabled, use the old filter to add checkbox after the submit button
+	// otherwise use our standard filter
+	if ( empty( $options['theme_compat'] ) ) {
+		add_filter( 'comment_form_submit_field', 'lstc_comment_form_submit_field', 9999 );
+	} else {
+		add_action( 'comment_form', 'lstc_comment_form', 99 );
+	}
 
-	add_action( 'comment_form_after_fields', 'lstc_comment_form', 999 );
 	add_action( 'wp_set_comment_status', 'lstc_wp_set_comment_status', 10, 2 );
 	add_action( 'comment_post', 'lstc_comment_post', 10, 2 );
 
-	if (empty($_GET['lstc_id'])) return;
+	if ( empty( $_GET['lstc_id'] ) ) {
+		return;
+	}
 
 	$token = $_GET['lstc_t'];
 	$id = $_GET['lstc_id'];
@@ -344,7 +367,7 @@ function lstc_init() {
 	$unsubscribe_url = empty( $options['unsubscribe_url'] ) ? '' : $options['unsubscribe_url'];
 
 	if ( $unsubscribe_url ) {
-		header('Location: ' . $unsubscribe_url);
+		header( 'Location: ' . $unsubscribe_url );
 	} else {
 		$thankyou = empty( $options['thankyou'] ) ?
 		__( 'Your subscription has been removed. You\'ll be redirect to the home page within few seconds.', 'comment-notifier-no-spammers') :
@@ -361,7 +384,7 @@ function lstc_init() {
 
 	die();
 }
-add_action('init', 'lstc_init');
+add_action( 'init', 'lstc_init' );
 
 /**
  * Removes a subscription.
@@ -602,7 +625,8 @@ function lstc_sanitize_settings( $options ) {
 		'checked',
 		'ty_enabled',
 		'disable_css',
-		'delete_data'
+		'delete_data',
+		'theme_compat'
 	);
 	foreach ( $int_keys as $int_key ) {
 		if ( isset( $options[ $int_key ] ) ) {
