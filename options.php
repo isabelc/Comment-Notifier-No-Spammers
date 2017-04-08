@@ -252,7 +252,7 @@ function lstcPreview() {
 				<th><label><?php _e( 'Show Checkbox After The Comment Form', 'comment-notifier-no-spammers' ); ?></label></th>
 				<td>
 					<input type="checkbox" name="options[theme_compat]" value="1" <?php echo isset( $options['theme_compat'] ) ? 'checked' : ''; ?> />
-					<?php _e( 'If the checkbox is not appearing on your comment form, enable this option. This means your theme does not use standard WordPress comment form filters. Enabling this option will make the checkbox work on a larger variety of independent themes. This will add the checkbox <strong>below</strong> the comment form submit button.', 'comment-notifier-no-spammers' ); ?>
+					<?php _e( 'If the checkbox is not appearing on your comment form, enable this option. Enabling this option will make the checkbox work on a larger variety of independent themes (themes that do not use standard WordPress comment form filters). This will add the checkbox <strong>below</strong> the comment form submit button.', 'comment-notifier-no-spammers' ); ?>
 				</td>
 			</tr>
 		</table>
