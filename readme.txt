@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: comment, comments, subscribe to comments, follow comments, notifications, subscription
 Requires at least: 3.7
 Tested up to: 4.8-alpha-40350
-Stable tag: 1.5.6
+Stable tag: 1.5.7
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,27 +18,22 @@ This plugin focuses on a lightweight footprint and fastest pagespeed. No scripts
 
 = Easily Switch From Other Comments Subscription Plugins =
 
-Your subscribers will be imported for an easy switch from the following listed plugins. This is done automatically upon activation. 
-
-See the [Installation Guide](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments#jl-install).
-
-You can unsubscribe people from the settings page, if you wish.
-
-**Optional Settings** include: 
-
-
-* You can customize the notification emails.
-* Set a custom "Unsubscribe Page" URL or unsubscribe message.
-* Send a "Thank You" message for first time commentators.
-* Send a copy of EACH notification to emails of your choice.
-
-Automatically upon activation, your comment subscribers will be migrated from these plugins:
+Your subscribers will be imported for an easy switch from the following listed plugins. This is done automatically upon activation. Your comment subscribers will be migrated from these plugins:
 
 
 
 - "Subscribe To Comments" plugin
 - "Subscribe To Comments Reloaded" plugin
 - "Comment Notifier" plugin
+
+
+**Optional Settings** include: 
+
+* You can unsubscribe people, if you wish.
+* You can customize the notification emails.
+* Set a custom "Unsubscribe Page" URL or unsubscribe message.
+* Send a "Thank You" message for first time commentators.
+* Send a copy of EACH notification to emails of your choice.
 
 
 = Special Condition For "Comment Notifier" Plugin Users: =
@@ -64,6 +59,8 @@ Upon activation, this plugin will clean up your "comment_notifier" list (databas
 = Languages =
 
 This plugin is translation-ready and includes a `.pot` file to make it easy to translate.
+
+See the [Installation Guide](https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments#jl-install).
 
 == Installation ==
 
@@ -104,6 +101,10 @@ See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-
 1. This is the subscription checkbox that is added beneath your comment form.
 
 == Changelog ==
+
+= 1.5.7 =
+* New - Added new Theme Compatibility option to "Show Checkbox After The Comment Form." If the checkbox is not appearing on your comment form, enable this option. Enabling this option will make the checkbox work on a larger variety of independent themes (themes that do not use standard WordPress comment form filters). This will add the checkbox below the comment form submit button.
+* Fix - Added compatibility for languages with non-Latin characters such as Cyrillic, Arabic, and Hebrew. Previously, names with non-Latin characters were displayed incorrectly in the notification emails. Note that this update fixes this issue, but it may be an hour or more, after you update, before the fix first takes effect. If you have a large database with thousands of posts it may take as much as several hours before the fix is complete.
 
 = 1.5.6 =
 * New - Added option to delete all plugin data on uninstall. Enabling this option will delete the subscriber list and their subscriptions when the plugin is deleted.
@@ -174,6 +175,9 @@ See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-
 * First release.
 
 == Upgrade Notice ==
+
+= 1.5.7 =
+Added new Theme Compatibility option. Fixed non-Latin characters display, including Cyrillic, Arabic, and Hebrew. 
 
 = 1.5.6 =
 Added compatibility with more themes. New option to delete all plugin data on uninstall.
