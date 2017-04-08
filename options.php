@@ -121,7 +121,7 @@ function lstcPreview() {
 			<tr>
 				<th><?php _e('Enable The Checkbox', 'comment-notifier-no-spammers'); ?></th>
 				<td>
-					<input type="checkbox" name="options[checkbox]" value="1" <?php echo isset($options['checkbox']) ? 'checked' : ''; ?> />
+					<input type="checkbox" name="options[checkbox]" value="1" <?php echo empty( $options['checkbox'] ) ? '' : 'checked'; ?> />
 					<?php _e('Check this to add the "Notify me" subscription checkbox to the comment form.', 'comment-notifier-no-spammers'); ?>
 				</td>
 			</tr>
@@ -137,7 +137,7 @@ function lstcPreview() {
 			<tr>
 				<th><?php _e('Checkbox Default Status', 'comment-notifier-no-spammers'); ?></th>
 				<td>
-					<input type="checkbox" name="options[checked]" value="1" <?php echo isset($options['checked']) ? 'checked' : ''; ?> />
+					<input type="checkbox" name="options[checked]" value="1" <?php echo isset( $options['checked'] ) ? 'checked' : ''; ?> />
 					<?php _e('Check here if you want the "Notify me" subscription checkbox to be checked by default', 'comment-notifier-no-spammers'); ?>
 				</td>
 			</tr>

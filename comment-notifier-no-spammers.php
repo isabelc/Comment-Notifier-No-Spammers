@@ -242,7 +242,6 @@ function lstc_notify( $comment_id ) {
 	$comment = get_comment($comment_id);
 	$data->author = $comment->comment_author;
 	$data->content = $comment->comment_content;
-
 	$message = lstc_replace($options['message'], $data);
 
 	// Fill the message subject with same for all data.
@@ -707,3 +706,32 @@ function lstc_migrate_options() {
 	}
 }
 add_action( 'init', 'lstc_migrate_options' );
+
+/**
+ * Convert our comment_notifier table to use utf8 instead of latin character set.
+ * @since 1.5.7
+ * @todo remove this at some future point, and delete the option lstc_update_table_utf8_complete upon deactivation.
+ */
+function lstc_update_table_utf8() {
+	// Run this update only once
+	if ( get_option( 'lstc_update_table_utf8_complete' ) != 'completed' ) {
+
+		global $wpdb;
+		$table = $wpdb->prefix . 'comment_notifier';
+
+		// First, set our table to utf8
+		$wpdb->query("ALTER TABLE $table CHARACTER SET utf8");
+
+		// Then set the column in a 3-step process
+
+		// First re-cast the data as latin1 
+		$wpdb->query("ALTER TABLE $table change name name VARCHAR(100) CHARACTER SET latin1");
+		// Then convert the VARCHAR column to its blob-type counterpart: VARBINARY. 
+		$wpdb->query("ALTER TABLE $table change name name VARBINARY(100)");
+		// Then convert it back to VARCHAR, but with our desired character set of utf8;. 
+		$wpdb->query("ALTER TABLE $table change name name VARCHAR(100) CHARACTER SET utf8");
+
+		update_option( 'lstc_update_table_utf8_complete', 'completed' );
+	}
+}
+add_action( 'init', 'lstc_update_table_utf8' );
