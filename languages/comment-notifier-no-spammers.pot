@@ -1,0 +1,302 @@
+# Copyright (C) 2017 Lightweight Subscribe To Comments
+# This file is distributed under the same license as the Lightweight Subscribe To Comments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Lightweight Subscribe To Comments 1.5\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/comment-notifier-"
+"no-spammers\n"
+"POT-Creation-Date: 2017-02-20 17:43:48+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: comment-notifier-no-spammers.php:521
+msgid "Hi %s"
+msgstr ""
+
+#: comment-notifier-no-spammers.php:523
+msgid "%s has just written a new comment on \"%s\". Here is an excerpt:"
+msgstr ""
+
+#: comment-notifier-no-spammers.php:527
+msgid "To read more, <a href=\"%s\">click here</a>."
+msgstr ""
+
+#: comment-notifier-no-spammers.php:529
+msgid "Bye"
+msgstr ""
+
+#: comment-notifier-no-spammers.php:531
+msgid ""
+"To unsubscribe from this notification service, <a href=\"%s\">click here</a>."
+msgstr ""
+
+#: comment-notifier-no-spammers.php:533
+msgid "Notify me when new comments are added."
+msgstr ""
+
+#: comment-notifier-no-spammers.php:534
+msgid "A new comment from %s on \"%s\""
+msgstr ""
+
+#: comment-notifier-no-spammers.php:535
+msgid ""
+"Your subscription has been removed. You'll be redirect to the home page "
+"within few seconds."
+msgstr ""
+
+#: comment-notifier-no-spammers.php:540
+msgid "Thank you for your first comment"
+msgstr ""
+
+#: comment-notifier-no-spammers.php:542
+msgid "Hi %s,"
+msgstr ""
+
+#: comment-notifier-no-spammers.php:544
+msgid "I received and published your first comment on my blog on the article:"
+msgstr ""
+
+#: comment-notifier-no-spammers.php:548
+msgid "Have a nice day!"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (Lightweight Subscribe To Comments 1.5)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: comment-notifier-no-spammers.php:564 options.php:80
+msgid "Lightweight Subscribe To Comments"
+msgstr ""
+
+#: options.php:20
+msgid "Author"
+msgstr ""
+
+#: options.php:23
+msgid "The post title"
+msgstr ""
+
+#: options.php:24
+msgid ""
+"This is a long comment. Be a yardstick of quality. Some people are not used "
+"to an environment where excellence is expected."
+msgstr ""
+
+#: options.php:46 options.php:53
+msgid "Security violated"
+msgstr ""
+
+#: options.php:83
+msgid "Email Management"
+msgstr ""
+
+#: options.php:87
+msgid "Remove this email: "
+msgstr ""
+
+#: options.php:88 options.php:261
+msgid "Remove"
+msgstr ""
+
+#: options.php:95
+msgid "Subscription Checkbox Configuration"
+msgstr ""
+
+#: options.php:98
+msgid "Enable The Checkbox"
+msgstr ""
+
+#: options.php:101
+msgid ""
+"Check this to add the \"Notify me\" subscription checkbox to the comment "
+"form."
+msgstr ""
+
+#: options.php:106
+msgid "Subscription Checkbox Label"
+msgstr ""
+
+#: options.php:109
+msgid "Label to be displayed near the subscription checkbox"
+msgstr ""
+
+#: options.php:113
+msgid "Checkbox Default Status"
+msgstr ""
+
+#: options.php:116
+msgid ""
+"Check here if you want the \"Notify me\" subscription checkbox to be checked "
+"by default"
+msgstr ""
+
+#: options.php:121
+msgid "Notification Email Settings"
+msgstr ""
+
+#: options.php:124
+msgid "Notification Sender Name"
+msgstr ""
+
+#: options.php:131
+msgid "Notification Sender Email"
+msgstr ""
+
+#: options.php:137
+msgid "Notification Subject"
+msgstr ""
+
+#: options.php:141
+msgid ""
+"Tags: %1$s - the post title, %2$s - the subscriber name, %3$s - the "
+"commenter name"
+msgstr ""
+
+#: options.php:146
+msgid "Notification Message Body"
+msgstr ""
+
+#: options.php:148
+msgid "preview"
+msgstr ""
+
+#: options.php:152
+msgid ""
+"Tags: %1$s - the subscriber name, %2$s - the unsubscribe link, %3$s - the "
+"post title, %4$s - the commenter name, %5$s - the post link, %6$s - the "
+"comment text (eventually truncated)."
+msgstr ""
+
+#: options.php:156
+msgid "Comment Excerpt Length"
+msgstr ""
+
+#: options.php:159
+msgid " characters"
+msgstr ""
+
+#: options.php:161
+msgid ""
+"The length of the comment excerpt to be inserted in the email notification. "
+"If blank, the default is 155 characters."
+msgstr ""
+
+#: options.php:166
+msgid "Unsubscribe Settings"
+msgstr ""
+
+#: options.php:168
+msgid ""
+"Here you can configure what to show to unsubscribing users. Set an "
+"\"Unsubscribe page URL\" to send the user to a specific page or configure a "
+"specific message."
+msgstr ""
+
+#: options.php:174
+msgid "Unsubscribe Page URL"
+msgstr ""
+
+#: options.php:177
+msgid ""
+"If you want to create a page with your content to say \"ok, you are "
+"unsubscribed\", enter the URL here. Otherwise, leave this field blank and "
+"the following message will be used."
+msgstr ""
+
+#: options.php:182
+msgid "Unsubscribe Message"
+msgstr ""
+
+#: options.php:185
+msgid ""
+"Example: You have unsubscribed successfully. Thank you. I will send you to "
+"the home page in 3 seconds."
+msgstr ""
+
+#: options.php:190
+msgid "Thank You Message Settings"
+msgstr ""
+
+#: options.php:191
+msgid ""
+"Configure a thank you message for <strong>first time commentators</strong>. "
+"Messages are sent when comments are approved."
+msgstr ""
+
+#: options.php:195
+msgid "Enable Thank You Message"
+msgstr ""
+
+#: options.php:198
+msgid "send a \"Thank You\" message sent to visitor on their first comment"
+msgstr ""
+
+#: options.php:202
+msgid "Subject"
+msgstr ""
+
+#: options.php:206
+msgid "Tags: %1$s - the post title, %2$s - the commenter name"
+msgstr ""
+
+#: options.php:210
+msgid "Notification message body"
+msgstr ""
+
+#: options.php:214
+msgid ""
+"Tags: %1$s - the post title, %2$s - the commenter name, %3$s - the post "
+"link, %4$s - the comment text."
+msgstr ""
+
+#: options.php:219
+msgid "Advanced Settings"
+msgstr ""
+
+#: options.php:223
+msgid "Extra email address where to send a copy of EACH notification:"
+msgstr ""
+
+#: options.php:226
+msgid "Leave empty to disable."
+msgstr ""
+
+#: options.php:231
+msgid "Email address where to send test emails:"
+msgstr ""
+
+#: options.php:238
+msgid "Save"
+msgstr ""
+
+#: options.php:240
+msgid "Save and send a Thank You test email"
+msgstr ""
+
+#: options.php:247
+msgid "Long List of Subscribers"
+msgstr ""
+
+#: options.php:254
+msgid ", subscribers: "
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Easiest and most lightweight plugin to let visitors subscribe to comments "
+"and get email notifications."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Isabel Castillo"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://isabelcastillo.com"
+msgstr ""
