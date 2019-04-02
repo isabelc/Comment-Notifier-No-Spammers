@@ -10,7 +10,7 @@ License: GPL2
 Text Domain: comment-notifier-no-spammers
 Domain Path: languages
 
-Copyright 2014 - 2017 Isabel Castillo
+Copyright 2014-2019 Isabel Castillo
 
 This file is part of Lightweight Subscribe To Comments.
 
