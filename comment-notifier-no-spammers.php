@@ -3,14 +3,14 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.7
+Version: 1.5.8.alpha-1
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
 Text Domain: comment-notifier-no-spammers
 Domain Path: languages
 
-Copyright 2014-2019 Isabel Castillo
+Copyright 2014-2020 Isabel Castillo
 
 This file is part of Lightweight Subscribe To Comments.
 
@@ -82,6 +82,7 @@ function lstc_comment_post( $comment_id, $status ) {
 function lstc_wp_set_comment_status( $comment_id, $status ) {
 	// get original comment info
 	$comment = get_comment( $comment_id );
+	if ( ! $comment ) { return; }
 	$post_id = $comment->comment_post_ID;
 	$email = strtolower( trim( $comment->comment_author_email ) );
 	$name = $comment->comment_author;
