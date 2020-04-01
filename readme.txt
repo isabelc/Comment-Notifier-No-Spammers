@@ -3,8 +3,8 @@ Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R7BHLMCQ437SS
 Tags: comment, comments, subscribe to comments, follow comments, notifications, subscription
 Requires at least: 3.7
-Tested up to: 5.1.1
-Stable tag: 1.5.7
+Tested up to: 5.4
+Stable tag: 1.5.8
 License: GNU Version 2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,10 @@ See all [the FAQ](https://isabelcastillo.com/free-plugins/lightweight-subscribe-
 1. This is the subscription checkbox that is added beneath your comment form.
 
 == Changelog ==
+
+= 1.5.8 =
+* Fix - Deleting comments from the Trash caused PHP errors.
+* Build - Removed deprecated functions and options.
 
 = 1.5.7 =
 * New - Added new Theme Compatibility option to "Show Checkbox After The Comment Form." If the checkbox is not appearing on your comment form, enable this option. Enabling this option will make the checkbox work on a larger variety of independent themes (themes that do not use standard WordPress comment form filters). This will add the checkbox below the comment form submit button.
