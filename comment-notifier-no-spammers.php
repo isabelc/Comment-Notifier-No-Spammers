@@ -3,7 +3,7 @@
 Plugin Name: Lightweight Subscribe To Comments
 Plugin URI: https://isabelcastillo.com/free-plugins/lightweight-subscribe-comments
 Description: Easiest and most lightweight plugin to let visitors subscribe to comments and get email notifications.
-Version: 1.5.8.alpha-1
+Version: 1.5.8.alpha-2
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
@@ -669,70 +669,14 @@ function lstc_sanitize_settings( $options ) {
 }
 
 /**
- * Migrate options to new handle 
- * @since 1.5.1
- * @todo remove this at some future point, and delete the option lstc_migrate_options_complete upon deactivation.
+ * Delete old options
+ * @since 1.5.8
+ * @todo remove this function on next update
  */
-function lstc_migrate_options() {
-	// Run this update only once
-	if ( get_option( 'lstc_migrate_options_complete' ) != 'completed' ) {
-		$old_options = get_option( 'cmnt_nospammers' );
-		if ( ! empty( $old_options ) ) {
-			update_option( 'lstc', $old_options );
-			delete_option( 'cmnt_nospammers' );
-		}
-		update_option( 'lstc_migrate_options_complete', 'completed' );
-	}
+function lstc_cleanup_old_options() {
+	delete_option( 'lstc_migrate_options_complete' );
+	delete_option( 'lstc_cleanup_emails_done' );
+	delete_option( 'lstc_update_table_utf8_complete' );
 
-	/* Remove invalid subscribers that were imported from other plugins.
-	 * Run this cleanup only once
-	 * @since 1.5.3 
-	 * @todo remove this at some future point, and delete the option lstc_cleanup_emails_done upon deactivation.
-	 */
-	if ( get_option( 'lstc_cleanup_emails_done' ) != 'completed' ) {
-		global $wpdb;
-		$comment_notifier_table = $wpdb->prefix . 'comment_notifier';
-
-		// Get email list
-		$lstc_subscribers = $wpdb->get_col("SELECT email FROM " . $comment_notifier_table);
-		// delete every email in the comment_notifier table isn't valid
-		foreach ( $lstc_subscribers as $email ) {
-			if ( ! lstc_valid_email( $email ) ) {
-				$wpdb->query( 
-					$wpdb->prepare( "DELETE FROM " . $comment_notifier_table . " WHERE email = %s", $email )
-				);			
-			}
-		}
-		update_option( 'lstc_cleanup_emails_done', 'completed' );
-	}
 }
-add_action( 'init', 'lstc_migrate_options' );
-
-/**
- * Convert our comment_notifier table to use utf8 instead of latin character set.
- * @since 1.5.7
- * @todo remove this at some future point, and delete the option lstc_update_table_utf8_complete upon deactivation.
- */
-function lstc_update_table_utf8() {
-	// Run this update only once
-	if ( get_option( 'lstc_update_table_utf8_complete' ) != 'completed' ) {
-
-		global $wpdb;
-		$table = $wpdb->prefix . 'comment_notifier';
-
-		// First, set our table to utf8
-		$wpdb->query("ALTER TABLE $table CHARACTER SET utf8");
-
-		// Then set the column in a 3-step process
-
-		// First re-cast the data as latin1 
-		$wpdb->query("ALTER TABLE $table change name name VARCHAR(100) CHARACTER SET latin1");
-		// Then convert the VARCHAR column to its blob-type counterpart: VARBINARY. 
-		$wpdb->query("ALTER TABLE $table change name name VARBINARY(100)");
-		// Then convert it back to VARCHAR, but with our desired character set of utf8;. 
-		$wpdb->query("ALTER TABLE $table change name name VARCHAR(100) CHARACTER SET utf8");
-
-		update_option( 'lstc_update_table_utf8_complete', 'completed' );
-	}
-}
-add_action( 'init', 'lstc_update_table_utf8' );
+add_action('admin_init', 'lstc_cleanup_old_options');
