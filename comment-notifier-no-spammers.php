@@ -264,7 +264,7 @@ function lstc_notify( $comment_id ) {
 	$ok = 0;
 	foreach ( $subscriptions as $subscription ) {
 		$idx++;
-		$m = $message;
+		$m = apply_filters( 'lstc_notify_message', $message, $comment, $subscription );
 		$m = str_replace('{name}', $subscription->name, $m);
 		$m = str_replace('{unsubscribe}', $url . 'lstc_id=' . $subscription->id . '&lstc_t=' . $subscription->token, $m);
 		$s = $subject;
